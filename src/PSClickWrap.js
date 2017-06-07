@@ -104,7 +104,7 @@ PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You mus
 
 PSClickWrap.propTypes = {
     accessId: PropTypes.string.isRequired,
-	clickWrapStyle: PropTypes.string,
+	clickWrapStyle: PropTypes.oneOf(['full', 'scroll', 'checkbox', 'combined', 'embedded']),
 	confirmationEmail: PropTypes.bool,
 	containerName: PropTypes.string.isRequired,
 	disableSending: PropTypes.bool,
@@ -123,7 +123,12 @@ PSClickWrap.propTypes = {
 PSClickWrap.defaultProps = {
     psScriptURL: '//vault.pactsafe.io/ps.min.js',
     containerName: 'ps-clickwrap',
-    displayImmediately: true
+    displayImmediately: true,
+	disableSending: false,
+	displayAll: true,
+	dynamic: false,
+	
+	
 };
 
 export default PSClickWrap;
