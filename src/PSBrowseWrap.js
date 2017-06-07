@@ -11,13 +11,13 @@ class PSBrowseWrap extends React.Component{
             (function (window, document, script, src, pso, a, m) {
                 window['PactSafeObject'] = pso;
                 window[pso] = window[pso] || function () {
-                    (window[pso].q = window[pso].q || []).push(arguments)
+                    (window[pso].q = window[pso].q || []).push(arguments);
                 }, window[pso].on = function () {
-                    (window[pso].e = window[pso].e || []).push(arguments)
+                    (window[pso].e = window[pso].e || []).push(arguments);
                 }, window[pso].once = function () {
-                    (window[pso].eo = window[pso].eo || []).push(arguments)
+                    (window[pso].eo = window[pso].eo || []).push(arguments);
                 }, window[pso].off = function () {
-                    (window[pso].o = window[pso].o || []).push(arguments)
+                    (window[pso].o = window[pso].o || []).push(arguments);
                 }, window[pso].t = 1 * new Date();
                 a = document.createElement(script),
                 m = document.getElementsByTagName(script)[0];
@@ -62,26 +62,26 @@ class PSBrowseWrap extends React.Component{
     }
 
     componentWillUnmount(){
-        _ps.getByKey(this.props.groupKey).rendered = false
+        _ps.getByKey(this.props.groupKey).rendered = false;
     }
 }
 
-PSBrowseWrap.MUST_PROVIDE_LINK_IF_OPEN_LEGAL_CENTER_FALSE = "PSBrowseWrap Error: You must provide a link prop if openLegalCenter is passed false"
+PSBrowseWrap.MUST_PROVIDE_LINK_IF_OPEN_LEGAL_CENTER_FALSE = 'PSBrowseWrap Error: You must provide a link prop if openLegalCenter is passed false';
 
 PSBrowseWrap.propTypes = {
-    psScriptURL: PropTypes.string.isRequired,
-    accessId: PropTypes.string.isRequired,
-    groupKey: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
-    position: PropTypes.oneOf(['middle','left', 'right', 'auto']).isRequired,
-    alwaysVisible: PropTypes.bool,
-    badgeText: PropTypes.string,
-    openLegalCenter: PropTypes.bool,
-    link: isRequiredIf(PropTypes.string, props => (props.hasOwnProperty('openLegalCenter') && props.openLegalCenter === false), PSBrowseWrap.MUST_PROVIDE_LINK_IF_OPEN_LEGAL_CENTER_FALSE)
+	accessId: PropTypes.string.isRequired,
+	alwaysVisible: PropTypes.bool,
+	badgeText: PropTypes.string,
+	groupKey: PropTypes.string.isRequired,
+	link: isRequiredIf(PropTypes.string, props => (props.hasOwnProperty('openLegalCenter') && props.openLegalCenter === false), PSBrowseWrap.MUST_PROVIDE_LINK_IF_OPEN_LEGAL_CENTER_FALSE),
+	linkText: PropTypes.string.isRequired,
+	openLegalCenter: PropTypes.bool,
+	position: PropTypes.oneOf(['middle','left', 'right', 'auto']).isRequired,
+	psScriptURL: PropTypes.string.isRequired,
 };
 
 PSBrowseWrap.defaultProps = {
-    psScriptURL: "//vault.pactsafe.io/ps.min.js",
+    psScriptURL: '//vault.pactsafe.io/ps.min.js',
     position: 'auto'
 };
 

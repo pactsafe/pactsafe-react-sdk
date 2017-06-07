@@ -13,13 +13,13 @@ class PSClickWrap extends React.Component {
             (function (window, document, script, src, pso, a, m) {
                 window['PactSafeObject'] = pso;
                 window[pso] = window[pso] || function () {
-                        (window[pso].q = window[pso].q || []).push(arguments)
+                        (window[pso].q = window[pso].q || []).push(arguments);
                     }, window[pso].on = function () {
-                    (window[pso].e = window[pso].e || []).push(arguments)
+                    (window[pso].e = window[pso].e || []).push(arguments);
                 }, window[pso].once = function () {
-                    (window[pso].eo = window[pso].eo || []).push(arguments)
+                    (window[pso].eo = window[pso].eo || []).push(arguments);
                 }, window[pso].off = function () {
-                    (window[pso].o = window[pso].o || []).push(arguments)
+                    (window[pso].o = window[pso].o || []).push(arguments);
                 }, window[pso].t = 1 * new Date();
                 a = document.createElement(script),
                     m = document.getElementsByTagName(script)[0];
@@ -71,7 +71,7 @@ class PSClickWrap extends React.Component {
                     try{
                         group.render();
                     }catch(e){
-                        console.log("Unable to re-render clickwrap")
+                        console.log('Unable to re-render clickwrap');
                     }
                 }
 
@@ -86,7 +86,7 @@ class PSClickWrap extends React.Component {
     render() {
         return (
             <div id={this.props.containerName}></div>
-        )
+        );
     }
 
     componentWillUnmount(){
@@ -99,31 +99,30 @@ class PSClickWrap extends React.Component {
 
 }
 
-PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe Clickwrap component!';
+PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe ClickWrap component!';
 PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You must provide a renderData prop when passing down the dynamic prop';
 
 PSClickWrap.propTypes = {
     accessId: PropTypes.string.isRequired,
-    groupKey: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('filter'), PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE),
-    signerIDSelector: PropTypes.string.isRequired,
-    containerName: PropTypes.string.isRequired,
+	clickWrapStyle: PropTypes.string,
+	confirmationEmail: PropTypes.bool,
+	containerName: PropTypes.string.isRequired,
+	disableSending: PropTypes.bool,
+	displayAll: PropTypes.bool,
+	displayImmediately: PropTypes.bool,
+	dynamic: PropTypes.bool,
+	filter: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('groupKey'), PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE),
+	forceScroll: PropTypes.bool,
+	groupKey: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('filter'), PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE),
+	psScriptURL: PropTypes.string.isRequired,
+	renderData: isRequiredIf(PropTypes.object, props => (props.hasOwnProperty('dynamic') && props.dynamic === true), PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE),
+	signerIDSelector: PropTypes.string.isRequired,
     testMode: PropTypes.bool,
-    disableSending: PropTypes.bool,
-    filter: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('groupKey'), PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE),
-    clickWrapStyle: PropTypes.string,
-    displayAll: PropTypes.bool,
-    dynamic: PropTypes.bool,
-    renderData: isRequiredIf(PropTypes.object, props => (props.hasOwnProperty('dynamic') && props.dynamic === true), PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE),
-    psScriptURL: PropTypes.string.isRequired,
-    forceScroll: PropTypes.bool,
-    confirmationEmail: PropTypes.bool,
-    displayImmediately: PropTypes.bool
-
 };
 
 PSClickWrap.defaultProps = {
-    psScriptURL: "//vault.pactsafe.io/ps.min.js",
-    containerName: "ps-clickwrap",
+    psScriptURL: '//vault.pactsafe.io/ps.min.js',
+    containerName: 'ps-clickwrap',
     displayImmediately: true
 };
 
