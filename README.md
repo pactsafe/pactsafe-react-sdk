@@ -4,6 +4,7 @@
 - Automatically loads the PactSafe Snippet into your app so all you have to do is call `_ps` to use the [PactSafe library](https://pactsafe.gelato.io/guides/categories/javascript-library).
 
 #### PSClickWrap Component:
+
 - Renders a PactSafe Clickwrap group by providing a site access ID and group key
 - Ability to render PactSafe Clickwrap groups dynamically using a filter to specify contract ID's and/or tags
 - Ability to render a dynamic PactSafe Clickwrap by passing in a custom `render_data` object
@@ -15,6 +16,7 @@
     - and more! ([See more detailed documentation on available PSClickWrap props here](#props))
 
 #### PSBrowseWrap Component:
+
 - Renders a PactSafe Browsewrap group by providing a site access ID and group key
 - Ability to override properties set within the PactSafe App's group configuration such as:
     - Position of BrowseWrap with the `position` prop
@@ -50,7 +52,8 @@ npm install pactsafe-react-sdk --save
 
 ## Usage
 
-####Using PSClickWrap
+#### Using PSClickWrap
+
 In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIDSelector` prop to the PSClickWrap component: 
 
 ```
@@ -68,7 +71,8 @@ Replace `YOUR_GROUP_KEY_HERE` with your group's key found within your [PactSafe 
 
 Pass in any additional options using props on the `PSClickWrap` component.
 
-####Using PSBrowseWrap
+#### Using PSBrowseWrap
+
 Your PSBrowseWrap component should be placed where you would like your Legal Center link to appear on the page. Pass what you want the link's text to display as using the `linkText` prop.
 
 
@@ -81,7 +85,8 @@ import PSBrowseWrap from 'pactsafe-react-sdk'
 
 ### Properties
 
-####PSClickWrap Properties:
+#### PSClickWrap Properties:
+
 |        Prop        |                                Type                                |                 Default                |                 Required?                |                                                                                                                                                        Description                                                                                                                                                       |
 |:------------------:|:------------------------------------------------------------------:|:--------------------------------------:|:----------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | accessId           | string                                                             | null                                   | Yes                                      | PactSafe site access ID                                                                                                                                                                                                                                                                                                  |
@@ -100,7 +105,8 @@ import PSBrowseWrap from 'pactsafe-react-sdk'
 | signerIDSelector   | string                                                             | null                                   | Yes                                      | The ID of the `<input>` element that will be used to identify the signer.                                                                                                                                                                                                                                                |
 | testMode           | bool                                                               | false                                  | No                                       | Enable this to register any contract acceptances as test data that can be cleared within the PactSafe UI                                                                                                                                                                                                                 |
 
-####PSBrowseWrap Properties
+#### PSBrowseWrap Properties:
+
 !!TODO!!
 
 ### Notes
