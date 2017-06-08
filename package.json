@@ -1,6 +1,6 @@
 {
   "name": "pactsafe-react-sdk",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "PactSafe React SDK - React SDK for easy Clickwrap/Browsewrap implementation leveraging PactSafe's JavaScript API",
   "main": "lib/index.js",
   "author": "PactSafe",
