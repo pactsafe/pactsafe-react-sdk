@@ -73,7 +73,7 @@ import {PSClickWrap} from 'pactsafe-react-sdk'
 
 <input type="email" id="userEmail" placeholder="Your Email"/>
 
-<PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE}/>
+<PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} signerIDSelector={userEmail}/>
 ```
 
 Replace with `YOUR_PACTSAFE_ACCESS_ID_HERE` with your PactSafe Site Access ID found [here](https://app.pactsafe.com/settings/account)
