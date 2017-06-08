@@ -1,7 +1,7 @@
 {
   "name": "pactsafe-react-sdk",
-  "version": "1.0.1",
-  "description": "PactSafe React SDK",
+  "version": "1.0.2",
+  "description": "PactSafe React SDK - React SDK for easy Clickwrap/Browsewrap implementation leveraging PactSafe's JavaScript API",
   "main": "lib/index.js",
   "author": "PactSafe",
   "homepage": "https://github.com/PactSafe/pactsafe-react-sdk",
@@ -38,7 +38,7 @@
     "react-dom": "^0.14.0"
   },
   "peerDependencies": {
-    "react": "^0.14.0"
+    "react": "^15.0.0"
   },
   "browserify-shim": {
     "react": "global:React"

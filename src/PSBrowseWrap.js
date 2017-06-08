@@ -24,7 +24,7 @@ class PSBrowseWrap extends React.Component{
                 a.async = 1;
                 a.src = src;
                 m.parentNode.insertBefore(a, m);
-                window[pso].debug = true;
+                // window[pso].debug = true;
             })(window, document, 'script', PSUrl, '_ps');
         }
         this.targetSelector = 'psbw-' + this.props.groupKey;
@@ -82,7 +82,9 @@ PSBrowseWrap.propTypes = {
 
 PSBrowseWrap.defaultProps = {
     psScriptURL: '//vault.pactsafe.io/ps.min.js',
-    position: 'auto'
+    position: 'auto',
+	link: '#',
+	openLegalCenter: true
 };
 
 export default PSBrowseWrap;

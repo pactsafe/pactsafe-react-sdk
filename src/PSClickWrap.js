@@ -127,8 +127,6 @@ PSClickWrap.defaultProps = {
 	disableSending: false,
 	displayAll: true,
 	dynamic: false,
-	
-	
 };
 
 export default PSClickWrap;
