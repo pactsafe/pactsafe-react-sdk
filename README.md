@@ -68,7 +68,7 @@ npm install pactsafe-react-sdk --save
 In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIDSelector` prop to the PSClickWrap component: 
 
 ```
-import PSClickWrap from 'pactsafe-react-sdk'
+import {PSClickWrap} from 'pactsafe-react-sdk'
 ...
 
 <input type="email" id="userEmail" placeholder="Your Email"/>
@@ -88,7 +88,7 @@ Your PSBrowseWrap component should be placed where you would like your Legal Cen
 
 
 ```
-import PSBrowseWrap from 'pactsafe-react-sdk'
+import {PSBrowseWrap} from 'pactsafe-react-sdk'
 ...
 
 <PSBrowseWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} linkText={'View Legal Center'}/>

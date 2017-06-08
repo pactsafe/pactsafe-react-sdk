@@ -1,12 +1,15 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var PactSafeReactSdk = require('pactsafe-react-sdk');
+var pactsafe = require('pactsafe-react-sdk');
+var PSClickWrap = pactsafe.PSClickWrap;
 
 var App = React.createClass({
 	render () {
 		return (
 			<div>
-				<PactSafeReactSdk />
+				<input type="email" id="email" placeholder="Signer ID"/>
+				<br>
+				<PSClickWrap accessId={'29ea80d9-d386-4cfd-a280-505e802ee732'} signerIDSelector={'email'} groupKey={'example-clickwrap'} displayAll={true} testMode={true}/>
 			</div>
 		);
 	}
