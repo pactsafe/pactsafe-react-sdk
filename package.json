@@ -12,6 +12,17 @@
   "bugs": {
     "url": "https://github.com/PactSafe/pactsafe-react-sdk/issues"
   },
+  "contributors": [
+    {
+      "name": "Kyle Peeler",
+      "email": "kpeeler@pactsafe.com",
+      "url": "http://kylepeeler.io"
+    }
+  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/pactsafe/pactsafe-react-sdk/blob/master/LICENSE"
+  }],
   "dependencies": {
     "classnames": "^2.1.2",
     "prop-types": "^15.5.10",
@@ -44,6 +55,10 @@
   },
   "keywords": [
     "react",
-    "react-component"
+    "react-component",
+    "clickwrap",
+    "contract",
+    "browsewrap",
+    "pactsafe"
   ]
 }
