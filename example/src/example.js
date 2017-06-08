@@ -8,7 +8,7 @@ var App = React.createClass({
 		return (
 			<div>
 				<input type="email" id="email" placeholder="Signer ID"/>
-				<br>
+				<br/>
 				<PSClickWrap accessId={'29ea80d9-d386-4cfd-a280-505e802ee732'} signerIDSelector={'email'} groupKey={'example-clickwrap'} displayAll={true} testMode={true}/>
 			</div>
 		);
