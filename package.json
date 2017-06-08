@@ -2,7 +2,7 @@
   "name": "pactsafe-react-sdk",
   "version": "1.0.0",
   "description": "PactSafe React SDK",
-  "main": "lib/PactSafeReactSdk.js",
+  "main": "lib/index.js",
   "author": "PactSafe",
   "homepage": "https://github.com/PactSafe/pactsafe-react-sdk",
   "repository": {

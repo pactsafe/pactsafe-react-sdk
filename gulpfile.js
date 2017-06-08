@@ -13,6 +13,7 @@ var initGulpTasks = require('react-component-gulp-tasks');
 var taskConfig = {
 
 	component: {
+        file: 'index.js',
 		name: 'PactSafeReactSdk',
 		dependencies: [
 			'classnames',
