@@ -67,7 +67,7 @@ You can also use the standalone build by including `dist/pactsafe-react-sdk.js` 
 
 In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIDSelector` prop to the PSClickWrap component: 
 
-```
+```JSX
 import {PSClickWrap} from 'pactsafe-react-sdk'
 ...
 
@@ -87,7 +87,7 @@ Pass in any additional options using props on the `PSClickWrap` component.
 Your PSBrowseWrap component should be placed where you would like your Legal Center link to appear on the page. Pass what you want the link's text to display as using the `linkText` prop.
 
 
-```
+```JSX
 import {PSBrowseWrap} from 'pactsafe-react-sdk'
 ...
 
