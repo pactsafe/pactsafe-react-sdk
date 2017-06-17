@@ -12,7 +12,7 @@ var App = React.createClass({
 				<br/>
 				<PSClickWrap accessId={'29ea80d9-d386-4cfd-a280-505e802ee732'} signerIDSelector={'email'} groupKey={'example-clickwrap'} displayAll={true} testMode={true}/>
 				<button type="submit" onClick={()=>{
-					if (document.getElementById('email').value === ""){
+					if (document.getElementById('email').value === ''){
 						alert('You must provide a signer id before submitting!');
 					} else if (_ps.getByKey('example-clickwrap').allChecked()){
 						alert('You agreed! Thanks! :)');

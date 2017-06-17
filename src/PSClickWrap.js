@@ -47,7 +47,8 @@ class PSClickWrap extends React.Component {
         _ps('create', this.props.accessId, {
             test_mode: this.props.testMode,
             disable_sending: this.props.disableSending,
-            dynamic: this.props.dynamic
+            dynamic: this.props.dynamic,
+						signer_id: this.props.signerID
         });
 
     }
@@ -101,9 +102,10 @@ class PSClickWrap extends React.Component {
 
 PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe ClickWrap component!';
 PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You must provide a renderData prop when passing down the dynamic prop';
+PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: You must provide either a signer ID or a signer ID selector';
 
 PSClickWrap.propTypes = {
-    accessId: PropTypes.string.isRequired,
+	accessId: PropTypes.string.isRequired,
 	clickWrapStyle: PropTypes.oneOf(['full', 'scroll', 'checkbox', 'combined', 'embedded']),
 	confirmationEmail: PropTypes.bool,
 	containerName: PropTypes.string.isRequired,
@@ -116,14 +118,15 @@ PSClickWrap.propTypes = {
 	groupKey: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('filter'), PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE),
 	psScriptURL: PropTypes.string.isRequired,
 	renderData: isRequiredIf(PropTypes.object, props => (props.hasOwnProperty('dynamic') && props.dynamic === true), PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE),
-	signerIDSelector: PropTypes.string.isRequired,
-    testMode: PropTypes.bool,
+	signerIDSelector: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('signerID'), PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR),
+	signerID: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('signerIDSelector'), PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR),
+	testMode: PropTypes.bool,
 };
 
 PSClickWrap.defaultProps = {
-    psScriptURL: '//vault.pactsafe.io/ps.min.js',
-    containerName: 'ps-clickwrap',
-    displayImmediately: true,
+	psScriptURL: '//vault.pactsafe.io/ps.min.js',
+	containerName: 'ps-clickwrap',
+	displayImmediately: true,
 	disableSending: false,
 	displayAll: true,
 	dynamic: false,
