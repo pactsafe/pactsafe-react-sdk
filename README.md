@@ -36,8 +36,6 @@
 
 ![PSBrowseWrap](images/psbrowsewrap.gif "PSBrowseWrap")
 
-Live demo: [PactSafe.github.io/pactsafe-react-sdk](http://PactSafe.github.io/pactsafe-react-sdk/)
-
 To build the examples locally, run:
 
 ```
