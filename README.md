@@ -1,6 +1,8 @@
 # PactSafe React SDK
+
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
+[![Coveralls][coveralls-badge]][coveralls]
 
 ## Features
 - Automatically loads the PactSafe Snippet into your app so all you have to do is call `_ps` to use the [PactSafe library](https://pactsafe.gelato.io/guides/categories/javascript-library).
@@ -135,13 +137,11 @@ import {PSBrowseWrap} from 'pactsafe-react-sdk'
 
 ## Development (`src`, `lib` and the build process)
 
-**NOTE:** The source code for the component is in `src`. A transpiled CommonJS version (generated with Babel) is available in `lib` for use with node.js, browserify and webpack. A UMD bundle is also built to `dist`, which can be included without the need for any build system.
-
-To build, watch and serve the examples (which will also watch the component source), run `npm start`. If you just want to watch changes to `src` and rebuild `lib`, run `npm run watch` (this is useful if you are working with `npm link`).
+TODO: (update this)
 
 ## License
 
-Copyright (c) 2017 PactSafe.
+Copyright &copy; 2018 PactSafe.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -154,3 +154,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
 [npm]: https://www.npmjs.org/package/pactsafe-react-sdk
+
+[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
+[coveralls]: https://coveralls.io/github/user/repo

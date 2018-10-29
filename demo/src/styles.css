@@ -1,0 +1,78 @@
+/* 
+// Examples Stylesheet
+// -------------------
+*/
+
+:global body {
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+
+:global a {
+	color: #08c;
+	text-decoration: none;
+}
+
+:global a:hover {
+	text-decoration: underline;
+}
+
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 720px;
+	padding: 1em;
+}
+
+.footer {
+	margin-top: 50px;
+	border-top: 1px solid #eee;
+	padding: 20px 0;
+	font-size: 12px;
+	color: #999;
+}
+
+:global h1,
+:global h2, 
+:global h3, 
+:global h4, 
+:global h5, 
+:global h6 {
+	color: #222;
+	font-weight: 100;
+	margin: 0.5em 0;
+}
+
+:global label {
+	color: #999;
+	display: inline-block;
+	font-size: 0.85em;
+	font-weight: bold;
+	margin: 1em 0;
+	text-transform: uppercase;
+}
+
+.hint {
+	margin: 15px 0;
+	font-style: italic;
+	color: #999;
+}
+:global button{
+    
+}
+:global input[type="email"] {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+:global input[type="email"]:focus {
+  outline: none;
+}

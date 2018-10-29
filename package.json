@@ -1,0 +1,65 @@
+{
+  "name": "pactsafe-react-sdk",
+  "version": "2.0.0",
+  "description": "PactSafe React SDK - React SDK for easy Clickwrap/Browsewrap implementation leveraging PactSafe's JavaScript API",
+  "author": "PactSafe",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "homepage": "https://github.com/PactSafe/pactsafe-react-sdk",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build-react-component",
+    "clean": "nwb clean-module && nwb clean-demo",
+    "prepublishOnly": "npm run build",
+    "start": "nwb serve-react-demo",
+    "test": "nwb test-react",
+    "test:coverage": "nwb test-react --coverage",
+    "test:watch": "nwb test-react --server"
+  },
+  "dependencies": {
+    "classnames": "^2.1.2",
+    "prop-types": "^15.5.10",
+    "react-proptype-conditional-require": "^1.0.4"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  },
+  "devDependencies": {
+    "nwb": "0.23.x",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PactSafe/pactsafe-react-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PactSafe/pactsafe-react-sdk/issues"
+  },
+  "contributors": [
+    {
+      "name": "Kyle Peeler",
+      "email": "kpeeler@pactsafe.com",
+      "url": "http://kylepeeler.io"
+    }
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/pactsafe/pactsafe-react-sdk/blob/master/LICENSE"
+    }
+  ],
+  "keywords": [
+    "react-component",
+    "react",
+    "clickwrap",
+    "contract",
+    "browsewrap",
+    "pactsafe"
+  ]
+}
