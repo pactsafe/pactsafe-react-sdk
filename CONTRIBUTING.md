@@ -14,9 +14,11 @@
 
 - `npm test` will run the tests once.
 
-- `npm run test:coverage` will run the tests and produce a coverage report in `coverage/`.
+- `npm run test:coverage` will run the tests and produce a coverage report
 
 - `npm run test:watch` will run the tests on every change.
+
+- `npm run test:coverage-watch` will run tests on every change and produce a coverage report
 
 ## Building
 

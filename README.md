@@ -137,7 +137,8 @@ import {PSBrowseWrap} from 'pactsafe-react-sdk'
 
 ## Development (`src`, `lib` and the build process)
 
-TODO: (update this)
+[See CONTRIBUTING.md](CONTRIBUTING.md)
+
 
 ## License
 
