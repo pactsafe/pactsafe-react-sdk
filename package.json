@@ -35,7 +35,9 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
+    "enzyme-to-json": "^3.3.4",
     "jest": "^23.6.0",
+    "jsdom": "^13.0.0",
     "nwb": "0.23.x",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -49,6 +51,12 @@
     "url": "https://github.com/PactSafe/pactsafe-react-sdk/issues"
   },
   "jest": {
+    "setupFiles": [
+      "./tests/jest-setup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
     }
