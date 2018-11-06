@@ -17,9 +17,10 @@
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
     "start": "nwb serve-react-demo",
-    "test": "nwb test-react",
-    "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:coverage-watch": "jest --coverage --watch"
   },
   "dependencies": {
     "classnames": "^2.1.2",
@@ -32,6 +33,8 @@
   "devDependencies": {
     "babel-jest": "^23.6.0",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "jest": "^23.6.0",
     "nwb": "0.23.x",
     "react": "^16.6.0",
@@ -44,6 +47,11 @@
   },
   "bugs": {
     "url": "https://github.com/PactSafe/pactsafe-react-sdk/issues"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "<rootDir>/jest.transform.js"
+    }
   },
   "contributors": [
     {

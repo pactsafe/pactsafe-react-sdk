@@ -27,10 +27,12 @@ class PSClickWrap extends React.Component {
 					}),
 					(window[pso].t = 1 * new Date());
 				(a = document.createElement(script)),
-					(m = document.getElementsByTagName(script)[0]);
+				(m = document.getElementsByTagName(script)[0]);
 				a.async = 1;
 				a.src = src;
-				m.parentNode.insertBefore(a, m);
+				if (m){
+					m.parentNode.insertBefore(a, m);
+				}
 				window[pso].debug = true;
 			})(window, document, "script", PSUrl, "_ps");
 		}
