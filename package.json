@@ -30,9 +30,13 @@
     "react": "16.x"
   },
   "devDependencies": {
+    "babel-jest": "^23.6.0",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^23.6.0",
     "nwb": "0.23.x",
     "react": "^16.6.0",
-    "react-dom": "^16.6.0"
+    "react-dom": "^16.6.0",
+    "react-test-renderer": "^16.6.0"
   },
   "repository": {
     "type": "git",
