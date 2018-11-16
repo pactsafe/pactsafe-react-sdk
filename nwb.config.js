@@ -5,8 +5,8 @@ module.exports = {
     umd: {
       global: 'PSReactSDK',
       externals: {
-        react: 'React'
-      }
-    }
-  }
-}
+        react: 'React',
+      },
+    },
+  },
+};

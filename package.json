@@ -20,8 +20,15 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:coverage-watch": "jest --coverage --watch"
+    "test:coverage-watch": "jest --coverage --watch",
+    "lint": "./node_modules/.bin/eslint . --fix"
   },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/pactsafe/pactsafe-react-sdk/blob/master/LICENSE"
+    }
+  ],
   "dependencies": {
     "classnames": "^2.1.2",
     "prop-types": "^15.5.10",
@@ -31,11 +38,17 @@
     "react": "16.x"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.0",
     "babel-jest": "^23.6.0",
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.4",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
     "jest": "^23.6.0",
     "jsdom": "^13.0.0",
     "nwb": "0.23.x",
