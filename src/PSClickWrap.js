@@ -8,17 +8,12 @@ class PSClickWrap extends React.Component {
   constructor(props) {
     super(props);
     this.isSnippetLoaded = this.isSnippetLoaded.bind(this);
-  }
-
-  componentWillMount() {
-    const {
-      psScriptURL,
-      accessId,
-      testMode,
-      disableSending,
-      dynamic,
-      signerID,
-    } = this.props;
+    this.createClickWrap = this.createClickWrap.bind(this);
+    this.state = {
+      clickwrapGroupKey: null,
+      dynamicGroup: false,
+    };
+    const { psScriptURL, accessId, testMode, disableSending, dynamic, signerID } = this.props;
     if (!this.isSnippetLoaded()) {
       injectSnippet(psScriptURL);
     }
@@ -31,40 +26,30 @@ class PSClickWrap extends React.Component {
   }
 
   componentDidMount() {
+    this.createClickWrap();
+  }
+
+  componentDidUpdate(prevProps) {
     const {
-      filter,
-      containerName,
-      signerIDSelector,
-      clickWrapStyle,
-      displayAll,
-      renderData,
-      displayImmediately,
-      forceScroll,
-      groupKey,
-      confirmationEmail,
+      clickWrapStyle, renderData, filter, groupKey
     } = this.props;
-    const options = {
-      filter,
-      container_selector: containerName,
-      confirmation_email: confirmationEmail,
-      signer_id_selector: signerIDSelector,
-      style: clickWrapStyle,
-      display_all: displayAll,
-      render_data: renderData,
-      auto_run: displayImmediately,
-      force_scroll: forceScroll,
-    };
-    if (groupKey) {
-      _ps('load', groupKey, {
-        ...options,
-        event_callback(err, group) {
-          if (group) group.render();
-        },
-      });
-    } else {
-      _ps('load', {
-        ...options,
-      });
+    const { clickwrapGroupKey, dynamicGroup } = this.state;
+    if (clickWrapStyle !== prevProps.clickWrapStyle && !dynamicGroup) {
+      _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
+      _ps.getByKey(clickwrapGroupKey).retrieveHTML();
+    }
+    if (renderData !== prevProps.renderData){
+        _ps(clickwrapGroupKey + ':retrieveHTML', renderData);
+    }
+    if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
+      this.createClickWrap();
+    }
+    if (filter !== prevProps.filter && dynamicGroup) {
+      this.createClickWrap();
+    }
+    if (groupKey !== prevProps.groupKey && !dynamicGroup){
+      this.setState({clickwrapGroupKey: groupKey});
+      this.createClickWrap();
     }
   }
 
@@ -79,11 +64,37 @@ class PSClickWrap extends React.Component {
     const { psScriptURL } = this.props;
     const scripts = document.getElementsByTagName('script');
     for (let i = 0; i < scripts.length; i += 1) {
-      if (scripts[i].src === psScriptURL) return true;
+      if (scripts[i].src.indexOf(psScriptURL) !== -1) return true;
     }
     return false;
   }
 
+  createClickWrap() {
+    const { filter, containerName, signerIDSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail } = this.props;
+    const options = { filter, container_selector: containerName, confirmation_email: confirmationEmail, signer_id_selector: signerIDSelector, style: clickWrapStyle, display_all: displayAll, render_data: renderData, auto_run: displayImmediately, force_scroll: forceScroll };
+    if (groupKey) {
+      this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
+      _ps('load', groupKey, { ...options,
+        event_callback: (err, group) => {
+          if (group) {
+            this.setState({ clickwrapGroupKey: group.get('key') });
+            group.render();
+          }
+        } });
+    } else {
+      _ps('load', {
+        ...options,
+        event_callback: (err, group) => {
+          if (group) {
+            this.setState({
+              clickwrapGroupKey: group.get('key'),
+              dynamicGroup: true,
+            });
+          }
+        },
+      });
+    }
+  }
 
   render() {
     const { containerName } = this.props;

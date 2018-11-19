@@ -3,3 +3,8 @@ dist/*
 example/dist/*
 lib/*
 node_modules/*
+umd/*
+es/*
+demo/*
+coverage/*
+src/PSSnippet.js

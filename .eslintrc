@@ -1,32 +1,40 @@
 {
+	"extends": ["airbnb"],
 	"parser": "babel-eslint",
 	"env": {
+		"es6": true,
 		"browser": true,
 		"node": true
 	},
-	"plugins": [
-		"react"
-	],
+	"plugins": ["react"],
 	"rules": {
-		"curly": [2, "multi-line"],
-		"quotes": [2, "single", "avoid-escape"],
-		"react/display-name": 0,
-		"react/jsx-boolean-value": 1,
-		"react/jsx-quotes": 1,
-		"react/jsx-no-undef": 1,
-		"react/jsx-sort-props": 0,
-		"react/jsx-sort-prop-types": 1,
-		"react/jsx-uses-react": 1,
-		"react/jsx-uses-vars": 1,
-		"react/no-did-mount-set-state": 1,
-		"react/no-did-update-set-state": 1,
-		"react/no-multi-comp": 1,
-		"react/no-unknown-property": 1,
-		"react/prop-types": 1,
-		"react/react-in-jsx-scope": 1,
-		"react/self-closing-comp": 1,
-		"react/wrap-multilines": 1,
-		"semi": 2,
-		"strict": 0
+		"no-param-reassign": "off",
+		"react/jsx-filename-extension": "off",
+		"react/require-default-props": "off",
+		"no-prototype-builtins": "off",
+		"jsx-a11y/label-has-associated-control": [
+			2,
+			{
+				"assert": "either",
+				"controlComponents": ["Form.Field"],
+				"depth": 3
+			}
+		],
+		"jsx-a11y/label-has-for": "off",
+		"max-len": "off",
+		"object-curly-newline": "off",
+		"jsx-a11y/anchor-is-valid": [
+			"warning",
+			{
+				"aspects": ["invalidHref", "preferButton"]
+			}
+		],
+		"react/button-has-type": "off",
+		"react/jsx-one-expression-per-line": [
+			1,
+			{
+				"allow": "single-child"
+			}
+		]
 	}
 }
