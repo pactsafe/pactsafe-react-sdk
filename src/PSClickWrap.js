@@ -31,15 +31,15 @@ class PSClickWrap extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      clickWrapStyle, renderData, filter, groupKey
+      clickWrapStyle, renderData, filter, groupKey,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
     if (clickWrapStyle !== prevProps.clickWrapStyle && !dynamicGroup) {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
-    if (renderData !== prevProps.renderData){
-        _ps(clickwrapGroupKey + ':retrieveHTML', renderData);
+    if (renderData !== prevProps.renderData) {
+      _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
       this.createClickWrap();
@@ -47,9 +47,9 @@ class PSClickWrap extends React.Component {
     if (filter !== prevProps.filter && dynamicGroup) {
       this.createClickWrap();
     }
-    if (groupKey !== prevProps.groupKey && !dynamicGroup){
-      this.setState({clickwrapGroupKey: groupKey});
+    if (groupKey !== prevProps.groupKey && !dynamicGroup) {
       this.createClickWrap();
+      _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
   }
 
