@@ -70,7 +70,7 @@ class PSClickWrap extends React.Component {
   }
 
   createClickWrap() {
-    const { filter, containerName, signerIDSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail } = this.props;
+    const { filter, containerName, signerIDSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail, onAgree } = this.props;
     const options = { filter, container_selector: containerName, confirmation_email: confirmationEmail, signer_id_selector: signerIDSelector, style: clickWrapStyle, display_all: displayAll, render_data: renderData, auto_run: displayImmediately, force_scroll: forceScroll };
     if (groupKey) {
       this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
@@ -92,6 +92,11 @@ class PSClickWrap extends React.Component {
             });
           }
         },
+      });
+    }
+    if (onAgree) {
+      _ps.on('valid', (a, b, c) => {
+        onAgree(a, b);
       });
     }
   }

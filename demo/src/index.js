@@ -7,7 +7,12 @@ class Demo extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      isRendered: true
+			isRendered: true,
+			dynamicRenderData: {
+					vendor_name: "Hi guys",
+					vendor_phone: "3178693251",
+					vendor_price: "$9999"
+			}
     }
   }
 
@@ -16,15 +21,27 @@ class Demo extends React.Component {
     this.setState((state,props) => {
       return {isRendered: !state.isRendered}
     })
-  }
+	}
+	
+	updateState = (e) => {
+		this.setState((state, props) => {
+			return {dynamicRenderData: {
+					vendor_name: "I updated!",
+					vendor_phone: "3178693251",
+					vendor_price: "$9999"
+			}}
+		})
+	}
 
-
+	onAgreeMethod = (parameters, group) => {
+		console.log('we agreed!', parameters, group);
+	}
 
   render() {
     let clickwraps = null;
     if (this.state.isRendered) {
       clickwraps = <div>
-            <PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIDSelector="email" groupKey="example-clickwrap" displayAll testMode clickWrapStyle="checkbox" />
+            <PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIDSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" onAgree={this.onAgreeMethod} dynamic renderData={this.state.dynamicRenderData}/>
             <PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIDSelector="email2" filter="id==14847" displayAll testMode clickWrapStyle="full" containerName="testing" />
           </div>
     };
@@ -44,7 +61,8 @@ class Demo extends React.Component {
           <input type="email" id="email2" placeholder="Signer ID" className="form-control" />
 
 				</div>
-      <button className="btn btn-primary" type="button" onClick={this.toggleClickwraps}>Toggle this shit</button>
+      <button className="btn btn-primary" type="button" onClick={this.toggleClickwraps}>Toggle visibility</button>&nbsp;&nbsp;
+			<button className="btn btn-primary" type="button" onClick={this.updateState}>Update render data</button>
 				<br />
         {clickwraps}
 				<button className="btn btn-primary" type="submit" onClick={() => {
