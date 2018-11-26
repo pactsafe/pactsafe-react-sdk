@@ -38,7 +38,13 @@ function injectSnippet(scriptURL) {
 		a.onerror = a.onabort = function() {
 			w[n].l = 0;
 		};
-		b.parentNode.insertBefore(a, b);
+
+		 // Insert the script tag to the DOM, n a testing context, no script tags exist so b is undefined.
+		if (b){
+			b.parentNode.insertBefore(a, b);
+		} else {
+			document.body.appendChild(a);
+		}
 
 		// Retry loading the script from a fallback location after 4 seconds.
 		setTimeout(() => {
@@ -95,4 +101,20 @@ function injectSnippet(scriptURL) {
 	);
 }
 
-module.exports = injectSnippet;
+function isSnippetLoaded(psScriptURL) {
+	const scripts = document.getElementsByTagName('script');
+	if (window._ps && window._ps.loaded && window._ps.realThang === 317) return true;
+    for (let i = 0; i < scripts.length; i += 1) {
+      if (scripts[i].src.indexOf(psScriptURL) !== -1){
+		console.log('returned true');
+		return true;
+	  } 
+	}
+	console.log('returned false')
+	return false;
+}
+
+module.exports = {
+	injectSnippet,
+	isSnippetLoaded
+}

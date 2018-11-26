@@ -2,15 +2,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
-import injectSnippet from './PSSnippet';
+import PSSnippet from './PSSnippet';
 
 class PSBrowseWrap extends React.Component {
   constructor(props) {
     super(props);
-    this.isSnippetLoaded = this.isSnippetLoaded.bind(this);
-    const { psScriptURL, groupKey, accessId } = this.props;
-    if (!this.isSnippetLoaded(psScriptURL)) {
-      injectSnippet(psScriptURL);
+    const { psScriptUrl, groupKey, accessId } = this.props;
+    if (!PSSnippet.isSnippetLoaded(psScriptUrl)) {
+      PSSnippet.injectSnippet(psScriptUrl);
     }
     this.targetSelector = `psbw-${groupKey}`;
     _ps('create', accessId);
@@ -35,10 +34,10 @@ class PSBrowseWrap extends React.Component {
   }
 
   isSnippetLoaded() {
-    const { psScriptURL } = this.props;
+    const { psScriptUrl } = this.props;
     const scripts = document.getElementsByTagName('script');
     for (let i = 0; i < scripts.length; i += 1) {
-      if (scripts[i].src.indexOf(psScriptURL) !== -1) return true;
+      if (scripts[i].src.indexOf(psScriptUrl) !== -1) return true;
     }
     return false;
   }
@@ -68,11 +67,11 @@ PSBrowseWrap.propTypes = {
   linkText: PropTypes.string.isRequired,
   openLegalCenter: PropTypes.bool,
   position: PropTypes.oneOf(['middle', 'left', 'right', 'auto']),
-  psScriptURL: PropTypes.string,
+  psScriptUrl: PropTypes.string,
 };
 
 PSBrowseWrap.defaultProps = {
-  psScriptURL: '//vault.pactsafe.io/ps.min.js',
+  psScriptUrl: '//vault.pactsafe.io/ps.min.js',
   position: 'auto',
   link: '#',
   openLegalCenter: true,

@@ -21,7 +21,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:coverage-watch": "jest --coverage --watch",
-    "lint": "./node_modules/.bin/eslint src/ --fix"
+    "lint": "./node_modules/.bin/eslint src/ tests/ --fix"
   },
   "licenses": [
     {
@@ -47,6 +47,7 @@
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^22.0.1",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
     "jest": "^23.6.0",
@@ -79,12 +80,6 @@
       "name": "Kyle Peeler",
       "email": "kpeeler@pactsafe.com",
       "url": "http://kylepeeler.io"
-    }
-  ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/pactsafe/pactsafe-react-sdk/blob/master/LICENSE"
     }
   ],
   "keywords": [

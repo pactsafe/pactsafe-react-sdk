@@ -3,23 +3,19 @@ import { mount } from 'enzyme';
 import { PSClickWrap } from '../src';
 
 describe('PSClickWrap', () => {
-  it('Renders a ps-clickwrap div', () => {
-    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIDSelector="email" groupKey="example-clickwrap" displayAll testMode />);
-    expect(wrapper.containsMatchingElement(<div className="ps-clickwrap" />));
-    console.log(wrapper.debug());
+  it('Renders a ps-clickwrap wrapper div', () => {
+    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode />);
+    expect(wrapper.containsMatchingElement(<div id="ps-clickwrap" />)).toBeTruthy();
   });
 
-  it('Creates _ps global', () => {
+  it('Renders a container div with specified id', () => {
+    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" containerId="test" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode/>);
+    expect(wrapper.containsMatchingElement(<div id="test" />)).toBeTruthy();
+  })
+
+  it('Creates _ps runner global', () => {
+    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode />);
     expect(_ps).toBeDefined();
-  });
-
-  it('should inject the snippet to the page', () => {
-    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIDSelector="email" groupKey="example-clickwrap" displayAll testMode />);
-    wrapper.instance().injectSnippet = jest.fn(() => {
-      console.log('hi there');
-    });
-    wrapper.instance().forceUpdate();
-
-    expect(wrapper.instance().injectSnippet).toBeCalled();
+    //expect(_ps).toBeCalled();
   });
 });
