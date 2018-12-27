@@ -1,6 +1,6 @@
 # PactSafe React SDK
 
-[![Travis][build-badge]][build]
+[![Travis][build-badge]][build]v
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 

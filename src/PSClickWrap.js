@@ -12,7 +12,19 @@ class PSClickWrap extends React.Component {
       clickwrapGroupKey: null,
       dynamicGroup: false,
     };
-    const { psScriptUrl, accessId, testMode, disableSending, dynamic, signerId } = this.props;
+    this.propsEventMap = {
+      onAll: 'all',
+      onSent: 'sent',
+      onRetrieve: 'retrieved',
+      onSet: 'set',
+      onValid: 'valid',
+      onInvalid: 'invalid',
+      onRender: 'rendered',
+      onDisplayed: 'displayed',
+      onSetSignerId: 'set:signer_id',
+      onError: 'error',
+    };
+    const { psScriptUrl, accessId, testMode, disableSending, dynamic, signerId, debug } = this.props;
     if (!PSSnippet.isSnippetLoaded(psScriptUrl)) {
       PSSnippet.injectSnippet(psScriptUrl);
     }
@@ -22,6 +34,9 @@ class PSClickWrap extends React.Component {
       dynamic,
       signer_id: signerId,
     });
+    if (debug) {
+      _ps.debug = true;
+    }
   }
 
   componentDidMount() {
@@ -59,38 +74,27 @@ class PSClickWrap extends React.Component {
     }
   }
 
-  setEventListeners(groupKey) {
-    const { onAgree, onValid, onInvalid, onSent } = this.props;
-    if (onAgree) {
-      _ps.on('sent', (event, parameters, group) => {
-        if (event === 'agreed' && group.get('key') === groupKey) {
-          onAgree(parameters, group);
+  registerEventListener(event, groupKey) {
+    _ps.on(this.propsEventMap[event], (...args) => {
+      let forCurrentGroupKey = false;
+      args.forEach((arg) => {
+        if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
+          forCurrentGroupKey = true;
         }
       });
-    }
-    if (onValid) {
-      _ps.on('valid', (parameters, context) => {
-        if (context.get('key') === groupKey) {
-          onValid(parameters, context);
-        }
-      });
-    }
-    if (onInvalid) {
-      _ps.on('invalid', (parameters, context) => {
-        if (context.get('key') === groupKey) {
-          onInvalid(parameters, context);
-        }
-      });
-    }
-    if (onSent) {
-      _ps.on('sent', (event, parameters, group) => {
-        if (group.get('key') === groupKey) {
-          onSent(event, parameters, group);
-        }
-      });
-    }
+      if (forCurrentGroupKey) {
+        this.props[event](...args);
+      }
+    });
   }
 
+  registerEventListeners(groupKey) {
+    Object.keys(this.propsEventMap).forEach((eventProp) => {
+      if (this.props[eventProp]) {
+        this.registerEventListener(eventProp, groupKey);
+      }
+    });
+  }
 
   createClickWrap() {
     const { filter, containerId, signerIdSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail } = this.props;
@@ -102,7 +106,7 @@ class PSClickWrap extends React.Component {
           if (group) {
             this.setState({ clickwrapGroupKey: groupKey });
             group.render();
-            this.setEventListeners(groupKey);
+            this.registerEventListeners(groupKey);
           }
         } });
     } else {
@@ -114,7 +118,7 @@ class PSClickWrap extends React.Component {
               clickwrapGroupKey: group.get('key'),
               dynamicGroup: true,
             });
-            this.setEventListeners(group.get('key'));
+            this.registerEventListeners(group.get('key'));
           }
         },
       });
@@ -175,10 +179,17 @@ PSClickWrap.propTypes = {
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   testMode: PropTypes.bool,
+  debug: PropTypes.bool,
+  onAll: PropTypes.func,
+  onSent: PropTypes.func,
+  onRetrieve: PropTypes.func,
+  onSet: PropTypes.func,
   onValid: PropTypes.func,
   onInvalid: PropTypes.func,
-  onSent: PropTypes.func,
-  onAgree: PropTypes.func,
+  onRender: PropTypes.func,
+  onDisplayed: PropTypes.func,
+  onSetSignerId: PropTypes.func,
+  onError: PropTypes.func,
 };
 
 PSClickWrap.defaultProps = {

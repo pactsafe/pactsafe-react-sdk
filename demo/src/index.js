@@ -28,11 +28,19 @@ class Demo extends React.Component {
 			return {
 				dynamicRenderData: {
 					vendor_name: "I updated!",
-					vendor_phone: "3178693251",
-					vendor_price: "$9999"
+					vendor_phone: "Updated phone",
+					vendor_price: "$15000"
 				}
 			};
 		});
+	};
+
+	onErrorMethod = (a, b, c, d) => {
+		console.log('We got an error I think...', a, b, c, d);
+	}
+
+	onDisplayedMethod = (parameters, group) => {
+		console.log("WE DISPLAYED!!! CLICKWRAP 1", parameters, group);
 	};
 
 	onAgreeMethod = (parameters, group) => {
@@ -71,7 +79,7 @@ class Demo extends React.Component {
 		let clickwraps = null;
 		if (this.state.isRendered) {
 			clickwraps = <div>
-					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" onAgree={this.onAgreeMethod} dynamic renderData={this.state.dynamicRenderData} onValid={this.onValidMethod} onSent={this.onSentMethod} onInvalid={this.onInvalidMethod} />
+					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" onAgree={this.onAgreeMethod} dynamic renderData={this.state.dynamicRenderData} onValid={this.onValidMethod} onSent={this.onSentMethod} onInvalid={this.onInvalidMethod} onDisplayed={this.onDisplayedMethod} onError={this.onErrorMethod}/>
 					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email2" filter="id==14847" displayAll testMode clickWrapStyle="full" containerId="testing" onAgree={this.onAgreeOtherMethod} onValid={this.onValid2Method} onSent={this.onSent2Method} onInvalid={this.onInvalid2Method} />
 				</div>;
 		}

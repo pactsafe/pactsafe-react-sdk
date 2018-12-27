@@ -9,13 +9,13 @@ describe('PSClickWrap', () => {
   });
 
   it('Renders a container div with specified id', () => {
-    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" containerId="test" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode/>);
+    const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" containerId="test" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode />);
     expect(wrapper.containsMatchingElement(<div id="test" />)).toBeTruthy();
-  })
+  });
 
   it('Creates _ps runner global', () => {
     const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode />);
     expect(_ps).toBeDefined();
-    //expect(_ps).toBeCalled();
+    // expect(_ps).toBeCalled();
   });
 });

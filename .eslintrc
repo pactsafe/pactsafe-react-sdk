@@ -8,6 +8,8 @@
 	},
 	"plugins": ["react"],
 	"rules": {
+		"react/destructuring-assignment": "off",
+		"react/no-unused-prop-types": "off", //We dynamically create event handlers and we verify them as function prop types, eslint does not detect them so turning this off
 		"no-param-reassign": "off",
 		"react/jsx-filename-extension": "off",
 		"react/require-default-props": "off",
