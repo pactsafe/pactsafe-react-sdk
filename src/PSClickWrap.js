@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
+import uuid from 'uuid/v4';
 import PSSnippet from './PSSnippet';
 
 class PSClickWrap extends React.Component {
@@ -72,27 +73,46 @@ class PSClickWrap extends React.Component {
     if (_ps && _ps.getByKey(groupKey) && _ps.getByKey(groupKey).rendered) {
       _ps.getByKey(groupKey).rendered = false;
     }
+    this.unregisterEventListeners(this.state.clickwrapGroupKey);
   }
 
   registerEventListener(event, groupKey) {
-    _ps.on(this.propsEventMap[event], (...args) => {
+    const eventCallbackFn = (...args) => {
       let forCurrentGroupKey = false;
       args.forEach((arg) => {
         if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
           forCurrentGroupKey = true;
         }
       });
-      if (forCurrentGroupKey) {
+      if (forCurrentGroupKey || event.indexOf('onSet') !== -1) {
         this.props[event](...args);
       }
-    });
+    };
+    const newEventListenerID = uuid();
+    eventCallbackFn.toString = () => newEventListenerID;
+    _ps.on(this.propsEventMap[event], eventCallbackFn);
+    return eventCallbackFn.toString();
   }
 
   registerEventListeners(groupKey) {
+    const eventListeners = {};
     Object.keys(this.propsEventMap).forEach((eventProp) => {
       if (this.props[eventProp]) {
-        this.registerEventListener(eventProp, groupKey);
+        eventListeners[this.propsEventMap[eventProp]] = this.registerEventListener(eventProp, groupKey);
       }
+    });
+    this.setState({ eventListeners });
+    console.log(eventListeners);
+  }
+
+  unregisterEventListeners() {
+    Object.keys(this.state.eventListeners).forEach((event) => {
+      const eventUUID = this.state.eventListeners[event];
+      const fakeEventListener = function () {
+        return eventUUID;
+      };
+      fakeEventListener.toString = function () { return eventUUID; };
+      _ps.off(this.propsEventMap[event], fakeEventListener);
     });
   }
 
@@ -104,7 +124,9 @@ class PSClickWrap extends React.Component {
       _ps('load', groupKey, { ...options,
         event_callback: (err, group) => {
           if (group) {
-            this.setState({ clickwrapGroupKey: groupKey });
+            this.setState({
+              clickwrapGroupKey: groupKey,
+            });
             group.render();
             this.registerEventListeners(groupKey);
           }

@@ -34,6 +34,10 @@ class Demo extends React.Component {
 			};
 		});
 	};
+	
+	onAllMethod = (a, b, c, d, e, f) => {
+		console.log('on all method here', a, b, c, d, e, f);
+	}
 
 	onErrorMethod = (a, b, c, d) => {
 		console.log('We got an error I think...', a, b, c, d);
@@ -75,11 +79,15 @@ class Demo extends React.Component {
 		console.log("on invalid2 called", parameters, group);
 	};
 
+	onSetSignerIDMethod = (a, b, c, d) => {
+		console.log("SET PROP CALLBACK WORKING!!!!", a, b, c, d);
+	}
+
 	render() {
 		let clickwraps = null;
 		if (this.state.isRendered) {
 			clickwraps = <div>
-					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" onAgree={this.onAgreeMethod} dynamic renderData={this.state.dynamicRenderData} onValid={this.onValidMethod} onSent={this.onSentMethod} onInvalid={this.onInvalidMethod} onDisplayed={this.onDisplayedMethod} onError={this.onErrorMethod}/>
+					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" onAgree={this.onAgreeMethod} dynamic renderData={this.state.dynamicRenderData} onValid={this.onValidMethod} onSent={this.onSentMethod} onInvalid={this.onInvalidMethod} onDisplayed={this.onDisplayedMethod} onError={this.onErrorMethod} onSet={this.onSetSignerIDMethod}/>
 					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email2" filter="id==14847" displayAll testMode clickWrapStyle="full" containerId="testing" onAgree={this.onAgreeOtherMethod} onValid={this.onValid2Method} onSent={this.onSent2Method} onInvalid={this.onInvalid2Method} />
 				</div>;
 		}

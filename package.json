@@ -32,7 +32,8 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "prop-types": "^15.5.10",
-    "react-proptype-conditional-require": "^1.0.4"
+    "react-proptype-conditional-require": "^1.0.4",
+    "uuid": "^3.3.2"
   },
   "peerDependencies": {
     "react": "16.x"
