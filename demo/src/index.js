@@ -7,7 +7,7 @@ class Demo extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isRendered: true,
+			isRendered: false,
 			dynamicRenderData: {
 				vendor_name: "Hi guys",
 				vendor_phone: "3178693251",
@@ -47,6 +47,10 @@ class Demo extends React.Component {
 		console.log("WE DISPLAYED!!! CLICKWRAP 1", parameters, group);
 	};
 
+	onDisplayed2Method = (parameters, group) => {
+		console.log("WE DISPLAYED!!! CLICKWRAP 2", parameters, group);
+	};
+
 	onAgreeMethod = (parameters, group) => {
 		console.log("WE AGREED!!! CLICKWRAP 1", parameters, group);
 	};
@@ -56,7 +60,7 @@ class Demo extends React.Component {
 	};
 
 	onSentMethod = (event, parameters, group) => {
-		console.log("on sent called", event, parameters, group);
+		console.log("on sent called (shouldnt be called when toggled!)", event, parameters, group);
 	};
 
 	onValidMethod = (parameters, group) => {
@@ -84,13 +88,6 @@ class Demo extends React.Component {
 	}
 
 	render() {
-		let clickwraps = null;
-		if (this.state.isRendered) {
-			clickwraps = <div>
-					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" onAgree={this.onAgreeMethod} dynamic renderData={this.state.dynamicRenderData} onValid={this.onValidMethod} onSent={this.onSentMethod} onInvalid={this.onInvalidMethod} onDisplayed={this.onDisplayedMethod} onError={this.onErrorMethod} onSet={this.onSetSignerIDMethod}/>
-					<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email2" filter="id==14847" displayAll testMode clickWrapStyle="full" containerId="testing" onAgree={this.onAgreeOtherMethod} onValid={this.onValid2Method} onSent={this.onSent2Method} onInvalid={this.onInvalid2Method} />
-				</div>;
-		}
 		return (
 			<div className="container">
 				<link
@@ -136,7 +133,8 @@ class Demo extends React.Component {
 					Update render data
 				</button>
 				<br />
-				{clickwraps}
+				<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email2" filter="id==14847" displayAll testMode clickWrapStyle="full" containerId="testing" onValid={this.onValid2Method} onSent={this.onSentMethod} onInvalid={this.onInvalid2Method} onDisplayed={this.onDisplayed2Method}/>
+				{this.state.isRendered && <PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="dynamic-clickwrap" displayAll testMode clickWrapStyle="full" dynamic renderData={this.state.dynamicRenderData} onValid={this.onValidMethod} onSent={this.onSent2Method} onInvalid={this.onInvalidMethod} onDisplayed={this.onDisplayedMethod} onError={this.onErrorMethod} onSet={this.onSetSignerIDMethod}/>}
 				<button
 					className="btn btn-primary"
 					type="submit"

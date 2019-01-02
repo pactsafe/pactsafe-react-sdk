@@ -76,7 +76,7 @@ class PSClickWrap extends React.Component {
     this.unregisterEventListeners(this.state.clickwrapGroupKey);
   }
 
-  registerEventListener(event, groupKey) {
+  registerEventListener(eventProp, groupKey) {
     const eventCallbackFn = (...args) => {
       let forCurrentGroupKey = false;
       args.forEach((arg) => {
@@ -84,13 +84,13 @@ class PSClickWrap extends React.Component {
           forCurrentGroupKey = true;
         }
       });
-      if (forCurrentGroupKey || event.indexOf('onSet') !== -1) {
-        this.props[event](...args);
+      if (forCurrentGroupKey || eventProp.indexOf('onSet') !== -1) {
+        this.props[eventProp](...args);
       }
     };
     const newEventListenerID = uuid();
     eventCallbackFn.toString = () => newEventListenerID;
-    _ps.on(this.propsEventMap[event], eventCallbackFn);
+    _ps.on(this.propsEventMap[eventProp], eventCallbackFn);
     return eventCallbackFn.toString();
   }
 
@@ -102,17 +102,14 @@ class PSClickWrap extends React.Component {
       }
     });
     this.setState({ eventListeners });
-    console.log(eventListeners);
   }
 
   unregisterEventListeners() {
     Object.keys(this.state.eventListeners).forEach((event) => {
       const eventUUID = this.state.eventListeners[event];
-      const fakeEventListener = function () {
-        return eventUUID;
-      };
-      fakeEventListener.toString = function () { return eventUUID; };
-      _ps.off(this.propsEventMap[event], fakeEventListener);
+      const fakeEventListener = () => eventUUID;
+      fakeEventListener.toString = () => eventUUID;
+      _ps.off(event, fakeEventListener);
     });
   }
 
