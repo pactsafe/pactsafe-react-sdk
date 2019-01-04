@@ -78,16 +78,20 @@ class PSClickWrap extends React.Component {
 
   registerEventListener(eventProp, groupKey) {
     const eventCallbackFn = (...args) => {
-      let forCurrentGroupKey = false;
+      let shouldFire = false;
       args.forEach((arg) => {
-        if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
-          forCurrentGroupKey = true;
+        // On set's context is not always passed as a ClickwrapGroup, if its a parameter being set such as the signer ID
+        // So we check that the context's toString represents a Site and fire for all group keys under that site.
+        if (arg.get && arg.get('key') && arg.get('key') === groupKey || arg.toString() === '[object Site]') {
+          shouldFire = true;
         }
       });
-      if (forCurrentGroupKey || eventProp.indexOf('onSet') !== -1) {
+      if (shouldFire) {
         this.props[eventProp](...args);
       }
     };
+    // In order to handle unregistration of event listeners, we override the toString function to identify the
+    // function by a UUID rather than the default toString of a function (it's code implementation).
     const newEventListenerID = uuid();
     eventCallbackFn.toString = () => newEventListenerID;
     _ps.on(this.propsEventMap[eventProp], eventCallbackFn);
@@ -107,6 +111,8 @@ class PSClickWrap extends React.Component {
   unregisterEventListeners() {
     Object.keys(this.state.eventListeners).forEach((event) => {
       const eventUUID = this.state.eventListeners[event];
+      // In order to unregister the event, we must create a fake function (typeof passed to _ps.off must be a function),
+      // that returns the UUID we want to unregister.
       const fakeEventListener = () => eventUUID;
       fakeEventListener.toString = () => eventUUID;
       _ps.off(event, fakeEventListener);

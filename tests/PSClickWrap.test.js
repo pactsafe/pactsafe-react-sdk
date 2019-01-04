@@ -3,6 +3,10 @@ import { mount } from 'enzyme';
 import { PSClickWrap } from '../src';
 
 describe('PSClickWrap', () => {
+
+  const _ps = jest.fn();
+
+
   it('Renders a ps-clickwrap wrapper div', () => {
     const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode />);
     expect(wrapper.containsMatchingElement(<div id="ps-clickwrap" />)).toBeTruthy();
@@ -16,6 +20,5 @@ describe('PSClickWrap', () => {
   it('Creates _ps runner global', () => {
     const wrapper = mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" signerIdSelector="email" groupKey="example-clickwrap" displayAll testMode />);
     expect(_ps).toBeDefined();
-    // expect(_ps).toBeCalled();
   });
 });
