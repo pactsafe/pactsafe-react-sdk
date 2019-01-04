@@ -78,20 +78,22 @@ class PSClickWrap extends React.Component {
 
   registerEventListener(eventProp, groupKey) {
     const eventCallbackFn = (...args) => {
-      let shouldFire = false;
+      let shouldFireListener = false;
       args.forEach((arg) => {
         // On set's context is not always passed as a ClickwrapGroup, if its a parameter being set such as the signer ID
         // So we check that the context's toString represents a Site and fire for all group keys under that site.
-        if (arg.get && arg.get('key') && arg.get('key') === groupKey || arg.toString() === '[object Site]') {
-          shouldFire = true;
+        if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
+          shouldFireListener = true;
+        } else if (arg.toString() === '[object Site]') {
+          shouldFireListener = true;
         }
       });
-      if (shouldFire) {
+      if (shouldFireListener) {
         this.props[eventProp](...args);
       }
     };
     // In order to handle unregistration of event listeners, we override the toString function to identify the
-    // function by a UUID rather than the default toString of a function (it's code implementation).
+    // function by a UUID rather than the default toString of a function.
     const newEventListenerID = uuid();
     eventCallbackFn.toString = () => newEventListenerID;
     _ps.on(this.propsEventMap[eventProp], eventCallbackFn);
