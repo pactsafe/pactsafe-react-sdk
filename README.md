@@ -102,7 +102,7 @@ class Example extends React.Component {
     
             <PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} signerIdSelector={userEmail} onValid={this.onValid} onInvalid={this.onInvalid}/>
     
-            <button disabled={!this.state.hasAgreed} type="submit" onClick={this.onClickSubmit}>Submit</button>
+            <button disabled={!this.state.hasAgreed} type="submit">Submit</button>
         </div>
     }
 }
