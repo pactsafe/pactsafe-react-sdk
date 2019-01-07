@@ -18,11 +18,13 @@ class PSClickWrap extends React.Component {
       onSent: 'sent',
       onRetrieved: 'retrieved',
       onSet: 'set',
+      onSetSignerId: 'set:signer_id',
       onValid: 'valid',
       onInvalid: 'invalid',
-      onRender: 'rendered',
+      onRendered: 'rendered',
       onDisplayed: 'displayed',
-      onSetSignerId: 'set:signer_id',
+      onScrolledContract: 'scrolled:contract',
+      onScrolled: 'scrolled',
       onError: 'error',
     };
     const { psScriptUrl, backupScriptURL, accessId, testMode, disableSending, dynamic, signerId, debug } = this.props;
@@ -81,7 +83,8 @@ class PSClickWrap extends React.Component {
       let shouldFireListener = false;
       args.forEach((arg) => {
         // On set's context is not always passed as a ClickwrapGroup, if its a parameter being set such as the signer ID
-        // So we check that the context's toString represents a Site and fire for all group keys under that site.
+        // So we check that the context's toString represents a Site and fire for all group keys under that site. If it if
+        // passed, we use that context to ensure the event fires for only the correct clickwrap
         if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
           shouldFireListener = true;
         } else if (arg.toString() === '[object Site]') {
@@ -107,6 +110,7 @@ class PSClickWrap extends React.Component {
         eventListeners[this.propsEventMap[eventProp]] = this.registerEventListener(eventProp, groupKey);
       }
     });
+    // Store event listeners in state so we can unregister them later on unmount
     this.setState({ eventListeners });
   }
 
@@ -210,13 +214,15 @@ PSClickWrap.propTypes = {
   debug: PropTypes.bool,
   onAll: PropTypes.func,
   onSent: PropTypes.func,
-  onRetrieve: PropTypes.func,
+  onRetrieved: PropTypes.func,
   onSet: PropTypes.func,
+  onSetSignerId: PropTypes.func,
   onValid: PropTypes.func,
   onInvalid: PropTypes.func,
-  onRender: PropTypes.func,
+  onRendered: PropTypes.func,
   onDisplayed: PropTypes.func,
-  onSetSignerId: PropTypes.func,
+  onScrolledContract: PropTypes.func,
+  onScrolled: PropTypes.func,
   onError: PropTypes.func,
 };
 
