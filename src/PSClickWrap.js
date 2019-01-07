@@ -128,32 +128,25 @@ class PSClickWrap extends React.Component {
   createClickWrap() {
     const { filter, containerId, signerIdSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail } = this.props;
     const options = { filter, container_selector: containerId, confirmation_email: confirmationEmail, signer_id_selector: signerIdSelector, style: clickWrapStyle, display_all: displayAll, render_data: renderData, auto_run: displayImmediately, force_scroll: forceScroll };
-    if (groupKey) {
-      this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
-      _ps('load', groupKey, { ...options,
-        event_callback: (err, group) => {
-          if (group) {
-            this.setState({
-              clickwrapGroupKey: groupKey,
-            });
-            group.render();
-            this.registerEventListeners(groupKey);
-          }
-        } });
-    } else {
-      _ps('load', {
-        ...options,
-        event_callback: (err, group) => {
-          if (group) {
-            this.setState({
-              clickwrapGroupKey: group.get('key'),
-              dynamicGroup: true,
-            });
-            this.registerEventListeners(group.get('key'));
-          }
-        },
-      });
-    }
+
+    if (groupKey) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
+    const dynamic = !groupKey;
+
+    const eventCallback = (err, group) => {
+      if (group) {
+        const key = groupKey || group.get('key');
+
+        const state = { clickwrapGroupKey: key };
+        if (dynamic) state.dynamicGroup = true;
+        this.setState(state);
+
+        if (!dynamic) group.render();
+        this.registerEventListeners(key);
+      }
+    };
+
+    if (groupKey) _ps('load', groupKey, { ...options, event_callback: eventCallback });
+    else _ps('load', { ...options, event_callback: eventCallback });
   }
 
 

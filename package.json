@@ -7,7 +7,6 @@
   "module": "es/index.js",
   "homepage": "https://github.com/PactSafe/pactsafe-react-sdk",
   "files": [
-    "css",
     "es",
     "lib",
     "umd"
