@@ -84,15 +84,15 @@ import {PSClickWrap} from 'pactsafe-react-sdk'
 class Example extends React.Component {
     constructor(props){
         super(props);
-        this.state = {hasAgreed: false}
+        this.state = { hasAgreed: false };
     }
     
     onValid = () => {
-        this.setState({ hasAgreed: true })
+        this.setState({ hasAgreed: true });
     }
     
     onInvalid = () => {
-        this.setState({ hasAgreed: false })
+        this.setState({ hasAgreed: false });
     }
     
     render () {
