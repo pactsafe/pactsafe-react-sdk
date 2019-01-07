@@ -160,6 +160,4 @@ describe('PSClickWrap _ps interface tests', () => {
     mount(<PSClickWrap accessId="29ea80d9-d386-4cfd-a280-505e802ee732" groupKey="example-clickwrap" signerId="test@abc.com" />);
     expect(_ps.mock.calls[1][2].force_scroll).toBe(undefined);
   });
-
-
 });

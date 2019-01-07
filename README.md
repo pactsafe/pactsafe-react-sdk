@@ -75,7 +75,8 @@ Replace `YOUR_GROUP_KEY_HERE` with your group's key found within your [PactSafe 
 
 Pass in any additional options using props on the `PSClickWrap` component.
 
-You can hook into events using the event callback props described here: ([See documentation on PSClickwrap callback props here](#callback-props)). 
+You can hook into events using the event callback props described here: ([See documentation on PSClickwrap callback props here](#callback-props)).
+
 As a quick example if you want to enable a button on a valid clickwrap event, here is example code to do so:
 ```JSX
 import {PSClickWrap} from 'pactsafe-react-sdk'
@@ -107,7 +108,7 @@ class Example extends React.Component {
 }
 ```
 
-If you do not want to use event callback props, the `_ps` is loaded into the window object for you to access and set event listeners manually.
+If you do not want to use event callback props, the `_ps` is loaded into the window object for you to access and set event listeners manually. Using the `_ps` global you should be able to do everything listed in our full documentation on the [PS.js library](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library)
 
 #### Using PSBrowseWrap
 
@@ -131,7 +132,7 @@ import {PSBrowseWrap} from 'pactsafe-react-sdk'
 |`clickWrapStyle`     | string.oneOf[`'full'`, `'scroll'`, `'checkbox'`, `'combined'`, `'embedded'`] | Value specified in PactSafe Group's UI      | No                                                 | Override the clickwrap style specified in the PactSafe Group Interface                                                                                                                                                                                                                                                   |
 |`confirmationEmail`  | bool                                                                        | Value specified in PactSafe Group's UI      | No                                                 | Override whether to send a confirmation email to the signer upon contract acceptance                                                                                                                                                                                                                                     |
 |`containerId`        | string                                                                      | ps-clickwrap                                | No                                                 | The div ID that will contain your clickwrap. You should override this if you plan on displaying more than one contract on a page.                                                                                                                                                                                        |
-|`disableSending`     | bool                                                                        | false                                       | No                                                 | Turn this on if you want to manually send the agreed event instead of it automatically being sent on contract acceptance. [See documentation on manually sending the agreed event here.](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library#section-3-sending-agreed-in-javascript)                            |
+|`disableSending`     | bool                                                                        | false                                       | No                                                 | Turn this on if you want to manually send the agreed event instead of it automatically being sent on contract acceptance. [See documentation on manually sending the agreed event here.](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library#section-3-sending-agreed-in-javascript)                  |
 |`displayAll`         | bool                                                                        | true                                        | No                                                 | Display all contracts in the group immediately. If disabled, a contract will only be displayed if the signer hasn't accepted the latest version.                                                                                                                                                                         |
 |`displayImmediately` | bool                                                                        | true                                        | No                                                 | Display the group's contracts as soon as the Signer ID is available. If disabled, contracts will remain hidden until you call `displayRequired()`                                                                                                                                                                        |
 |`dynamic`            | bool                                                                        | false                                       | No                                                 | If you would like to use dynamic render_data in your contract, you must set this to true. If this is set to true, you MUST also pass an object into the `render_data` prop.                                                                                                                                              |
@@ -220,7 +221,7 @@ Triggered when the signer_id parameter is set.
 ### Callback Arguments:
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
-| value            | String                                                         | The `signer_id` that was set                                                                                                                          |                                                                                           
+| value            | String                                                         | The `signer_id` that was set                                                                                                                        |                                                                                           
 | context          | Site, BrowsewrapGroup or ClickwrapGroup                        | The Site or Group object on which the parameter was set.                                                                                            |
 
 ## <a name="onValid"></a> onValid
@@ -314,7 +315,7 @@ Triggered when a send or retrieve command encounters an error before being sent.
 | `link`		     	 | string															  | null								    | If `openLegalCenter` is set to false	   | Location of where the BrowseWrap link should redirect to, should only be used if `openLegalCenter` is set to false, otherwise the link will open the group's PactSafe legal center 																																	  |
 | `linkText`			 | string															  | null								    | Yes									   | The text that your BrowseWrap link will display (for example, 'Legal Center' or 'Terms of Service')																																																					  |
 | `openLegalCenter`	     | bool																  | true								    | No									   | Open this group's legal center page when the badge or link is clicked. If enabled, the target link's original `href` will be replaced.																																													  |
-| `position`			 | string.oneOf[`'middle'`, `'left'`, `'right'`, `'auto'`]		      | auto									| Yes								   	   | Position of where the BrowseWrap badge will float within the browser window																																																											  |
+| `position`			 | string.oneOf[`'middle'`, `'left'`, `'right'`, `'auto'`]		       | auto									 | Yes  		  					   	    | Position of where the BrowseWrap badge will float within the browser window																																																							 				   |
 | `psScriptUrl`          | string                                                             | '//vault.pactsafe.io/ps.min.js'         | Yes                                      | If using a custom (or development) version of the ps.js file, pass the file URL in here. You probably won't need to use this.                  																																										  |
 
 ## Development (`src`, `lib` and the build process)
