@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "import/no-extraneous-dependencies": "off", //don't want to load react-dom in on other's npm install, so keeping as devDependency
+        "no-console": "off", // for the demo page we want to keep console.logs to show triggered events
+        "no-alert": "off", // same for alerts
+    },
+}

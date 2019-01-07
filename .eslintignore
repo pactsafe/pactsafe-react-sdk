@@ -5,6 +5,6 @@ lib/*
 node_modules/*
 umd/*
 es/*
-demo/*
+demo/dist/*
 coverage/*
 src/PSSnippet.js

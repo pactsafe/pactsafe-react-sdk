@@ -75,40 +75,7 @@ Replace `YOUR_GROUP_KEY_HERE` with your group's key found within your [PactSafe 
 
 Pass in any additional options using props on the `PSClickWrap` component.
 
-You can hook into events using the event callback props described here: ([See documentation on PSClickwrap callback props here](#callback-props)).
-
-As a quick example if you want to enable a button on a valid clickwrap event, here is example code to do so:
-```JSX
-import {PSClickWrap} from 'pactsafe-react-sdk'
-...
-class Example extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = { hasAgreed: false };
-    }
-    
-    onValid = () => {
-        this.setState({ hasAgreed: true });
-    }
-    
-    onInvalid = () => {
-        this.setState({ hasAgreed: false });
-    }
-    
-    render () {
-        return 
-        <div>
-            <input type="email" id="userEmail" placeholder="Your Email"/>
-    
-            <PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} signerIdSelector={userEmail} onValid={this.onValid} onInvalid={this.onInvalid}/>
-    
-            <button disabled={!this.state.hasAgreed} type="submit">Submit</button>
-        </div>
-    }
-}
-```
-
-If you do not want to use event callback props, the `_ps` is loaded into the window object for you to access and set event listeners manually. Using the `_ps` global you should be able to do everything listed in our full documentation on the [PS.js library](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library)
+You can hook into events using the triggered event callback props described here: ([See documentation on PSClickwrap callback props here](#callback-props)).
 
 #### Using PSBrowseWrap
 
@@ -162,7 +129,42 @@ import {PSBrowseWrap} from 'pactsafe-react-sdk'
 ## <a name="callback-props"></a>PSClickwrap Triggered Event Callback Props:
 
 New in v2.0 of the React SDK we are introducing triggered event props. These props are functions that can be passed in as props and are called in response to events that happen after a user interacts with a PSClickwrap component. These function props correspond to the triggered events that can be also created using the _ps global created by the snippet. [For more information on how triggered events work within the PSSnippet and calling them without the props, you can learn about them here](https://developer.pactsafe.com/v1.1/reference#triggered-events-1). By using function props, the component will interact with the `_ps` API for you and clean up after itself when the component is destroyed.
-The list below describes the props names and corresponding PactSafe event. The demo page contains various callback examples and the corresponding callback events can be observed in the console output.
+The demo page contains various callback examples and the corresponding callback events can be observed in the console output.
+
+As a quick example of the usage of these, if you wanted to enable a button on a valid clickwrap event, here is example code to do so using the onValid and onInvalid event props:
+```JSX
+import {PSClickWrap} from 'pactsafe-react-sdk'
+...
+class Example extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = { hasAgreed: false };
+    }
+    
+    onValid = () => {
+        this.setState({ hasAgreed: true });
+    }
+    
+    onInvalid = () => {
+        this.setState({ hasAgreed: false });
+    }
+    
+    render () {
+        return 
+        <div>
+            <input type="email" id="userEmail" placeholder="Your Email"/>
+    
+            <PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} signerIdSelector={userEmail} onValid={this.onValid} onInvalid={this.onInvalid}/>
+    
+            <button disabled={!this.state.hasAgreed} type="submit">Submit</button>
+        </div>
+    }
+}
+```
+
+If you do not want to use event callback props, the `_ps` is loaded into the window object for you to access and set event listeners manually. Using the `_ps` global you should be able to do everything listed in our full documentation on the [PS.js library](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library)
+
+The list below describes the props names and corresponding PactSafe event:
 
 ## <a name="onAll"></a> onAll
 _ps event: `all`
@@ -173,7 +175,7 @@ A special event that is triggered when any other event is triggered. The name of
 |       Name       |        Type        |                   Description                                                                                                                       |
 |:----------------:|:------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | event            | String             | The name of the event that was triggered.                                                                                                           |
-|[arguments]       | Any                | All of the arguments that were passed to the original event.                                                                                        |
+|[arguments]       | Array<Any>         | All of the arguments that were passed to the original event.                                                                                        |
 
 ## <a name="onSent"></a> onSent
 _ps event: `sent`
@@ -325,7 +327,7 @@ Triggered when a send or retrieve command encounters an error before being sent.
 
 ## License
 
-Copyright &copy; 2018 PactSafe.
+Copyright &copy; 2019 PactSafe.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
