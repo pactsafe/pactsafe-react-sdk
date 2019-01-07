@@ -13,7 +13,7 @@
 - Ability to render a dynamic PactSafe ClickWrap by passing in a custom `render_data` object
 - Ability to override properties set within the PactSafe App's group configuration such as:
     - ClickWrap style using the `clickWrapStyle` prop
-    - Signer ID selector using the `signerIDSelector` prop
+    - Signer ID selector using the `signerIdSelector` prop
     - Displaying contracts immediately using the `displayImmediately` prop
     - Displaying all contracts using the `displayAll` prop
     - and more! ([See more detailed documentation on available PSClickWrap props here](#props))
@@ -58,10 +58,11 @@ npm install pactsafe-react-sdk --save
 
 #### Using PSClickWrap
 
-In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIDSelector` prop to the PSClickWrap component: 
+In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIdSelector` prop to the PSClickWrap component: 
 
 ```JSX
-import {PSClickWrap} from 'pactsafe-react-sdk'
+import { PSClickWrap } from 'pactsafe-react-sdk'
+
 ...
 
 <input type="email" id="userEmail" placeholder="Your Email"/>
@@ -83,7 +84,8 @@ Your PSBrowseWrap component should be placed where you would like your Legal Cen
 
 
 ```JSX
-import {PSBrowseWrap} from 'pactsafe-react-sdk'
+import { PSBrowseWrap } from 'pactsafe-react-sdk'
+
 ...
 
 <PSBrowseWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} linkText={'View Legal Center'}/>
@@ -133,8 +135,10 @@ The demo page contains various callback examples and the corresponding callback 
 
 As a quick example of the usage of these, if you wanted to enable a button on a valid clickwrap event, here is example code to do so using the onValid and onInvalid event props:
 ```JSX
-import {PSClickWrap} from 'pactsafe-react-sdk'
+import { PSClickWrap } from 'pactsafe-react-sdk'
+
 ...
+
 class Example extends React.Component {
     constructor(props){
         super(props);

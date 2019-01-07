@@ -174,7 +174,7 @@ class Demo extends React.Component {
        </div>
        <br />
        <PSClickWrap
-         accessId="29ea80d9-d386-4cfd-a280-505e802ee732"
+         accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4" // TODO: move me to a .env file
          signerIdSelector="email"
          groupKey="dynamic-clickwrap"
          displayAll
@@ -214,7 +214,7 @@ class Demo extends React.Component {
        <br />
        <br />
        <PSBrowseWrap
-         accessId="29ea80d9-d386-4cfd-a280-505e802ee732"
+         accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4" // TODO: move me to a .env file
          groupKey="example-browsewrap"
          linkText="Legal Center"
          alwaysVisible

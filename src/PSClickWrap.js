@@ -75,7 +75,7 @@ class PSClickWrap extends React.Component {
     if (_ps && _ps.getByKey(groupKey) && _ps.getByKey(groupKey).rendered) {
       _ps.getByKey(groupKey).rendered = false;
     }
-    this.unregisterEventListeners(this.state.clickwrapGroupKey);
+    this.unregisterEventListeners();
   }
 
   registerEventListener(eventProp, groupKey) {
@@ -130,17 +130,17 @@ class PSClickWrap extends React.Component {
     const options = { filter, container_selector: containerId, confirmation_email: confirmationEmail, signer_id_selector: signerIdSelector, style: clickWrapStyle, display_all: displayAll, render_data: renderData, auto_run: displayImmediately, force_scroll: forceScroll };
 
     if (groupKey) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
-    const dynamic = !groupKey;
+    const isDynamic = !groupKey;
 
     const eventCallback = (err, group) => {
       if (group) {
         const key = groupKey || group.get('key');
 
         const state = { clickwrapGroupKey: key };
-        if (dynamic) state.dynamicGroup = true;
+        if (isDynamic) state.dynamicGroup = true;
         this.setState(state);
 
-        if (!dynamic) group.render();
+        if (!isDynamic) group.render();
         this.registerEventListeners(key);
       }
     };
