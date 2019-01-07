@@ -16,7 +16,7 @@ class PSClickWrap extends React.Component {
     this.propsEventMap = {
       onAll: 'all',
       onSent: 'sent',
-      onRetrieve: 'retrieved',
+      onRetrieved: 'retrieved',
       onSet: 'set',
       onValid: 'valid',
       onInvalid: 'invalid',
@@ -25,9 +25,9 @@ class PSClickWrap extends React.Component {
       onSetSignerId: 'set:signer_id',
       onError: 'error',
     };
-    const { psScriptUrl, accessId, testMode, disableSending, dynamic, signerId, debug } = this.props;
-    if (!PSSnippet.isSnippetLoaded(psScriptUrl)) {
-      PSSnippet.injectSnippet(psScriptUrl);
+    const { psScriptUrl, backupScriptURL, accessId, testMode, disableSending, dynamic, signerId, debug } = this.props;
+    if (!PSSnippet.isSnippetLoaded(psScriptUrl, backupScriptURL)) {
+      PSSnippet.injectSnippet(psScriptUrl, backupScriptURL);
     }
     _ps('create', accessId, {
       test_mode: testMode,
@@ -190,6 +190,7 @@ PSClickWrap.propTypes = {
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   psScriptUrl: PropTypes.string,
+  backupScriptURL: PropTypes.string,
   renderData: isRequiredIf(
     PropTypes.object,
     props => props.hasOwnProperty('dynamic') && props.dynamic === true,
@@ -220,8 +221,8 @@ PSClickWrap.propTypes = {
 };
 
 PSClickWrap.defaultProps = {
-  confirmationEmail: false,
   psScriptUrl: '//vault.pactsafe.io/ps.min.js',
+  backupScriptURL: '//d3l1mqnl5xpsuc.cloudfront.net/ps.min.js',
   containerId: 'ps-clickwrap',
   displayImmediately: true,
   disableSending: false,

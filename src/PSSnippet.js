@@ -3,27 +3,20 @@
  * PS.JS source location is paramaterized.
  */
 
-function injectSnippet(scriptURL) {
+function injectSnippet(scriptURL, backupScriptURL) {
 	(function(w, d, s, c, f, n, t, g, a, b, l) {
 		// Defines the global _ps object and initializes the _ps() function
 		// that will queue commands until the PactSafe Library is ready.
 		w.PactSafeObject = n;
-		(w[n] =
-			w[n] ||
-			function() {
+		(w[n] = w[n] || function() {
 				(w[n].q = w[n].q || []).push(arguments);
-			}), // Defines the event functions for the global _ps object.
-			(w[n].on = function() {
+			}), (w[n].on = function() { // Defines the event functions for the global _ps object.
 				(w[n].e = w[n].e || []).push(arguments);
-			}),
-			(w[n].once = function() {
+			}), (w[n].once = function() {
 				(w[n].eo = w[n].eo || []).push(arguments);
-			}),
-			(w[n].off = function() {
+			}), (w[n].off = function() {
 				(w[n].o = w[n].o || []).push(arguments);
-			}), // Marks the time that the script is inserted.
-			(w[n].t = 1 * new Date()),
-			(w[n].l = 0);
+			}), (w[n].t = 1 * new Date()), (w[n].l = 0); // Marks the time that the script is inserted.
 
 		// Inserts a new script element to load the PactSafe Library JS file (ps.js).
 		a = d.createElement(s);
@@ -39,8 +32,8 @@ function injectSnippet(scriptURL) {
 			w[n].l = 0;
 		};
 
-		 // Insert the script tag to the DOM, n a testing context, no script tags exist so b is undefined.
-		if (b){
+		// Insert the script tag to the DOM, n a testing context, no script tags exist so b is undefined.
+		if (b) {
 			b.parentNode.insertBefore(a, b);
 		} else {
 			document.body.appendChild(a);
@@ -65,11 +58,7 @@ function injectSnippet(scriptURL) {
 				l = function(u, e) {
 					try {
 						e = d.createElement("img");
-						e.src =
-							"https://d3r8bdci515tjv.cloudfront.net/error.gif?t=" +
-							w[n].t +
-							"&u=" +
-							encodeURIComponent(u);
+						e.src = "https://d3r8bdci515tjv.cloudfront.net/error.gif?t=" + w[n].t + "&u=" + encodeURIComponent(u);
 						d.getElementsByTagName("body")[0].appendChild(e);
 					} catch (x) {}
 				};
@@ -92,7 +81,7 @@ function injectSnippet(scriptURL) {
 		document,
 		"script",
 		scriptURL,
-		"//d3l1mqnl5xpsuc.cloudfront.net/ps.min.js",
+		backupScriptURL,
 		"_ps",
 		4000,
 		function optionalErrorCallback() {
