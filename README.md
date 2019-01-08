@@ -118,13 +118,13 @@ import { PSBrowseWrap } from 'pactsafe-react-sdk'
 |`onSent`             | function                                                                    | undefined                                   | No                                                 | See [onSent](#onSent) below
 |`onRetrieved`        | function                                                                    | undefined                                   | No                                                 | See [onRetrieved](#onRetrieved) below
 |`onSet`              | function                                                                    | undefined                                   | No                                                 | See [onSet](#onSet) below
+|`onSetSignerId`      | function                                                                    | undefined                                   | No                                                 | See [onSetSignerId](#onSetSignerId) below
 |`onValid`            | function                                                                    | undefined                                   | No                                                 | See [onValid](#onValid) below
 |`onInvalid`          | function                                                                    | undefined                                   | No                                                 | See [onInvalid](#onInvalid) below
 |`onRendered`         | function                                                                    | undefined                                   | No                                                 | See [onRendered](#onRender) below
 |`onDisplayed`        | function                                                                    | undefined                                   | No                                                 | See [onDisplayed](#onDisplayed) below
-|`onSetSignerId`      | function                                                                    | undefined                                   | No                                                 | See [onSetSignerId](#onSetSignerId) below
-|`onScrolledContract` | function                                                                    | undefined                                   | No                                                 | See [onScrolledContract](#onScrolledContract) below
 |`onScrolled`         | function                                                                    | undefined                                   | No                                                 | See [onScrolled](#onScrolled) below
+|`onScrolledContract` | function                                                                    | undefined                                   | No                                                 | See [onScrolledContract](#onScrolledContract) below
 |`onError`            | function                                                                    | undefined                                   | No                                                 | See [onError](#onError) below
 
 

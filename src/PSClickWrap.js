@@ -82,11 +82,10 @@ class PSClickWrap extends React.Component {
     const eventCallbackFn = (...args) => {
       let shouldFireListener = false;
       args.forEach((arg) => {
-        // On set's context is not always passed as a ClickwrapGroup, if its a parameter being set such as the signer ID
-        // So we check that the context's toString represents a Site and fire for all group keys under that site. If it if
-        // passed, we use that context to ensure the event fires for only the correct clickwrap
+        // We need to check the context variable and see if it matches the groupKey, if it does -> fire the event (context argument position varies)
         if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
           shouldFireListener = true;
+        // Else we should check if the context is for the entire site, and as such the context variable is a Site object.
         } else if (arg.toString() === '[object Site]') {
           shouldFireListener = true;
         }
