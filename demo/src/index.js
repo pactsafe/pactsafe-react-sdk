@@ -89,7 +89,7 @@ class Demo extends React.Component {
    return (
      <div className="container">
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />
-       <h1>PactSafe React SDK - Example Clickwrap & Browsewrap</h1>
+       <h1>PactSafe React SDK v2.0 - Example Clickwrap & Browsewrap</h1>
        <h2>
          <a href="https://github.com/PactSafe/pactsafe-react-sdk">
       View project on GitHub
@@ -104,7 +104,7 @@ class Demo extends React.Component {
        </button>
        <br />
        <div style={{ float: 'right' }}>
-     Clickwrap Style:
+     PSClickwrap Style:
          <div className="btn-group" role="group" aria-label="Basic example">
            <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'full' ? 'active' : ''}`} value="full" onClick={this.updateClickwrapStylw}>
               Full

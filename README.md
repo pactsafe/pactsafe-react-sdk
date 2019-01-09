@@ -30,6 +30,8 @@
 
 ## Demo & Examples
 
+[Check out a live demo of both the PSClickwrap and PSBrowsewrap components here](https://pactsafe.github.io/pactsafe-react-sdk/)
+
 #### PSClickWrap:
 ![PSClickCrap](images/psclickwrap.gif "PSClickWrap")
 
