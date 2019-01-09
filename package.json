@@ -71,6 +71,9 @@
       "^.+\\.js$": "<rootDir>/jest.transform.js"
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "contributors": [
     {
       "name": "Kyle Peeler",
