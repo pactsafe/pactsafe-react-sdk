@@ -19,7 +19,7 @@
     "preversion": "npm test && npm run lint",
     "version": "npm run build && git commit -A",
     "postversion": "git push && git push --tags",
-    "deploy": "gh-pages -d demo/dist"
+    "deploy": "npm run build && gh-pages -d demo/dist"
   },
   "license": "UNLICENSED",
   "dependencies": {
