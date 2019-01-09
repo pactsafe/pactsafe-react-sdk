@@ -16,12 +16,14 @@
     "test:coverage": "jest --coverage",
     "test:coverage-watch": "jest --coverage --watch",
     "lint": "./node_modules/.bin/eslint src/ tests/ demo/src/ --fix",
-    "preversion": "npm test",
+    "version": "nwb build-react-component && git commit -A",
+    "preversion": "npm test && npm run lint",
     "postversion": "git push && git push --tags"
   },
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.1.2",
+    "dotenv-webpack": "^1.6.0",
     "prop-types": "^15.5.10",
     "react-proptype-conditional-require": "^1.0.4",
     "uuid": "^3.3.2"

@@ -37,7 +37,19 @@
 
 ![PSBrowseWrap](images/psbrowsewrap.gif "PSBrowseWrap")
 
-To build the examples locally, run:
+To build the examples locally, you must first add your PactSafe access id by creating a `.env` file in the root directory and add the following contents:
+
+```
+PACTSAFE_ACCESS_ID=<YOUR_PACTSAFE_ACCESS_ID_HERE>
+```
+
+After doing this, you need to create both a clickwrap group with the group key `example-clickwrap` and a browsewrap with the key `example-browsewrap`. In your example clickwrap group, if you
+want the render data to work properly, create three tokens in a contract within the `example-clickwrap` group with the API field names to be: `user_token_value`, `another_token_value`, and `last_token_value`.
+
+[Some helpful information on creating contracts with render data can be found here.](https://developer.pactsafe.com/docs/how-to-use-smart-contracts-with-the-javascript-library) 
+(Note: You shouldn't have to write any javascript to get the demo to work! When implementing yourself, the React SDK uses the `dynamic` and `renderData` props to handle rendering of dynamic contracts instead of having to make `_ps` calls.)
+
+After completing these steps the demo should load as the online example does by running 
 
 ```
 npm install
@@ -46,13 +58,26 @@ npm start
 
 Then open [`http://localhost:3000`](http://localhost:3000) in a browser. 
 
+
+
+
+
+
+
 ## Installation
 
 The easiest way to use pactsafe-react-sdk is to install it from NPM and include it in your own React build process
 
 ```
-npm install pactsafe-react-sdk --save
+npm install @pactsafe/pactsafe-react-sdk --save
 ```
+
+You can also directly download the source files from [Github](https://github.com/pactsafe/pactsafe-react-sdk) or [unpkg](https://unpkg.com/) to link to the source files directly.
+
+The following can be found in the project's root directory, as well as compiled using `npm run build`:
+* A CommonJS build in `lib/` 
+* An ES modules build in `es/` (enabled by default/without configuration using `npm install`)
+* UMD development and production builds in `/umd`
 
 ## Usage
 

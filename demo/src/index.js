@@ -125,7 +125,7 @@ class Demo extends React.Component {
        </div>
        <br />
        <PSClickWrap
-         accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4"
+         accessId={process.env.PACTSAFE_ACCESS_ID}
          signerIdSelector="email"
          groupKey="dynamic-clickwrap"
          displayAll
@@ -154,7 +154,7 @@ class Demo extends React.Component {
        <br />
        <br />
        <br />
-       <PSBrowseWrap accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4" groupKey="example-browsewrap" linkText="Legal Center" alwaysVisible position="right" />
+       <PSBrowseWrap accessId={process.env.PACTSAFE_ACCESS_ID} groupKey="example-browsewrap" linkText="Legal Center" alwaysVisible position="right" />
        <br />
      </div>
    );

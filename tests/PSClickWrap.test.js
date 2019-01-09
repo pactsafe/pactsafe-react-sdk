@@ -202,13 +202,12 @@ describe('PSClickWrap _ps event prop tests', () => {
     const fakeGroupObj = { render: () => {} };
     window._ps = jest.fn((...args) => {
       args.forEach((arg) => {
-        if (typeof arg === 'object' && arg.hasOwnProperty('event_callback')) {
+        if (typeof arg === 'object' && arg.hasOwnProperty('event_callback') && typeof arg.event_callback === 'function') {
           arg.event_callback(null, fakeGroupObj);
         }
       });
     });
     window._ps.on = jest.fn();
-    window._ps.getByKey = jest.fn();
   });
 
   function testPassedEventListenerCalled(psEvent) {
