@@ -183,11 +183,27 @@ describe('PSClickWrap _ps interface tests', () => {
 });
 
 describe('PSClickWrap _ps event prop tests', () => {
+  const propsEventMap = {
+    onAll: 'all',
+    onSent: 'sent',
+    onRetrieved: 'retrieved',
+    onSet: 'set',
+    onSetSignerId: 'set:signer_id',
+    onValid: 'valid',
+    onInvalid: 'invalid',
+    onRendered: 'rendered',
+    onDisplayed: 'displayed',
+    onScrolledContract: 'scrolled:contract',
+    onScrolled: 'scrolled',
+    onError: 'error',
+  };
+
   beforeEach(() => {
+    const fakeGroupObj = { render: () => {} };
     window._ps = jest.fn((...args) => {
       args.forEach((arg) => {
         if (typeof arg === 'object' && arg.hasOwnProperty('event_callback')) {
-          arg.event_callback(null, { render: () => {} });
+          arg.event_callback(null, fakeGroupObj);
         }
       });
     });
@@ -195,63 +211,30 @@ describe('PSClickWrap _ps event prop tests', () => {
     window._ps.getByKey = jest.fn();
   });
 
-  it('passing an onAll event prop fires a _ps.on("all",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onAll={() => ('onAll callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('all');
-  });
+  function testPassedEventListenerCalled(psEvent) {
+    const testingGroupKey = 'example-clickwrap';
+    const eventCallback = {
+      [psEvent]: jest.fn(),
+    };
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey={testingGroupKey} signerId="test@abc.com" {...eventCallback} />);
+    const callbackRegistered = _ps.on.mock.calls[0][1];
+    callbackRegistered({ get: () => testingGroupKey });
+    expect(eventCallback[psEvent]).toHaveBeenCalled();
+  }
 
-  it('passing an onSent event prop fires a _ps.on("sent",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onSent={() => ('onSent callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('sent');
-  });
+  function testPSOnParameter(psEvent) {
+    const callbackProp = { [psEvent]: () => `${psEvent} dummy callback event` };
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" {...callbackProp} />);
+    expect(_ps.on.mock.calls[0][0]).toBe(propsEventMap[psEvent]);
+  }
 
-  it('passing an onRetrieved event prop fires a _ps.on("retrieved",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onRetrieved={() => ('onRetrieved callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('retrieved');
-  });
+  Object.keys(propsEventMap).forEach((prop) => {
+    it(`passed ${prop} event prop fires a _ps.on("${propsEventMap[prop]}",...) function call`, () => {
+      testPSOnParameter(prop);
+    });
 
-  it('passing an onRendered event prop fires a _ps.on("set",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onSet={() => ('onSet callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('set');
-  });
-
-  it('passing an onValid event prop fires a _ps.on("valid",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onValid={() => ('onValid callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('valid');
-  });
-
-  it('passing an onInvalid event prop fires a _ps.on("invalid",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onInvalid={() => ('onInvalid callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('invalid');
-  });
-
-  it('passing an onRendered event prop fires a _ps.on("rendered",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onRendered={() => ('onRendered callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('rendered');
-  });
-
-  it('passing an onDisplayed event prop fires a _ps.on("displayed",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onDisplayed={() => ('onDisplayed callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('displayed');
-  });
-
-  it('passing an onSetSignerId event prop fires a _ps.on("set:signer_id",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onSetSignerId={() => ('onSetSignerId callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('set:signer_id');
-  });
-
-  it('passing an onScrolledContract event prop fires a _ps.on("scrolled:contract",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onScrolledContract={() => ('onScrolledContract callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('scrolled:contract');
-  });
-
-  it('passing an onScrolled event prop fires a _ps.on("scrolled",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onScrolled={() => ('onScrolled callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('scrolled');
-  });
-
-  it('passing an onError event prop fires a _ps.on("error",...) function call', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onError={() => ('onError callback event')} />);
-    expect(_ps.on.mock.calls[0][0]).toBe('error');
+    it(`passed ${prop} event listener is called by _ps callback function`, () => {
+      testPassedEventListenerCalled(prop);
+    });
   });
 });
