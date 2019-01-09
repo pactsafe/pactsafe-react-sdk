@@ -17,7 +17,6 @@
     "test:coverage-watch": "jest --coverage --watch",
     "lint": "./node_modules/.bin/eslint src/ tests/ demo/src/ --fix",
     "preversion": "npm test && npm run lint",
-    "version": "npm run build && git commit -A",
     "postversion": "git push && git push --tags",
     "deploy": "npm run build && gh-pages -d demo/dist"
   },
