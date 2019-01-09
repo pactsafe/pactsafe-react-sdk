@@ -69,7 +69,8 @@ class Demo extends React.Component {
  };
 
  onClickSubmit = () => {
-   if (this.state.hasAgreed) {
+   const [hasAgreed] = this.state;
+   if (hasAgreed) {
      alert(
        'Thanks for trying out the React SDK! (It does not actually bind you to anything, just a demo :)!',
      );
@@ -79,109 +80,59 @@ class Demo extends React.Component {
  };
 
  render() {
+   const {
+     clickwrapStyle,
+     dynamicRenderData,
+     needsAgreeWarning,
+     hasAgreed,
+   } = this.state;
    return (
      <div className="container">
-       <link
-         rel="stylesheet"
-         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-         crossOrigin="anonymous"
-       />
+       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous" />
        <h1>PactSafe React SDK - Example Clickwrap & Browsewrap</h1>
        <h2>
          <a href="https://github.com/PactSafe/pactsafe-react-sdk">
       View project on GitHub
-
          </a>
        </h2>
        <div className="form-group">
          <label htmlFor="email">Email address</label>
-         <input
-           type="email"
-           id="email"
-           placeholder="Enter an email address"
-           className="form-control"
-         />
+         <input type="email" id="email" placeholder="Enter an email address" className="form-control" />
        </div>
-       <button
-         className="btn btn-primary"
-         type="button"
-         onClick={this.updateRenderData}
-       >
-     Change render data
-
+       <button className="btn btn-primary" type="button" onClick={this.updateRenderData}>
+          Change render data
        </button>
        <br />
        <div style={{ float: 'right' }}>
      Clickwrap Style:
          <div className="btn-group" role="group" aria-label="Basic example">
-           <button
-             type="button"
-             className={`btn btn-primary btn-sm ${
-               this.state.clickwrapStyle === 'full' ? 'active' : ''
-             }`}
-             value="full"
-             onClick={this.updateClickwrapStyle}
-           >
-       Full
-
+           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'full' ? 'active' : ''}`} value="full" onClick={this.updateClickwrapStylw}>
+              Full
            </button>
-           <button
-             type="button"
-             className={`btn btn-primary btn-sm ${
-               this.state.clickwrapStyle === 'scroll' ? 'active' : ''
-             }`}
-             value="scroll"
-             onClick={this.updateClickwrapStyle}
-           >
-       Scroll
-
+           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'scroll' ? 'active' : ''}`} value="scroll" onClick={this.updateClickwrapStyle}>
+             Scroll
            </button>
-           <button
-             type="button"
-             className={`btn btn-primary btn-sm ${
-               this.state.clickwrapStyle === 'checkbox' ? 'active' : ''
-             }`}
-             value="checkbox"
-             onClick={this.updateClickwrapStyle}
-           >
-       Checkbox
-
+           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'checkbox' ? 'active' : ''}`} value="checkbox" onClick={this.updateClickwrapStyle}>
+             Checkbox
            </button>
-           <button
-             type="button"
-             className={`btn btn-primary btn-sm ${
-               this.state.clickwrapStyle === 'combined' ? 'active' : ''
-             }`}
-             value="combined"
-             onClick={this.updateClickwrapStyle}
-           >
-       Combined
-
+           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'combined' ? 'active' : ''}`} value="combined" onClick={this.updateClickwrapStyle}>
+            Combined
            </button>
-           <button
-             type="button"
-             className={`btn btn-primary btn-sm ${
-               this.state.clickwrapStyle === 'embedded' ? 'active' : ''
-             }`}
-             value="embedded"
-             onClick={this.updateClickwrapStyle}
-           >
-       Embedded
-
+           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'embedded' ? 'active' : ''}`} value="embedded" onClick={this.updateClickwrapStyle}>
+            Embedded
            </button>
          </div>
        </div>
        <br />
        <PSClickWrap
-         accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4" // TODO: move me to a .env file
+         accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4"
          signerIdSelector="email"
          groupKey="dynamic-clickwrap"
          displayAll
          testMode
          dynamic
-         renderData={this.state.dynamicRenderData}
-         clickWrapStyle={this.state.clickwrapStyle}
+         renderData={dynamicRenderData}
+         clickWrapStyle={clickwrapStyle}
          onValid={this.onValid}
          onSent={(...args) => this.onEventMethod('onSent', ...args)}
          onInvalid={this.onInvalid}
@@ -192,34 +143,18 @@ class Demo extends React.Component {
          onRendered={(...args) => this.onEventMethod('onRendered', ...args)}
          onRetrieved={(...args) => this.onEventMethod('onRetrieved', ...args)}
        />
-       {this.state.needsAgreeWarning && (
+       {needsAgreeWarning && (
        <div className="alert alert-warning" role="alert">
-      Please agree to all contracts with an email address above before
-      submitting!
-
+          Please agree to all contracts with an email address above before submitting!
        </div>
        )}
-
-       <button
-         className={`btn btn-primary ${
-           this.state.hasAgreed ? '' : 'disabled'
-         }`}
-         type="submit"
-         onClick={this.onClickSubmit}
-       >
-     Submit
-
+       <button className={`btn btn-primary ${hasAgreed ? '' : 'disabled'}`} type="submit" onClick={this.onClickSubmit}>
+          Submit
        </button>
        <br />
        <br />
        <br />
-       <PSBrowseWrap
-         accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4" // TODO: move me to a .env file
-         groupKey="example-browsewrap"
-         linkText="Legal Center"
-         alwaysVisible
-         position="right"
-       />
+       <PSBrowseWrap accessId="a241acf7-abc3-465a-8b62-ee2e476a18e4" groupKey="example-browsewrap" linkText="Legal Center" alwaysVisible position="right" />
        <br />
      </div>
    );
