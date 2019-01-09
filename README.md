@@ -1,4 +1,4 @@
-# PactSafe React SDK
+# PactSafe React SDK v2
 
 [![npm package][npm-badge]][npm]
 
@@ -68,7 +68,7 @@ The easiest way to use pactsafe-react-sdk is to install it from NPM
 npm install @pactsafe/pactsafe-react-sdk --save
 ```
 
-You can also directly download the source files from [unpkg](https://unpkg.com/) to link to the source files directly or download the source from Github and build it yourself.
+You can also directly download the source files from [unpkg](https://unpkg.com/@pactsafe/pactsafe-react-sdk@2.0.0/) to link to the source files directly or download the source from Github and build it yourself.
 
 The following can be found in the project's root directory, as well as compiled using `npm run build`:
 * A CommonJS build in `lib/` 
@@ -355,4 +355,4 @@ Triggered when a send or retrieve command encounters an error before being sent.
 Copyright &copy; 2019 PactSafe.
 
 [npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/pactsafe-react-sdk
+[npm]: https://www.npmjs.com/package/@pactsafe/pactsafe-react-sdk

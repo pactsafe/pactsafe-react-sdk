@@ -20,7 +20,11 @@
     "postversion": "git push && git push --tags",
     "deploy": "npm run build && gh-pages -d demo/dist"
   },
-  "license": "UNLICENSED",
+  "files": [
+    "es",
+     "lib",
+     "umd"
+   ],
   "dependencies": {
     "classnames": "^2.1.2",
     "dotenv-webpack": "^1.6.0",
