@@ -106,7 +106,7 @@ class Demo extends React.Component {
        <div style={{ float: 'right' }}>
      PSClickwrap Style:
          <div className="btn-group" role="group" aria-label="Basic example">
-           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'full' ? 'active' : ''}`} value="full" onClick={this.updateClickwrapStylw}>
+           <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'full' ? 'active' : ''}`} value="full" onClick={this.updateClickwrapStyle}>
               Full
            </button>
            <button type="button" className={`btn btn-primary btn-sm ${clickwrapStyle === 'scroll' ? 'active' : ''}`} value="scroll" onClick={this.updateClickwrapStyle}>

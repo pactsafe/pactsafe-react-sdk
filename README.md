@@ -1,4 +1,4 @@
-# PactSafe React SDK v2
+# PactSafe React SDK
 
 [![npm package][npm-badge]][npm]
 
@@ -354,5 +354,5 @@ Triggered when a send or retrieve command encounters an error before being sent.
 
 Copyright &copy; 2019 PactSafe.
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
+[npm-badge]: https://img.shields.io/npm/v/@pactsafe/pactsafe-react-sdk.svg
 [npm]: https://www.npmjs.com/package/@pactsafe/pactsafe-react-sdk
