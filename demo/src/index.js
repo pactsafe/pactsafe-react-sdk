@@ -7,8 +7,10 @@ class Demo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      signer_id_value: '',
       clickwrapStyle: 'full',
       needsAgreeWarning: false,
+      displayClickwrap: true,
       dynamicRenderData: {
         user_token_value: 'enter your email above to update this text',
         another_token_value: 'lorem ipsum',
@@ -16,6 +18,10 @@ class Demo extends React.Component {
       },
       hasAgreed: false,
     };
+  }
+
+  handleChangeSignerId = (e) => {
+    this.setState({ signer_id_value: e.target.value });
   }
 
  updateRenderData = () => {
@@ -27,6 +33,12 @@ class Demo extends React.Component {
      },
    }));
  };
+
+ toggleClickwrap = (e) => {
+   this.setState(prevState => ({
+     displayClickwrap: !prevState.displayClickwrap,
+   }));
+ }
 
  updateClickwrapStyle = (e) => {
    this.setState({ clickwrapStyle: e.target.value });
@@ -97,10 +109,19 @@ class Demo extends React.Component {
        </h2>
        <div className="form-group">
          <label htmlFor="email">Email address</label>
-         <input type="email" id="email" placeholder="Enter an email address" className="form-control" />
+         <input
+           type="email"
+           id="email"
+           placeholder="Enter an email address"
+           className="form-control"
+           onChange={this.handleChangeSignerId}
+         />
        </div>
        <button className="btn btn-primary" type="button" onClick={this.updateRenderData}>
           Change render data
+       </button>
+       <button className="btn btn-primary" type="button" onClick={this.toggleClickwrap}>
+         Toggle Clickwrap
        </button>
        <br />
        <div style={{ float: 'right' }}>
@@ -126,11 +147,12 @@ class Demo extends React.Component {
        <br />
        <PSClickWrap
          accessId={process.env.PACTSAFE_ACCESS_ID}
-         signerIdSelector="email"
          groupKey="dynamic-clickwrap"
-         displayAll
+         displayImmediately={false}
          testMode
          dynamic
+         disabled={this.state.displayClickwrap}
+         signerId={this.state.signer_id_value}
          renderData={dynamicRenderData}
          clickWrapStyle={clickwrapStyle}
          onValid={this.onValid}
