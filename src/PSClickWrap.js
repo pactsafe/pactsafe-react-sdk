@@ -48,7 +48,7 @@ class PSClickWrap extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      clickWrapStyle, renderData, filter, groupKey, signerId, disabled
+      clickWrapStyle, renderData, filter, groupKey, signerId,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
     if (clickWrapStyle !== prevProps.clickWrapStyle && !dynamicGroup) {
@@ -65,9 +65,6 @@ class PSClickWrap extends React.Component {
       this.createClickWrap();
     }
     if (filter !== prevProps.filter && dynamicGroup) {
-      this.createClickWrap();
-    }
-    if (disabled !== prevProps.disabled) {
       this.createClickWrap();
     }
     if (groupKey !== prevProps.groupKey && !dynamicGroup) {
@@ -131,7 +128,7 @@ class PSClickWrap extends React.Component {
   }
 
   createClickWrap() {
-    const { filter, containerId, signerIdSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail, disabled } = this.props;
+    const { filter, containerId, signerIdSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail } = this.props;
     const options = { filter, container_selector: containerId, confirmation_email: confirmationEmail, signer_id_selector: signerIdSelector, style: clickWrapStyle, display_all: displayAll, render_data: renderData, auto_run: displayImmediately, force_scroll: forceScroll };
 
     if (groupKey) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
@@ -150,10 +147,8 @@ class PSClickWrap extends React.Component {
       }
     };
 
-    if (!disabled) {
-      if (groupKey) _ps('load', groupKey, { ...options, event_callback: eventCallback });
-      else _ps('load', { ...options, event_callback: eventCallback });
-    }
+    if (groupKey) _ps('load', groupKey, { ...options, event_callback: eventCallback });
+    else _ps('load', { ...options, event_callback: eventCallback });
   }
 
 
@@ -178,7 +173,6 @@ PSClickWrap.propTypes = {
   ]),
   confirmationEmail: PropTypes.bool,
   disableSending: PropTypes.bool,
-  disabled: PropTypes.bool,
   displayAll: PropTypes.bool,
   displayImmediately: PropTypes.bool,
   dynamic: PropTypes.bool,
