@@ -38,7 +38,7 @@
 
 ![PSBrowseWrap](images/psbrowsewrap.gif "PSBrowseWrap")
 
-To build the examples locally, you must first add your PactSafe access id by creating a `.env` file in the root directory and add the following contents:
+To build the examples locally (after cloning this repo from Github), you must first add your PactSafe access id by creating a `.env` file in the root directory and add the following contents:
 
 ```
 PACTSAFE_ACCESS_ID=<YOUR_PACTSAFE_ACCESS_ID_HERE>
@@ -81,13 +81,13 @@ The following can be found in the project's root directory, as well as compiled 
 In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIdSelector` prop to the PSClickWrap component: 
 
 ```JSX
-import { PSClickWrap } from 'pactsafe-react-sdk'
+import { PSClickWrap } from '@pactsafe/pactsafe-react-sdk'
 
 ...
 
 <input type="email" id="userEmail" placeholder="Your Email"/>
 
-<PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} signerIdSelector={userEmail}/>
+<PSClickWrap accessId={"YOUR_PACTSAFE_ACCESS_ID_HERE"} groupKey={"YOUR_GROUP_KEY_HERE"} signerIdSelector={"userEmail"}/>
 ```
 
 Replace with `YOUR_PACTSAFE_ACCESS_ID_HERE` with your PactSafe Site Access ID found [here](https://app.pactsafe.com/settings/account)
@@ -104,7 +104,7 @@ Your PSBrowseWrap component should be placed where you would like your Legal Cen
 
 
 ```JSX
-import { PSBrowseWrap } from 'pactsafe-react-sdk'
+import { PSBrowseWrap } from '@pactsafe/pactsafe-react-sdk'
 
 ...
 
@@ -157,7 +157,7 @@ The demo page contains various callback examples and the corresponding callback 
 
 As a quick example of the usage of these, if you wanted to enable a button on a valid clickwrap event, here is example code to do so using the onValid and onInvalid event props:
 ```JSX
-import { PSClickWrap } from 'pactsafe-react-sdk'
+import { PSClickWrap } from '@pactsafe/pactsafe-react-sdk'
 
 ...
 
@@ -180,7 +180,7 @@ class Example extends React.Component {
         <div>
             <input type="email" id="userEmail" placeholder="Your Email"/>
     
-            <PSClickWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} signerIdSelector={userEmail} onValid={this.onValid} onInvalid={this.onInvalid}/>
+            <PSClickWrap accessId={"YOUR_PACTSAFE_ACCESS_ID_HERE"} groupKey={"YOUR_GROUP_KEY_HERE"} signerIdSelector={"userEmail"} onValid={this.onValid} onInvalid={this.onInvalid}/>
     
             <button disabled={!this.state.hasAgreed} type="submit">Submit</button>
         </div>
