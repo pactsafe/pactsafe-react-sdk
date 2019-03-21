@@ -74,7 +74,7 @@ class Demo extends React.Component {
  };
 
  onClickSubmit = () => {
-   const [hasAgreed] = this.state;
+   const { hasAgreed } = this.state;
    if (hasAgreed) {
      alert(
        'Thanks for trying out the React SDK! (It does not actually bind you to anything, just a demo :)!',
