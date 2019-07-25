@@ -75,8 +75,11 @@ class PSClickWrap extends React.Component {
 
   componentWillUnmount() {
     const { groupKey } = this.props;
-    if (_ps && _ps.getByKey(groupKey) && _ps.getByKey(groupKey).rendered) {
-      _ps.getByKey(groupKey).rendered = false;
+    if (_ps && _ps.getByKey(groupKey)) {
+      if (_ps.getByKey(groupKey).rendered) {
+        _ps.getByKey(groupKey).rendered = false;
+      }
+      _ps.getByKey(groupKey).resetData();
     }
     this.unregisterEventListeners();
   }
@@ -86,10 +89,10 @@ class PSClickWrap extends React.Component {
       let shouldFireListener = false;
       args.forEach((arg) => {
         // We need to check the context variable and see if it matches the groupKey, if it does -> fire the event (context argument position varies)
-        if (arg.get && arg.get('key') && arg.get('key') === groupKey) {
+        if (arg && arg.get && arg.get('key') && arg.get('key') === groupKey) {
           shouldFireListener = true;
         // Else we should check if the context is for the entire site, and as such the context variable is a Site object.
-        } else if (arg.toString() === '[object Site]') {
+        } else if (arg && arg.toString() === '[object Site]') {
           shouldFireListener = true;
         }
       });
