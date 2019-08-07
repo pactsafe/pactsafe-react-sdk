@@ -120,14 +120,16 @@ class PSClickWrap extends React.Component {
   }
 
   unregisterEventListeners() {
-    Object.keys(this.state.eventListeners).forEach((event) => {
-      const eventUUID = this.state.eventListeners[event];
-      // In order to unregister the event, we must create a fake function (typeof passed to _ps.off must be a function),
-      // that returns the UUID we want to unregister.
-      const fakeEventListener = () => eventUUID;
-      fakeEventListener.toString = () => eventUUID;
-      _ps.off(event, fakeEventListener);
-    });
+    if (this.state.eventListeners) {
+      Object.keys(this.state.eventListeners).forEach((event) => {
+        const eventUUID = this.state.eventListeners[event];
+        // In order to unregister the event, we must create a fake function (typeof passed to _ps.off must be a function),
+        // that returns the UUID we want to unregister.
+        const fakeEventListener = () => eventUUID;
+        fakeEventListener.toString = () => eventUUID;
+        _ps.off(event, fakeEventListener);
+      });
+    }
   }
 
   createClickWrap() {
