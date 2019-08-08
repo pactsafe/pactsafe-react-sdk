@@ -27,7 +27,16 @@ class PSClickWrap extends React.Component {
       onScrolled: 'scrolled',
       onError: 'error',
     };
-    const { psScriptUrl, backupScriptURL, accessId, testMode, disableSending, dynamic, signerId, debug } = this.props;
+    const {
+      psScriptUrl,
+      backupScriptURL,
+      accessId,
+      testMode,
+      disableSending,
+      dynamic,
+      signerId,
+      debug,
+    } = this.props;
     if (!PSSnippet.isSnippetLoaded(psScriptUrl, backupScriptURL)) {
       PSSnippet.injectSnippet(psScriptUrl, backupScriptURL);
     }
@@ -48,10 +57,20 @@ class PSClickWrap extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
-      clickWrapStyle, renderData, filter, groupKey, signerId,
+      clickWrapStyle,
+      renderData,
+      filter,
+      groupKey,
+      signerId,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
-    if (clickWrapStyle !== prevProps.clickWrapStyle && !dynamicGroup) {
+    if (
+      clickWrapStyle !== prevProps.clickWrapStyle
+      && !dynamicGroup
+      && _ps
+      && _ps.getByKey
+      && typeof _ps.getByKey === 'function'
+    ) {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
@@ -75,7 +94,12 @@ class PSClickWrap extends React.Component {
 
   componentWillUnmount() {
     const { groupKey } = this.props;
-    if (_ps && _ps.getByKey(groupKey)) {
+    if (
+      _ps
+      && _ps.getByKey
+      && typeof _ps.getByKey === 'function'
+      && _ps.getByKey(groupKey)
+    ) {
       if (_ps.getByKey(groupKey).rendered) {
         _ps.getByKey(groupKey).rendered = false;
       }
@@ -91,7 +115,7 @@ class PSClickWrap extends React.Component {
         // We need to check the context variable and see if it matches the groupKey, if it does -> fire the event (context argument position varies)
         if (arg && arg.get && arg.get('key') && arg.get('key') === groupKey) {
           shouldFireListener = true;
-        // Else we should check if the context is for the entire site, and as such the context variable is a Site object.
+          // Else we should check if the context is for the entire site, and as such the context variable is a Site object.
         } else if (arg && arg.toString() === '[object Site]') {
           shouldFireListener = true;
         }
@@ -112,7 +136,9 @@ class PSClickWrap extends React.Component {
     const eventListeners = {};
     Object.keys(this.propsEventMap).forEach((eventProp) => {
       if (this.props[eventProp]) {
-        eventListeners[this.propsEventMap[eventProp]] = this.registerEventListener(eventProp, groupKey);
+        eventListeners[
+          this.propsEventMap[eventProp]
+        ] = this.registerEventListener(eventProp, groupKey);
       }
     });
     // Store event listeners in state so we can unregister them later on unmount
@@ -133,8 +159,29 @@ class PSClickWrap extends React.Component {
   }
 
   createClickWrap() {
-    const { filter, containerId, signerIdSelector, clickWrapStyle, displayAll, renderData, displayImmediately, forceScroll, groupKey, confirmationEmail } = this.props;
-    const options = { filter, container_selector: containerId, confirmation_email: confirmationEmail, signer_id_selector: signerIdSelector, style: clickWrapStyle, display_all: displayAll, render_data: renderData, auto_run: displayImmediately, force_scroll: forceScroll };
+    const {
+      filter,
+      containerId,
+      signerIdSelector,
+      clickWrapStyle,
+      displayAll,
+      renderData,
+      displayImmediately,
+      forceScroll,
+      groupKey,
+      confirmationEmail,
+    } = this.props;
+    const options = {
+      filter,
+      container_selector: containerId,
+      confirmation_email: confirmationEmail,
+      signer_id_selector: signerIdSelector,
+      style: clickWrapStyle,
+      display_all: displayAll,
+      render_data: renderData,
+      auto_run: displayImmediately,
+      force_scroll: forceScroll,
+    };
 
     if (groupKey) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
     const isDynamic = !groupKey;
@@ -155,7 +202,6 @@ class PSClickWrap extends React.Component {
     if (groupKey) _ps('load', groupKey, { ...options, event_callback: eventCallback });
     else _ps('load', { ...options, event_callback: eventCallback });
   }
-
 
   render() {
     const { containerId } = this.props;
