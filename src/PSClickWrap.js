@@ -6,6 +6,8 @@ import uuid from 'uuid/v4';
 import PSSnippet from './PSSnippet';
 
 class PSClickWrap extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.createClickWrap = this.createClickWrap.bind(this);
@@ -52,6 +54,7 @@ class PSClickWrap extends React.Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.createClickWrap();
   }
 
@@ -93,6 +96,7 @@ class PSClickWrap extends React.Component {
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     const { groupKey } = this.props;
     if (
       _ps
@@ -142,7 +146,9 @@ class PSClickWrap extends React.Component {
       }
     });
     // Store event listeners in state so we can unregister them later on unmount
-    this.setState({ eventListeners });
+    if (this._isMounted) {
+      this.setState({ eventListeners });
+    }
   }
 
   unregisterEventListeners() {
@@ -183,7 +189,7 @@ class PSClickWrap extends React.Component {
       force_scroll: forceScroll,
     };
 
-    if (groupKey) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
+    if (groupKey && this._isMounted) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
     const isDynamic = !groupKey;
 
     const eventCallback = (err, group) => {
@@ -192,7 +198,9 @@ class PSClickWrap extends React.Component {
 
         const state = { clickwrapGroupKey: key };
         if (isDynamic) state.dynamicGroup = true;
-        this.setState(state);
+        if (this._isMounted) {
+          this.setState(state);
+        }
 
         if (!isDynamic) group.render();
         this.registerEventListeners(key);
