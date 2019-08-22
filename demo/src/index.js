@@ -106,7 +106,7 @@ class Demo extends React.Component {
             id="email"
             placeholder="Enter an email address"
             className="form-control"
-            onChange={this.handleChangeSignerId}
+            onBlur={this.handleChangeSignerId}
           />
         </div>
         <button className="btn btn-primary" type="button" onClick={this.updateRenderData}>
