@@ -81,6 +81,8 @@ class PSClickWrap extends React.Component {
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
     if (signerId !== prevProps.signerId) {
+      // Prevent style from resetting on signerId update
+      _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps('set', 'signer_id', signerId);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
@@ -189,7 +191,7 @@ class PSClickWrap extends React.Component {
       force_scroll: forceScroll,
     };
 
-    if (groupKey && this._isMounted) this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
+    if (groupKey && this._isMounted) { this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false }); }
     const isDynamic = !groupKey;
 
     const eventCallback = (err, group) => {
@@ -207,8 +209,9 @@ class PSClickWrap extends React.Component {
       }
     };
 
-    if (groupKey) _ps('load', groupKey, { ...options, event_callback: eventCallback });
-    else _ps('load', { ...options, event_callback: eventCallback });
+    if (groupKey) {
+      _ps('load', groupKey, { ...options, event_callback: eventCallback });
+    } else _ps('load', { ...options, event_callback: eventCallback });
   }
 
   render() {
