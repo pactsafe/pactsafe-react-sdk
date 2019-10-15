@@ -67,13 +67,12 @@ class PSClickWrap extends React.Component {
       signerId,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
-    const _psLoadedValidGroup =
-			_ps &&
-			_ps.getByKey &&
-			typeof _ps.getByKey === "function" &&
-			clickwrapGroupKey &&
-      _ps.getByKey(clickwrapGroupKey);
-      
+    const _psLoadedValidGroup = _ps
+      && _ps.getByKey
+      && typeof _ps.getByKey === 'function'
+      && clickwrapGroupKey
+      && _ps.getByKey(clickwrapGroupKey);
+
     if (
       clickWrapStyle !== prevProps.clickWrapStyle
       && !dynamicGroup
