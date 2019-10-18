@@ -67,22 +67,26 @@ class PSClickWrap extends React.Component {
       signerId,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
+    const _psLoadedValidGroup = _ps
+      && _ps.getByKey
+      && typeof _ps.getByKey === 'function'
+      && clickwrapGroupKey
+      && _ps.getByKey(clickwrapGroupKey);
+
     if (
       clickWrapStyle !== prevProps.clickWrapStyle
       && !dynamicGroup
-      && _ps
-      && _ps.getByKey
-      && typeof _ps.getByKey === 'function'
+      && _psLoadedValidGroup
     ) {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
     if (renderData !== prevProps.renderData) {
-      if (clickWrapStyle) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
+      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
     if (signerId !== prevProps.signerId) {
-      if (clickWrapStyle) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
+      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps('set', 'signer_id', signerId);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
