@@ -97,7 +97,7 @@ class PSClickWrap extends React.Component {
     }
     if (groupKey !== prevProps.groupKey && !dynamicGroup) {
       this.createClickWrap();
-      _ps.getByKey(clickwrapGroupKey).retrieveHTML();
+      if (_psLoadedValidGroup) _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
   }
 
