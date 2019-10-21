@@ -92,7 +92,9 @@ class PSClickWrap extends React.Component {
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
       this.createClickWrap();
     }
-    if (filter !== prevProps.filter && dynamicGroup) {
+    console.log('updated props', filter, prevProps.filter);
+    if (filter !== prevProps.filter) {
+      alert('I changed!');
       this.createClickWrap();
     }
     if (groupKey !== prevProps.groupKey && !dynamicGroup) {
