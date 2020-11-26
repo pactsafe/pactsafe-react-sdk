@@ -28,7 +28,7 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "dotenv-webpack": "^1.6.0",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.7.2",
     "react-proptype-conditional-require": "^1.0.4",
     "uuid": "^3.3.2"
   },
