@@ -6,7 +6,7 @@
 
 - Automatically loads the PactSafe Snippet into your app so all you have to do is call `_ps` to use the [PactSafe library](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library).
 
-#### PSClickWrap Component
+### PSClickWrap Component
 
 - Renders a PactSafe ClickWrap group by providing a site access ID and group key
 - Ability to render PactSafe ClickWrap groups dynamically using a filter to specify contract ID's and/or tags
@@ -18,7 +18,7 @@
   - and more! ([See more detailed documentation on available PSClickWrap props here](#props))
 - Ability to hook into events fired by the Snippet using function props ([See documentation on PSClickwrap callback props here](#callback-props))
 
-#### PSBrowseWrap Component
+### PSBrowseWrap Component
 
 - Renders a PactSafe BrowseWrap group by providing a site access ID and group key
 - Ability to override properties set within the PactSafe App's group configuration such as:
@@ -30,11 +30,11 @@
 
 [Check out a live demo of both the PSClickwrap and PSBrowsewrap components here](https://pactsafe.github.io/pactsafe-react-sdk/)
 
-#### PSClickWrap
+### PSClickWrap
 
 ![PSClickCrap](images/psclickwrap.gif "PSClickWrap")
 
-#### PSBrowseWrap
+### PSBrowseWrap
 
 ![PSBrowseWrap](images/psbrowsewrap.gif "PSBrowseWrap")
 
@@ -52,7 +52,7 @@ want the render data to work properly, create three tokens in a contract within 
 
 After completing these steps the demo should load as the online example does by running
 
-```
+```bash
 npm install
 npm start
 ```
@@ -63,7 +63,7 @@ Then open [`http://localhost:3000`](http://localhost:3000) in a browser.
 
 The easiest way to use pactsafe-react-sdk is to install it from NPM
 
-```
+```bash
 npm install @pactsafe/pactsafe-react-sdk --save
 ```
 
@@ -71,13 +71,13 @@ You can also directly download the source files from [unpkg](https://unpkg.com/@
 
 The following can be found in the project's root directory, as well as compiled using `npm run build`:
 
-* A CommonJS build in `lib/`
-* An ES modules build in `es/` (enabled by default/without configuration using `npm install`)
-* UMD development and production builds in `/umd`
+- A CommonJS build in `lib/`
+- An ES modules build in `es/` (enabled by default/without configuration using `npm install`)
+- UMD development and production builds in `/umd`
 
 ## Usage
 
-#### Using PSClickWrap
+### Using PSClickWrap
 
 In order to use the PSClickWrap, you must specify a signer ID selector that corresponds to the ID of an `<input>` field on the page that will identify the signer (usually an email field). This ID should then be passed as the `signerIdSelector` prop to the PSClickWrap component:
 
@@ -99,7 +99,7 @@ Pass in any additional options using props on the `PSClickWrap` component.
 
 You can hook into events using the triggered event callback props described here: ([See documentation on PSClickwrap callback props here](#callback-props)).
 
-#### Using PSBrowseWrap
+### Using PSBrowseWrap
 
 Your PSBrowseWrap component should be placed where you would like your Legal Center link to appear on the page. Pass what you want the link's text to display as using the `linkText` prop.
 
@@ -113,7 +113,7 @@ import { PSBrowseWrap } from '@pactsafe/pactsafe-react-sdk'
 
 ---
 
-## <a name="props"></a>Props
+## Props
 
 ### PSClickWrap Props
 
@@ -151,7 +151,7 @@ import { PSBrowseWrap } from '@pactsafe/pactsafe-react-sdk'
 | `onScrolledContract` | See [onScrolledContract](#onScrolledContract) below                                                                                                                                                                                                                                                                                                                                |                                   function                                   |                      No                     |                   undefined                  |
 |       `onError`      | See [onError](#onError) below                                                                                                                                                                                                                                                                                                                                                      |                                   function                                   |                      No                     |                   undefined                  |                                                                          |
 
-## <a name="callback-props"></a>PSClickwrap Triggered Event Callback Props
+## PSClickwrap Triggered Event Callback Props
 
 New in v2.0 of the React SDK we are introducing triggered event props. These props are functions that can be passed in as props and are called in response to events that happen after a user interacts with a PSClickwrap component. These function props correspond to the triggered events that can be also created using the _ps global created by the snippet. [For more information on how triggered events work within the PSSnippet and calling them without the props, you can learn about them here](https://developer.pactsafe.com/v1.1/reference#triggered-events-1). By using function props, the component will interact with the `_ps` API for you and clean up after itself when the component is destroyed.
 The demo page contains various callback examples and the corresponding callback events can be observed in the console output.
@@ -194,26 +194,26 @@ If you do not want to use event callback props, the `_ps` is loaded into the win
 
 The list below describes the props names and corresponding PactSafe event:
 
-## <a name="onAll"></a> onAll
+## onAll
 
 _ps event: `all`
 
 A special event that is triggered when any other event is triggered. The name of the original event is always the first argument passed to the callback function. The rest of the arguments will match whatever arguments were passed to the original event's callback function.
 
-### Callback Arguments
+### onAll Callback Arguments
 
 |       Name       |        Type        |                   Description                                                                                                                       |
 |:----------------:|:------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | event            | String             | The name of the event that was triggered.                                                                                                           |
 |[arguments]       | Array<Any>         | All of the arguments that were passed to the original event.                                                                                        |
 
-## <a name="onSent"></a> onSent
+## onSent
 
 _ps event: `sent`
 
 Triggered when a `send` command has been completed successfully.
 
-### Callback Arguments
+### onSent Callback Arguments
 
 |       Name       |                 Type                    |                   Description                                                                                                                       |
 |:----------------:|:---------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -222,13 +222,13 @@ Triggered when a `send` command has been completed successfully.
 | context          | Site, BrowsewrapGroup or ClickwrapGroup | The Site or Group object that initiated the send command.                                                                                           |
 | payload          | String                                  | The URL-encoded payload that would have been sent to the Action API. This argument is only present when the prop `disable_sending` is set to true.  |
 
-## <a name="onRetrieved"></a> onRetrieved
+## onRetrieved
 
 _ps event: `retrieved`
 
 Triggered when a `retrieved` command has been completed successfully.
 
-### Callback Arguments
+### onRetrieve Callback Arguments
 
 |       Name       |                 Type                    |                   Description                                                                                                                       |
 |:----------------:|:---------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -236,14 +236,14 @@ Triggered when a `retrieved` command has been completed successfully.
 | xhr              | XMLHttpRequest                          | The raw XMLHttpRequest that was sent to the Action API.                                                                                             |
 | context          | Site, BrowsewrapGroup or ClickwrapGroup | The Site or Group object that initiated the retrieve command.                                                                                       |
 
-## <a name="onSet"></a> onSet
+## onSet
 
 _ps event: `set`
 
 Triggered when a parameter is set. *Note:* This event will only be triggered for specific parameters. Supported parameters include: signer_id, signer_id_selector, form_selector. Since this is an event listener for site level properties, you should only set this on
 one clickwrap on the page if multiple are mounted in order to guarantee the function is idempotent, otherwise it will be called once per clickwrap.
 
-### Callback Arguments
+### onSet Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -251,103 +251,103 @@ one clickwrap on the page if multiple are mounted in order to guarantee the func
 | value            | String, Number, Object, Function, etc.                         | The raw XMLHttpRequest that was sent to the Action API.                                                                                             |
 | context          | Site, BrowsewrapGroup or ClickwrapGroup                        | The Site or Group object on which the parameter was set.                                                                                            |
 
-## <a name="onSetSignerId"></a> onSetSignerId
+## onSetSignerId
 
 _ps event: `set:signer_id`
 
 Triggered when the signer_id parameter is set.
 
-### Callback Arguments
+### onSetSignerId Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | value            | String                                                         | The `signer_id` that was set                                                                                                                        |
 | context          | Site, BrowsewrapGroup or ClickwrapGroup                        | The Site or Group object on which the parameter was set.                                                                                            |
 
-## <a name="onValid"></a> onValid
+## onValid
 
 _ps event: `valid`
 
 Triggered when all of the contracts in a Group have been accepted by a signer.
 
-### Callback Arguments
+### onValid Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | parameters       | Object                                                         | An object containing the contracts and versions that belong to the Group. Contains three parameters: 'contracts', 'versions' and 'group'            |
 | context          | BrowsewrapGroup or ClickwrapGroup                              | The Group object that was validated                                                                                                                 |
 
-## <a name="onInvalid"></a> onInvalid
+## onInvalid
 
 _ps event: `invalid`
 
 Triggered when all of the contracts in a Group are no longer accepted by a signer. This event will be triggered if a signer un-checks a contract on a valid Group.
 
-### Callback Arguments
+### onInvalid Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | parameters       | Object                                                         | An object containing the contracts and versions that belong to the Group. Contains three parameters: 'contracts', 'versions' and 'group'            |
 | context          | BrowsewrapGroup or ClickwrapGroup                              | The Group object that was invalidated                                                                                                               |
 
-## <a name="onRendered"></a> onRendered
+## onRendered
 
 _ps event: `rendered`
 
 Triggered when a Group object has been rendered.
 
-### Callback Arguments
+### onRendered Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | context          | ClickwrapGroup                              | The Group object that was rendered                                                                                                               |
 
-## <a name="onDisplayed"></a> onDisplayed
+## onDisplayed
 
 _ps event: `displayed`
 
 Triggered when a Group object displays a contract.
 
-### Callback Arguments
+### onDisplayed Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | element          | HTMLElement                                                    | The contract's HTMLElement that was displayed.                                                                                                      |
 | context          | ClickwrapGroup                                                 | The Group object that displayed the contract                                                                                                        |
 
-## <a name="onScrolled"></a> onScrolled
+## onScrolled
 
 _ps event: `scrolled`
 
 Triggered when "Force Scroll" has been enabled in your Group Settings (or passed as a prop) and *all* of the contracts in a Group have been scrolled to the bottom of within a "Scroll" or "Embedded" Group style/layout.
 
-### Callback Arguments
+### onScrolled Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | contractsElement | Object                                                         | The element containing the entire container selector of the group.                                                                                  |
 | context          | ClickwrapGroup                                                 | The Group object that had all contracts scrolled to the bottom                                                                                      |
 
-## <a name="onScrolledContract"></a> onScrolledContract
+## onScrolledContract
 
 _ps event: `scrolled:contract`
 
 Triggered when "Force Scroll" has been enabled in your Group Settings (or passed as a prop) and one of the contracts in a Group has been scrolled to the bottom of a "Scroll" or "Embedded" Group style/layout.
 
-### Callback Arguments
+### onScrolledContract Callback Arguments
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
 | contractHTML     | Object                                                         | An object containing the HTML of the contract that has been scrolled to the bottom.                                                                 |
 | group            | ClickwrapGroup                                                 | The Group object that was scrolled to the bottom                                                                                                    |
 
-## <a name="onError"></a> onError
+## onError
 
 _ps event: `error`
 
 Triggered when a send or retrieve command encounters an error before being sent.
 
-### Callback Arguments
+### onError Callback Arguments
 
 |        Name         |                                 Type                           |                   Description                                                                                                                       |
 |:-------------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -381,7 +381,7 @@ Triggered when a send or retrieve command encounters an error before being sent.
 
 [MIT License](LICENSE)
 
-Copyright &copy; 2019 PactSafe.
+Copyright &copy; 2021 PactSafe.
 
 [npm-badge]: https://img.shields.io/npm/v/@pactsafe/pactsafe-react-sdk.svg
 [npm]: https://www.npmjs.com/package/@pactsafe/pactsafe-react-sdk
