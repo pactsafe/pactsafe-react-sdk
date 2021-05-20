@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
-import uuid from 'uuid/v4';
+import { v4 as uuid } from 'uuid';
 import PSSnippet from './PSSnippet';
 
 class PSClickWrap extends React.Component {
@@ -247,13 +247,13 @@ PSClickWrap.propTypes = {
   containerId: PropTypes.string,
   filter: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('groupKey'),
+    props => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('internal'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   forceScroll: PropTypes.bool,
   groupKey: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('filter'),
+    props => !props.hasOwnProperty('filter') && !props.hasOwnProperty('internal'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   psScriptUrl: PropTypes.string,
