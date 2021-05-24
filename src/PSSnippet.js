@@ -4,6 +4,8 @@
  */
 
 function injectSnippet(scriptURL, backupScriptURL) {
+	if (!window) return; // Support for SSR
+
 	(function(w, d, s, c, f, n, t, g, a, b, l) {
 		// Defines the global _ps object and initializes the _ps() function
 		// that will queue commands until the PactSafe Library is ready.
@@ -92,11 +94,11 @@ function injectSnippet(scriptURL, backupScriptURL) {
 
 function isSnippetLoaded(psScriptURL) {
 	const scripts = document.getElementsByTagName('script');
-	if (window._ps && window._ps.loaded && window._ps.realThang === 317) return true;
+	if (window && window._ps && window._ps.loaded && window._ps.realThang === 317) return true;
     for (let i = 0; i < scripts.length; i += 1) {
       if (scripts[i].src.indexOf(psScriptURL) !== -1){
 		return true;
-	  } 
+	  }
 	}
 	return false;
 }

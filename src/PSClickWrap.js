@@ -183,6 +183,9 @@ class PSClickWrap extends React.Component {
       groupKey,
       confirmationEmail,
     } = this.props;
+
+		if (!filter && !groupKey) return; // Internal use case where we manually initialize the clickwrap group rather than fetching for an external configuration
+
     const options = {
       filter,
       container_selector: containerId,
@@ -226,7 +229,6 @@ class PSClickWrap extends React.Component {
   }
 }
 
-PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe ClickWrap component!';
 PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You must provide a renderData prop when passing down the dynamic prop';
 PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: You must provide either a signer ID or a signer ID selector';
 
@@ -245,17 +247,9 @@ PSClickWrap.propTypes = {
   displayImmediately: PropTypes.bool,
   dynamic: PropTypes.bool,
   containerId: PropTypes.string,
-  filter: isRequiredIf(
-    PropTypes.string,
-    props => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('internal'),
-    PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
-  ),
+  filter: PropTypes.string,
   forceScroll: PropTypes.bool,
-  groupKey: isRequiredIf(
-    PropTypes.string,
-    props => !props.hasOwnProperty('filter') && !props.hasOwnProperty('internal'),
-    PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
-  ),
+  groupKey: PropTypes.string,
   psScriptUrl: PropTypes.string,
   backupScriptURL: PropTypes.string,
   renderData: isRequiredIf(
