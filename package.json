@@ -1,6 +1,6 @@
 {
   "name": "@pactsafe/pactsafe-react-sdk",
-  "version": "2.4.7",
+  "version": "2.4.8",
   "description": "PactSafe React SDK - React SDK for easy Clickwrap/Browsewrap implementation leveraging PactSafe's JavaScript API",
   "author": "PactSafe",
   "license": "MIT",
@@ -29,6 +29,7 @@
   "dependencies": {
     "classnames": "^2.1.2",
     "dotenv-webpack": "^1.6.0",
+    "lodash.isequal": "^4.5.0",
     "prop-types": "^15.5.10",
     "react-proptype-conditional-require": "^1.0.4",
     "uuid": "^3.3.2"

@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
 import uuid from 'uuid/v4';
+import isEqual from 'lodash.isequal';
 import PSSnippet from './PSSnippet';
 
 class PSClickWrap extends React.Component {
@@ -81,7 +82,7 @@ class PSClickWrap extends React.Component {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
-    if (renderData !== prevProps.renderData) {
+    if (!isEqual(renderData, prevProps.renderData)) {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
