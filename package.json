@@ -35,7 +35,7 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": ">= 16.8.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
