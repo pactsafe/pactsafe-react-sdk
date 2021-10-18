@@ -25,3 +25,9 @@
 - `npm run build` will build the component for publishing to npm (generating \lib, \es, and \umd directories) and also bundle the demo app.
 
 - `npm run clean` will delete built resources.
+
+## Deploying
+
+- `np` Run [this command](https://github.com/sindresorhus/np), it will walk you through it
+  - You should install this globally if you don't already have it installed: `npm install -g np`
+  - Follow [semver](https://semver.org/) when choosing a version
