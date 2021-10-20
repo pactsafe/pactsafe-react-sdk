@@ -250,7 +250,7 @@ PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You mus
 PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: You must provide either a signer ID or a signer ID selector';
 
 PSClickWrap.propTypes = {
-  accessId: isRequiredIf(PropTypes.string, props => props.hasOwnProperty('injectSnippetOnly')),
+  accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
   clickWrapStyle: PropTypes.oneOf([
     'full',
     'scroll',
