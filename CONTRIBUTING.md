@@ -28,6 +28,7 @@
 
 ## Deploying
 
+- Commit all changes you want to `master` before running the following...
 - `np` Run [this command](https://github.com/sindresorhus/np), it will walk you through it
   - You should install this globally if you don't already have it installed: `npm install -g np`
   - Follow [semver](https://semver.org/) when choosing a version
