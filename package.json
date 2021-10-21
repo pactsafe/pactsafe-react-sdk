@@ -1,6 +1,6 @@
 {
   "name": "@pactsafe/pactsafe-react-sdk",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "PactSafe React SDK - React SDK for easy Clickwrap/Browsewrap implementation leveraging PactSafe's JavaScript API",
   "author": "PactSafe",
   "license": "MIT",
