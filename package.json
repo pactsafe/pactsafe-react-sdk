@@ -17,6 +17,7 @@
     "test:coverage": "jest --coverage",
     "test:coverage-watch": "jest --coverage --watch",
     "lint": "./node_modules/.bin/eslint src/ tests/ demo/src/ --fix",
+    "release": "np",
     "preversion": "npm test && npm run lint",
     "postversion": "git push && git push --tags",
     "deploy": "npm run build && gh-pages -d demo/dist"
@@ -56,6 +57,7 @@
     "gh-pages": "^2.0.1",
     "jest": "^24.9.0",
     "jsdom": "^13.0.0",
+    "np": "^7.5.0",
     "nwb": "^0.25.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
