@@ -186,9 +186,9 @@ describe('PSClickWrap _ps interface tests', () => {
     expect(_ps.mock.calls[1][2].allow_disagreed).toBe(true);
   });
 
-  it('sets allowDisagreed to false if not passed as a prop', () => {
+  it('sets allowDisagreed to undefined if not passed as a prop', () => {
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
-    expect(_ps.mock.calls[1][2].allow_disagreed).toBe(false);
+    expect(_ps.mock.calls[1][2].allow_disagreed).toBeUndefined();
   });
 });
 

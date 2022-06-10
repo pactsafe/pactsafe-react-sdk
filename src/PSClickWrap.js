@@ -211,7 +211,7 @@ class PSClickWrap extends React.Component {
       render_data: renderData,
       auto_run: displayImmediately,
       force_scroll: forceScroll,
-      allow_disagreed: allowDisagreed,
+      allow_disagreed: allowDisagreed || false,
     };
 
     if (injectSnippetOnly) return;
@@ -250,7 +250,7 @@ class PSClickWrap extends React.Component {
 PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe ClickWrap component!';
 PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You must provide a renderData prop when passing down the dynamic prop';
 PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: You must provide either a signer ID or a signer ID selector';
-PSClickWrap.MUST_SET_ALLOWDISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
+PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
 
 PSClickWrap.propTypes = {
   accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
@@ -300,7 +300,7 @@ PSClickWrap.propTypes = {
   allowDisagreed: isRequiredIf(
     PropTypes.bool,
     props => props.hasOwnProperty('onInvalid'),
-    PSClickWrap.MUST_SET_ALLOWDISAGREED,
+    PSClickWrap.MUST_SET_ALLOW_DISAGREED,
   ),
   debug: PropTypes.bool,
   onAll: PropTypes.func,
