@@ -299,7 +299,7 @@ PSClickWrap.propTypes = {
   testMode: PropTypes.bool,
   allowDisagreed: isRequiredIf(
     PropTypes.bool,
-    props => !props.hasOwnProperty('onInvalid'),
+    props => props.hasOwnProperty('onInvalid'),
     PSClickWrap.MUST_SET_ALLOWDISAGREED,
   ),
   debug: PropTypes.bool,
@@ -326,7 +326,6 @@ PSClickWrap.defaultProps = {
   displayAll: true,
   dynamic: false,
   testMode: false,
-  allowDisagreed: false,
 };
 
 export default PSClickWrap;
