@@ -180,6 +180,16 @@ describe('PSClickWrap _ps interface tests', () => {
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
     expect(_ps.mock.calls[0][2].test_mode).toBe(false);
   });
+
+  it('sets allowDisagreed to true if passed as a prop', () => {
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" allowDisagreed />);
+    expect(_ps.mock.calls[1][2].allow_disagreed).toBe(true);
+  });
+
+  it('sets allowDisagreed to false if not passed as a prop', () => {
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
+    expect(_ps.mock.calls[1][2].allow_disagreed).toBe(false);
+  });
 });
 
 describe('PSClickWrap _ps event prop tests', () => {
