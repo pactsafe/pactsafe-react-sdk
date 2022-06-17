@@ -28,7 +28,7 @@
     "umd"
   ],
   "dependencies": {
-    "classnames": "^2.1.2",
+    "classnames": "^2.3.1",
     "dotenv-webpack": "^1.6.0",
     "lodash.isequal": "^4.5.0",
     "prop-types": "^15.5.10",
