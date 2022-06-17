@@ -180,6 +180,22 @@ describe('PSClickWrap _ps interface tests', () => {
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
     expect(_ps.mock.calls[0][2].test_mode).toBe(false);
   });
+
+  it('sets allowDisagreed to true if passed as a prop', () => {
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" allowDisagreed />);
+    expect(_ps.mock.calls[1][2].allow_disagreed).toBe(true);
+  });
+
+  it('sets allowDisagreed to false if not passed as a prop', () => {
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
+    expect(_ps.mock.calls[1][2].allow_disagreed).toBe(false);
+  });
+
+  it('a console error should be shown if onInvalid is passed without setting allowDisagreed', () => {
+    const logSpy = jest.spyOn(console, 'error');
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onInvalid={() => {}} />);
+    expect(logSpy).toHaveBeenCalled();
+  });
 });
 
 describe('PSClickWrap _ps event prop tests', () => {
