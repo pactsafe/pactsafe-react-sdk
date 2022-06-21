@@ -25,3 +25,11 @@
 - `npm run build` will build the component for publishing to npm (generating \lib, \es, and \umd directories) and also bundle the demo app.
 
 - `npm run clean` will delete built resources.
+
+## Deploying
+
+- Commit all changes you want to `master` before running the following...
+- [`np`](https://github.com/sindresorhus/np) will walk you through it
+  - You may need to bug @mewelling to turn off branch protection rules
+  - You can run this by running `npm run release`
+  - Follow [semver](https://semver.org/) when choosing a version

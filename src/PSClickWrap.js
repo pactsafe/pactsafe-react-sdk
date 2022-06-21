@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
 import uuid from 'uuid/v4';
+import isEqual from 'lodash.isequal';
 import PSSnippet from './PSSnippet';
 
 class PSClickWrap extends React.Component {
@@ -30,40 +31,50 @@ class PSClickWrap extends React.Component {
       onError: 'error',
     };
     const {
-      psScriptUrl,
-      backupScriptURL,
       accessId,
-      testMode,
+      backupScriptURL,
+      debug,
       disableSending,
       dynamic,
+      injectSnippetOnly,
+      psScriptUrl,
       signerId,
-      debug,
+      testMode,
     } = this.props;
     if (!PSSnippet.isSnippetLoaded(psScriptUrl, backupScriptURL)) {
       PSSnippet.injectSnippet(psScriptUrl, backupScriptURL);
     }
+
+    if (debug) {
+      _ps.debug = true;
+    }
+    if (injectSnippetOnly) return;
+
     _ps('create', accessId, {
       test_mode: testMode,
       disable_sending: disableSending,
       dynamic,
       signer_id: signerId,
     });
-    if (debug) {
-      _ps.debug = true;
-    }
   }
 
   componentDidMount() {
+    const { injectSnippetOnly } = this.props;
+
     this._isMounted = true;
+
+    if (injectSnippetOnly) return;
+
     this.createClickWrap();
   }
 
   componentDidUpdate(prevProps) {
     const {
       clickWrapStyle,
-      renderData,
       filter,
       groupKey,
+      injectSnippetOnly,
+      renderData,
       signerId,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
@@ -73,6 +84,8 @@ class PSClickWrap extends React.Component {
       && clickwrapGroupKey
       && _ps.getByKey(clickwrapGroupKey);
 
+    if (injectSnippetOnly) return;
+
     if (
       clickWrapStyle !== prevProps.clickWrapStyle
       && !dynamicGroup
@@ -81,7 +94,7 @@ class PSClickWrap extends React.Component {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
-    if (renderData !== prevProps.renderData) {
+    if (!isEqual(renderData, prevProps.renderData)) {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
@@ -103,7 +116,10 @@ class PSClickWrap extends React.Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-    const { groupKey } = this.props;
+    const { injectSnippetOnly, groupKey } = this.props;
+
+    if (injectSnippetOnly) return;
+
     if (
       _ps
       && _ps.getByKey
@@ -172,16 +188,18 @@ class PSClickWrap extends React.Component {
 
   createClickWrap() {
     const {
-      filter,
-      containerId,
-      signerIdSelector,
       clickWrapStyle,
+      confirmationEmail,
+      containerId,
       displayAll,
-      renderData,
       displayImmediately,
+      filter,
       forceScroll,
       groupKey,
-      confirmationEmail,
+      injectSnippetOnly,
+      renderData,
+      signerIdSelector,
+      allowDisagreed,
     } = this.props;
     const options = {
       filter,
@@ -193,7 +211,10 @@ class PSClickWrap extends React.Component {
       render_data: renderData,
       auto_run: displayImmediately,
       force_scroll: forceScroll,
+      allow_disagreed: allowDisagreed || false,
     };
+
+    if (injectSnippetOnly) return;
 
     if (groupKey && this._isMounted) {
       this.setState({ clickwrapGroupKey: groupKey, dynamicGroup: false });
@@ -229,9 +250,10 @@ class PSClickWrap extends React.Component {
 PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe ClickWrap component!';
 PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You must provide a renderData prop when passing down the dynamic prop';
 PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: You must provide either a signer ID or a signer ID selector';
+PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
 
 PSClickWrap.propTypes = {
-  accessId: PropTypes.string.isRequired,
+  accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
   clickWrapStyle: PropTypes.oneOf([
     'full',
     'scroll',
@@ -247,15 +269,16 @@ PSClickWrap.propTypes = {
   containerId: PropTypes.string,
   filter: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('groupKey'),
+    props => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   forceScroll: PropTypes.bool,
   groupKey: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('filter'),
+    props => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
+  injectSnippetOnly: PropTypes.bool,
   psScriptUrl: PropTypes.string,
   backupScriptURL: PropTypes.string,
   renderData: isRequiredIf(
@@ -265,15 +288,20 @@ PSClickWrap.propTypes = {
   ),
   signerIdSelector: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerId'),
+    props => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   signerId: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerIdSelector'),
+    props => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   testMode: PropTypes.bool,
+  allowDisagreed: isRequiredIf(
+    PropTypes.bool,
+    props => props.hasOwnProperty('onInvalid'),
+    PSClickWrap.MUST_SET_ALLOW_DISAGREED,
+  ),
   debug: PropTypes.bool,
   onAll: PropTypes.func,
   onSent: PropTypes.func,
