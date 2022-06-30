@@ -93,10 +93,10 @@ function injectSnippet(scriptURL, backupScriptURL) {
 function isSnippetLoaded(psScriptURL) {
 	const scripts = document.getElementsByTagName('script');
 	if (window._ps && window._ps.loaded && window._ps.realThang === 317) return true;
-    for (let i = 0; i < scripts.length; i += 1) {
-      if (scripts[i].src.indexOf(psScriptURL) !== -1){
-		return true;
-	  } 
+	for (let i = 0; i < scripts.length; i += 1) {
+		if (scripts[i].src.indexOf(psScriptURL) !== -1) {
+			return true;
+		}
 	}
 	return false;
 }

@@ -56,6 +56,9 @@ class PSClickWrap extends React.Component {
       dynamic,
       signer_id: signerId,
     });
+
+    _ps('set', 'client_library', 'react-sdk');
+    _ps('set', 'client_version', '_client-version');
   }
 
   componentDidMount() {
