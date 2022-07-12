@@ -1,4 +1,5 @@
 const Dotenv = require('dotenv-webpack');
+const { version } = require('./package.json');
 
 module.exports = {
   type: 'react-component',
@@ -20,5 +21,20 @@ module.exports = {
         new Dotenv(),
       ],
     },
+  },
+  babel: {
+    plugins: [
+      [
+        'search-and-replace',
+        {
+          rules: [
+            {
+              search: '_client-version',
+              replace: version,
+            },
+          ],
+        },
+      ],
+    ],
   },
 };

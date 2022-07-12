@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { PSClickWrap, PSBrowseWrap } from '../../src';
+import { PSClickWrap } from '../../src';
 import './styles.css';
 
 class Demo extends React.Component {
@@ -197,18 +197,7 @@ class Demo extends React.Component {
           onClick={this.onClickSubmit}
         >
           Submit
-
         </button>
-        <br />
-        <br />
-        <br />
-        <PSBrowseWrap
-          accessId={process.env.PACTSAFE_ACCESS_ID}
-          groupKey="example-browsewrap"
-          linkText="Legal Center"
-          alwaysVisible
-          position="right"
-        />
         <br />
       </div>
     );
