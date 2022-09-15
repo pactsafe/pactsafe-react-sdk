@@ -95,7 +95,7 @@ class Demo extends React.Component {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossOrigin="anonymous"
         />
-        <h1>PactSafe React SDK - Example Clickwrap & Browsewrap</h1>
+        <h1>Ironclad Clickwrap React SDK - Example Clickwrap</h1>
         <h2>
           <a href="https://github.com/PactSafe/pactsafe-react-sdk">View project on GitHub</a>
         </h2>

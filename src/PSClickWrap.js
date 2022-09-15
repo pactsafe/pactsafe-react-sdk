@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import isEqual from 'lodash.isequal';
 import PSSnippet from './PSSnippet';
 
@@ -155,7 +155,7 @@ class PSClickWrap extends React.Component {
     };
     // In order to handle unregistration of event listeners, we override the toString function to identify the
     // function by a UUID rather than the default toString of a function.
-    const newEventListenerID = uuid();
+    const newEventListenerID = uuidv4();
     eventCallbackFn.toString = () => newEventListenerID;
     _ps.on(this.propsEventMap[eventProp], eventCallbackFn);
     return eventCallbackFn.toString();

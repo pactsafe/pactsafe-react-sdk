@@ -1,53 +1,42 @@
-# PactSafe React SDK
+# Ironclad Clickwrap React SDK
 
 [![npm package][npm-badge]][npm]
 
+
 ## Features
 
-- Automatically loads the PactSafe Snippet into your app so all you have to do is call `_ps` to use the [PactSafe library](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library).
+Automatically loads the Ironclad Clickwrap JavaScript Library into your app so all you have to do is call `_ps` to use the [Ironclad Clickwrap JavaScript library](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library).
 
-#### PSClickWrap Component
+### PSClickWrap Component
 
-- Renders a PactSafe ClickWrap group by providing a site access ID and group key
-- Ability to render PactSafe ClickWrap groups dynamically using a filter to specify contract ID's and/or tags
-- Ability to render a dynamic PactSafe ClickWrap by passing in a custom `render_data` object
-- Ability to override properties set within the PactSafe App's group configuration such as:
-  - ClickWrap style using the `clickWrapStyle` prop
+- Renders a clickwrap group by providing a site access ID and group key
+- Render clickwrap groups dynamically using a filter to specify template ID's and/or tags
+- Dynamically add data to contracts by passing in a custom `render_data` object
+- Ability to override properties set within the Ironclad Clickwrap App's group configuration such as:
+  - Clickwrap style using the `clickWrapStyle` prop
   - Signer ID selector using the `signerIdSelector` prop
   - Displaying all contracts using the `displayAll` prop
   - and more! ([See more detailed documentation on available PSClickWrap props here](#props))
 - Ability to hook into events fired by the Snippet using function props ([See documentation on PSClickwrap callback props here](#callback-props))
 
-#### PSBrowseWrap Component
-
-- Renders a PactSafe BrowseWrap group by providing a site access ID and group key
-- Ability to override properties set within the PactSafe App's group configuration such as:
-  - Position of BrowseWrap with the `position` prop
-  - Whether the BrowseWrap should always be visible with the `alwaysVisible` prop
-  - and more! ([See more detailed documentation on available PSBrowseWrap props here](#props))
-
 ## Demo & Examples
 
-[Check out a live demo of both the PSClickwrap and PSBrowsewrap components here](https://pactsafe.github.io/pactsafe-react-sdk/)
+[Check out a live demo of both the PSClickwrap here](https://pactsafe.github.io/pactsafe-react-sdk/)
 
-#### PSClickWrap
+### PSClickWrap
 
 ![PSClickCrap](images/psclickwrap.gif "PSClickWrap")
 
-#### PSBrowseWrap
-
-![PSBrowseWrap](images/psbrowsewrap.gif "PSBrowseWrap")
-
-To build the examples locally (after cloning this repo from Github), you must first add your PactSafe access id by creating a `.env` file in the root directory and add the following contents:
+To build the examples locally (after cloning this repo from Github), you must first add your Ironclad Clickwrap Site Access ID by creating a `.env` file in the root directory and add the following contents:
 
 ```
 PACTSAFE_ACCESS_ID=<YOUR_PACTSAFE_ACCESS_ID_HERE>
 ```
 
-After doing this, you need to create both a clickwrap group with the group key `example-clickwrap` and a browsewrap with the key `example-browsewrap`. In your example clickwrap group, if you
-want the render data to work properly, create three tokens in a contract within the `example-clickwrap` group with the API field names to be: `user_token_value`, `another_token_value`, and `last_token_value`.
+After doing this, you need to create both a clickwrap group with the group key `example-clickwrap`. In your example clickwrap group, if you
+want the render data to work properly, create three tokens in a template within the `example-clickwrap` group with the API field names to be: `user_token_value`, `another_token_value`, and `last_token_value`.
 
-[Some helpful information on creating contracts with render data can be found here.](https://developer.pactsafe.com/docs/how-to-use-smart-contracts-with-the-javascript-library)
+[Some helpful information on creating templates with render data can be found here.](https://clickwrap-developer.ironcladapp.com/docs/how-to-use-dynamic-contracts-with-the-javascript-library)
 (Note: You shouldn't have to write any javascript to get the demo to work! When implementing yourself, the React SDK uses the `dynamic` and `renderData` props to handle rendering of dynamic contracts instead of having to make `_ps` calls.)
 
 After completing these steps the demo should load as the online example does by running
@@ -99,18 +88,6 @@ Pass in any additional options using props on the `PSClickWrap` component.
 
 You can hook into events using the triggered event callback props described here: ([See documentation on PSClickwrap callback props here](#callback-props)).
 
-#### Using PSBrowseWrap
-
-Your PSBrowseWrap component should be placed where you would like your Legal Center link to appear on the page. Pass what you want the link's text to display as using the `linkText` prop.
-
-```JSX
-import { PSBrowseWrap } from '@pactsafe/pactsafe-react-sdk'
-
-...
-
-<PSBrowseWrap accessId={YOUR_PACTSAFE_ACCESS_ID_HERE} groupKey={YOUR_GROUP_KEY_HERE} linkText={'View Legal Center'}/>
-```
-
 ---
 
 ## <a name="props"></a>Props
@@ -122,8 +99,8 @@ import { PSBrowseWrap } from '@pactsafe/pactsafe-react-sdk'
 |         Prop         |                                                                                                                                                                                     Description                                                                                                                                                                                    |                                     Type                                     |                  Required?                  |                    Default                   |
 |:--------------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------:|:-------------------------------------------:|:--------------------------------------------:|
 |      `accessId`      | PactSafe site access ID                                                                                                                                                                                                                                                                                                                                                            |                                    string                                    |                     Yes, if `injectSnippetOnly` is not passed                     |                undefined                |
-|   `clickWrapStyle`   | Override the clickwrap style specified in the PactSafe Group Interface                                                                                                                                                                                                                                                                                                             | string.oneOf[`'full'`, `'scroll'`, `'checkbox'`, `'combined'`, `'embedded'`] |                      No                     |    Value specified in PactSafe Group's UI    |
-|  `confirmationEmail` | Override whether to send a confirmation email to the signer upon contract acceptance                                                                                                                                                                                                                                                                                               |                                     bool                                     |                      No                     |    Value specified in PactSafe Group's UI    |
+|   `clickWrapStyle`   | Override the clickwrap style specified in the Ironclad Clickwrap Group Interface                                                                                                                                                                                                                                                                                                             | string.oneOf[`'full'`, `'scroll'`, `'checkbox'`, `'combined'`, `'embedded'`] |                      No                     |    Value specified in Ironclad Clickwrap Group's UI    |
+|  `confirmationEmail` | Override whether to send a confirmation email to the signer upon contract acceptance                                                                                                                                                                                                                                                                                               |                                     bool                                     |                      No                     |    Value specified in Ironclad Clickwrap Group's UI    |
 |     `containerId`    | The div ID that will contain your clickwrap. You should override this if you plan on displaying more than one contract on a page.                                                                                                                                                                                                                                                  |                                    string                                    |                      No                     |                 ps-clickwrap                 |
 |   `disableSending`   | Turn this on if you want to manually send the agreed event instead of it automatically being sent on contract acceptance. [See documentation on manually sending the agreed event here.](https://developer.pactsafe.com/docs/get-to-know-our-javascript-library#section-3-sending-agreed-in-javascript)                                                                            |                                     bool                                     |                      No                     |                     false                    |
 |     `displayAll`     | Display all contracts in the group immediately. If disabled, a contract will only be displayed if the signer hasn't accepted the latest version.                                                                                                                                                                                                                                   |                                     bool                                     |                      No                     |                     true                     |
@@ -131,14 +108,14 @@ import { PSBrowseWrap } from '@pactsafe/pactsafe-react-sdk'
 |       `dynamic`      | If you would like to use dynamic render_data in your contract, you must set this to true. If this is set to true, you MUST also pass an object into the `render_data` prop.                                                                                                                                                                                                        |                                     bool                                     |                      No                     |                     false                    |
 |       `filter`       | Allows you to dynamically load contracts without having to specify a group. Filter must be in the format: `id==123,456` OR `id==12345 and tags==tag1,tag2` OR `tags==tag1,tag2`. [See documentation for more information on using dynamic groups.](https://developer.pactsafe.com/docs/dynamic-groups-and-how-to-use-them)                                                         |                                    string                                    |   No, Yes if `groupKey` prop is not passed  |                   undefined                  |
 |     `forceScroll`    | Disable acceptance until the signer scrolls to the bottom of each contract.                                                                                                                                                                                                                                                                                                        |                                     bool                                     |                      No                     |    Value specified in PactSafe Group's UI    |
-|      `groupKey`      | PactSafe group key, this is found within the PactSafe Groups configuration.                                                                                                                                                                                                                                                                                                        |                                    string                                    |     Yes, unless `filter` prop is passed     |                   undefined                  |
+|      `groupKey`      | PactSafe group key, this is found within the Ironclad Clickwrap Groups configuration.                                                                                                                                                                                                                                                                                                        |                                    string                                    |     Yes, unless `filter` prop is passed     |                   undefined                  |
 |  `injectSnippetOnly` | Prop to use if you only want to inject the snippet and do not want the SDK to create and initialize a clickwrap for you.                                                                                                                                                                                                                                                           |                                    boolean                                   |                      No                     |                   false                      |
 |     `psScriptUrl`    | If using a custom (or development) version of the ps.js file, pass the file URL in here. You probably won't need to use this.                                                                                                                                                                                                                                                      |                                    string                                    |                      No                     |        '//vault.pactsafe.io/ps.min.js'       |
 |   `backupScriptUrl`  | If using a custom (or development) version of the ps.js file, pass the alternative backup URL in here. Otherwise, this will default to the cloudfront backup provided by the ps.js snippet. This is designed to load if the first script (defined in psScriptURL) fails to load                                                                                                    |                                    string                                    |                      No                     | ''//d3l1mqnl5xpsuc.cloudfront.net/ps.min.js' |
 |     `renderData`     | Object containing the dynamic render data for your contract. [For more information on using dynamic contracts, check out this documentation.](https://developer.pactsafe.com/docs/how-to-use-smart-contracts-with-the-javascript-library)                                                                                                                                          |                                    object                                    |         If `dynamic` is set to true         |                   undefined                  |
 |  `signerIdSelector`  | The ID of the `<input>` element that will be used to identify the signer.                                                                                                                                                                                                                                                                                                          |                                    string                                    |                     Yes                     |                Required Value                |
 |      `signerId`      | Use this to set the signer id directly. Note that if this value is tied to a state variable updated via user input, you may hit rate limits if it is updated frequently in a short period of time. To avoid hitting a rate limit, it is best to set the value tied to this prop only when the user's input is complete as opposed to changing this value on a per character basis. |                                    string                                    | No, unless `signerIdSelector` is not passed |                   undefined                  |
-|      `testMode`      | Enable this to register any contract acceptances as test data that can be cleared within the PactSafe UI                                                                                                                                                                                                                                                                           |                                     bool                                     |                      No                     |                     false                    |
+|      `testMode`      | Enable this to register any contract acceptances as test data that can be cleared within the Ironclad Clickwrap UI                                                                                                                                                                                                                                                                           |                                     bool                                     |                      No                     |                     false                    |
 |      `allowDisagreed`      | Enable this to allow invalid events to be triggered when a signer unchecks a checkbox.                                                                         |                                     bool                                     |                   If `onInvalid` is passed                      |                     false                    |
 |        `onAll`       | See [onAll](#onAll) below                                                                                                                                                                                                                                                                                                                                                          |                                   function                                   |                      No                     |                   undefined                  |
 |       `onSent`       | See [onSent](#onSent) below                                                                                                                                                                                                                                                                                                                                                        |                                   function                                   |                      No                     |                   undefined                  |
@@ -359,22 +336,6 @@ Triggered when a send or retrieve command encounters an error before being sent.
 
 ---
 
-### PSBrowseWrap Props
-
-(*Note you may have to scroll to the right to see the description*)
-
-|        Prop            |                                Type                                |                 Default                 |                 Required?                |                                                                                                                                                        Description                                                                                                                                                       |
-|:----------------------:|:------------------------------------------------------------------:|:---------------------------------------:|:----------------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| `accessId`             | string                                                             | Required Value                          | Yes                                      | PactSafe site access ID                                                                                                                                                                                                                                                                                                  |
-| `alwaysVisible`        | bool                                                               | false                                   | No                                       | Keep the badge visible on the page at all times. If disabled, the badge will be hidden if the target link is visible on screen.                                                                                                                                                                                          |
-| `badgeText`            | string                                 | value of `linkText`         | No               | Provide alternate text for the BrowseWrap badge                                                                    |
-| `groupKey`             | string                                                             | null                                    | Yes               | PactSafe group key, this is found within the PactSafe Groups configuration.                                                                                                                                                                                                                                              |
-| `link`         | string                 | null            | If `openLegalCenter` is set to false    | Location of where the BrowseWrap link should redirect to, should only be used if `openLegalCenter` is set to false, otherwise the link will open the group's PactSafe legal center                                    |
-| `linkText`    | string                 | null            | Yes            | The text that your BrowseWrap link will display (for example, 'Legal Center' or 'Terms of Service')                                                       |
-| `openLegalCenter`      | bool                  | true            | No            | Open this group's legal center page when the badge or link is clicked. If enabled, the target link's original `href` will be replaced.                                               |
-| `position`    | string.oneOf[`'middle'`, `'left'`, `'right'`, `'auto'`]         | auto          | Yes                   | Position of where the BrowseWrap badge will float within the browser window                                                               |
-| `psScriptUrl`          | string                                                             | '//vault.pactsafe.io/ps.min.js'         | Yes                                      | If using a custom (or development) version of the ps.js file, pass the file URL in here. You probably won't need to use this.                                                              |
-
 ## Development (`src`, `lib` and the build process)
 
 [See CONTRIBUTING.md](CONTRIBUTING.md)
@@ -383,7 +344,7 @@ Triggered when a send or retrieve command encounters an error before being sent.
 
 [MIT License](LICENSE)
 
-Copyright &copy; 2019 PactSafe.
+Copyright &copy; 2019 Ironclad.
 
 [npm-badge]: https://img.shields.io/npm/v/@pactsafe/pactsafe-react-sdk.svg
 [npm]: https://www.npmjs.com/package/@pactsafe/pactsafe-react-sdk
