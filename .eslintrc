@@ -1,6 +1,13 @@
 {
 	"extends": ["airbnb"],
 	"parser": "@babel/eslint-parser",
+	"parserOptions": {
+    "requireConfigFile": false,
+		"babelOptions": {
+			"presets": ["@babel/preset-env", "@babel/preset-react"],
+			"plugins": ["@babel/plugin-proposal-export-default-from"]
+		}
+	},
 	"env": {
 		"es6": true,
 		"browser": true,

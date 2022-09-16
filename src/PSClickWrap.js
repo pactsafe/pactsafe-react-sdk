@@ -256,7 +256,7 @@ PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: Y
 PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
 
 PSClickWrap.propTypes = {
-  accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
+  accessId: isRequiredIf(PropTypes.string, (props) => !props.hasOwnProperty('injectSnippetOnly')),
   clickWrapStyle: PropTypes.oneOf([
     'full',
     'scroll',
@@ -272,13 +272,13 @@ PSClickWrap.propTypes = {
   containerId: PropTypes.string,
   filter: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   forceScroll: PropTypes.bool,
   groupKey: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   injectSnippetOnly: PropTypes.bool,
@@ -286,23 +286,23 @@ PSClickWrap.propTypes = {
   backupScriptURL: PropTypes.string,
   renderData: isRequiredIf(
     PropTypes.object,
-    props => props.hasOwnProperty('dynamic') && props.dynamic === true,
+    (props) => props.hasOwnProperty('dynamic') && props.dynamic === true,
     PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE,
   ),
   signerIdSelector: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   signerId: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   testMode: PropTypes.bool,
   allowDisagreed: isRequiredIf(
     PropTypes.bool,
-    props => props.hasOwnProperty('onInvalid'),
+    (props) => props.hasOwnProperty('onInvalid'),
     PSClickWrap.MUST_SET_ALLOW_DISAGREED,
   ),
   debug: PropTypes.bool,

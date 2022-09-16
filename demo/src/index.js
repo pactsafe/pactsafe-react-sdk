@@ -24,7 +24,7 @@ class Demo extends React.Component {
   };
 
   updateRenderData = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       dynamicRenderData: {
         ...state.dynamicRenderData,
         another_token_value: 'This value was updated through user interaction!',
@@ -42,7 +42,7 @@ class Demo extends React.Component {
   };
 
   onUpdateSignerId = (...args) => {
-    this.setState(state => ({
+    this.setState((state) => ({
       dynamicRenderData: {
         ...state.dynamicRenderData,
         user_token_value: args[0],
@@ -187,7 +187,7 @@ class Demo extends React.Component {
         />
         {needsAgreeWarning && (
         <div className="alert alert-warning" role="alert">
-            Please agree to all contracts with an email address above before submitting!
+          Please agree to all contracts with an email address above before submitting!
 
         </div>
         )}

@@ -15,7 +15,6 @@ class PSBrowseWrap extends React.Component {
     _ps('create', accessId);
   }
 
-
   componentDidMount() {
     const { groupKey, position, badgeText, alwaysVisible, openLegalCenter } = this.props;
     _ps('load', groupKey, {
@@ -26,7 +25,6 @@ class PSBrowseWrap extends React.Component {
       open_legal_center: openLegalCenter,
     });
   }
-
 
   componentWillUnmount() {
     const { groupKey } = this.props;
@@ -61,7 +59,7 @@ PSBrowseWrap.propTypes = {
   groupKey: PropTypes.string.isRequired,
   link: isRequiredIf(
     PropTypes.string,
-    props => props.hasOwnProperty('openLegalCenter') && props.openLegalCenter === false,
+    (props) => props.hasOwnProperty('openLegalCenter') && props.openLegalCenter === false,
     PSBrowseWrap.MUST_PROVIDE_LINK_IF_OPEN_LEGAL_CENTER_FALSE,
   ),
   linkText: PropTypes.string.isRequired,
