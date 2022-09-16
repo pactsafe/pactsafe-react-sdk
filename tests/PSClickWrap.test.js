@@ -210,6 +210,28 @@ describe('PSClickWrap _ps interface tests', () => {
     expect(_ps.mock.calls[FUNC.SET_LIB][2]).toBe('react-sdk');
     expect(_ps.mock.calls[FUNC.SET_VER][2]).toBe('_client-version');
   });
+
+  it('ensures customData is passed properly if passed as a prop', () => {
+    const testCustomData = { key_1: 'key1val', key_2: 2 }
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" customData={testCustomData} />);
+    expect(_ps.mock.calls[FUNC.LOAD][2].custom_data).toMatchObject(testCustomData);
+  });
+
+  it('sets customData to undefined if it is not passed as a prop', () => {
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
+    expect(_ps.mock.calls[FUNC.LOAD][2].custom_data).toBeUndefined();
+  });
+
+  it('ensures acceptanceLanguage is passed properly if passed as a prop', () => {
+    const testAcceptanceLanguage = "I agree to these contracts here";
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" acceptanceLanguage={testAcceptanceLanguage} />);
+    expect(_ps.mock.calls[FUNC.LOAD][2].acceptance_language).toBe(testAcceptanceLanguage);
+  });
+
+  it('sets acceptanceLanguage to be undefined if it is not passed as a prop', () => {
+    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
+    expect(_ps.mock.calls[FUNC.LOAD][2].acceptance_language).toBeUndefined();
+  });
 });
 
 describe('PSClickWrap _ps event prop tests', () => {
