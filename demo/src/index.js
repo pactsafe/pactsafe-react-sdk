@@ -19,6 +19,10 @@ class Demo extends React.Component {
     };
   }
 
+  static onEventMethod = (name, ...args) => {
+    console.log(`${name} prop callback called for PSClickwrap with parameters: `, [...args]);
+  };
+
   handleChangeSignerId = (e) => {
     this.setState({ signerIdValue: e.target.value });
   };
@@ -35,10 +39,6 @@ class Demo extends React.Component {
 
   updateClickwrapStyle = (e) => {
     this.setState({ clickwrapStyle: e.target.value });
-  };
-
-  onEventMethod = (name, ...args) => {
-    console.log(`${name} prop callback called for PSClickwrap with parameters: `, [...args]);
   };
 
   onUpdateSignerId = (...args) => {

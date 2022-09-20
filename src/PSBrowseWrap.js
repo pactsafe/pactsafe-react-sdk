@@ -31,15 +31,6 @@ class PSBrowseWrap extends React.Component {
     _ps.getByKey(groupKey).rendered = false;
   }
 
-  isSnippetLoaded() {
-    const { psScriptUrl } = this.props;
-    const scripts = document.getElementsByTagName('script');
-    for (let i = 0; i < scripts.length; i += 1) {
-      if (scripts[i].src.indexOf(psScriptUrl) !== -1) return true;
-    }
-    return false;
-  }
-
   render() {
     const { link, linkText } = this.props;
     return (

@@ -104,7 +104,7 @@ class PSClickWrap extends React.Component {
     }
     if (acceptanceLanguage !== prevProps.acceptanceLanguage) {
       _ps('set', 'acceptance_language', acceptanceLanguage);
-    };
+    }
     if (!isEqual(renderData, prevProps.renderData)) {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
@@ -269,7 +269,7 @@ PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDis
 
 PSClickWrap.propTypes = {
   acceptanceLanguage: PropTypes.string,
-  accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
+  accessId: isRequiredIf(PropTypes.string, (props) => !props.hasOwnProperty('injectSnippetOnly')),
   clickWrapStyle: PropTypes.oneOf([
     'full',
     'scroll',
