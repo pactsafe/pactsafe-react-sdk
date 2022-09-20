@@ -24,6 +24,7 @@ module.exports = {
   },
   babel: {
     plugins: [
+      ['@babel/plugin-proposal-export-default-from'],
       [
         'search-and-replace',
         {

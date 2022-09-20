@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import isEqual from 'lodash.isequal';
 import PSSnippet from './PSSnippet';
 
@@ -163,7 +163,7 @@ class PSClickWrap extends React.Component {
     };
     // In order to handle unregistration of event listeners, we override the toString function to identify the
     // function by a UUID rather than the default toString of a function.
-    const newEventListenerID = uuid();
+    const newEventListenerID = uuidv4();
     eventCallbackFn.toString = () => newEventListenerID;
     _ps.on(this.propsEventMap[eventProp], eventCallbackFn);
     return eventCallbackFn.toString();
@@ -286,13 +286,13 @@ PSClickWrap.propTypes = {
   containerId: PropTypes.string,
   filter: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   forceScroll: PropTypes.bool,
   groupKey: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   injectSnippetOnly: PropTypes.bool,
@@ -300,23 +300,23 @@ PSClickWrap.propTypes = {
   backupScriptURL: PropTypes.string,
   renderData: isRequiredIf(
     PropTypes.object,
-    props => props.hasOwnProperty('dynamic') && props.dynamic === true,
+    (props) => props.hasOwnProperty('dynamic') && props.dynamic === true,
     PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE,
   ),
   signerIdSelector: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   signerId: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   testMode: PropTypes.bool,
   allowDisagreed: isRequiredIf(
     PropTypes.bool,
-    props => props.hasOwnProperty('onInvalid'),
+    (props) => props.hasOwnProperty('onInvalid'),
     PSClickWrap.MUST_SET_ALLOW_DISAGREED,
   ),
   debug: PropTypes.bool,
