@@ -73,7 +73,9 @@ class PSClickWrap extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
+      acceptanceLanguage,
       clickWrapStyle,
+      customData,
       filter,
       groupKey,
       injectSnippetOnly,
@@ -97,6 +99,12 @@ class PSClickWrap extends React.Component {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
+    if (!isEqual(customData, prevProps.customData)) {
+      _ps('set', 'custom_data', customData);
+    }
+    if (acceptanceLanguage !== prevProps.acceptanceLanguage) {
+      _ps('set', 'acceptance_language', acceptanceLanguage);
+    };
     if (!isEqual(renderData, prevProps.renderData)) {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
@@ -191,7 +199,9 @@ class PSClickWrap extends React.Component {
 
   createClickWrap() {
     const {
+      acceptanceLanguage,
       clickWrapStyle,
+      customData,
       confirmationEmail,
       containerId,
       displayAll,
@@ -205,16 +215,18 @@ class PSClickWrap extends React.Component {
       allowDisagreed,
     } = this.props;
     const options = {
-      filter,
-      container_selector: containerId,
+      allow_disagreed: allowDisagreed || false,
+      acceptance_language: acceptanceLanguage,
+      auto_run: displayImmediately,
       confirmation_email: confirmationEmail,
+      container_selector: containerId,
+      custom_data: customData,
+      display_all: displayAll,
+      filter,
+      force_scroll: forceScroll,
+      render_data: renderData,
       signer_id_selector: signerIdSelector,
       style: clickWrapStyle,
-      display_all: displayAll,
-      render_data: renderData,
-      auto_run: displayImmediately,
-      force_scroll: forceScroll,
-      allow_disagreed: allowDisagreed || false,
     };
 
     if (injectSnippetOnly) return;
@@ -256,7 +268,8 @@ PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: Y
 PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
 
 PSClickWrap.propTypes = {
-  accessId: isRequiredIf(PropTypes.string, (props) => !props.hasOwnProperty('injectSnippetOnly')),
+  acceptanceLanguage: PropTypes.string,
+  accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
   clickWrapStyle: PropTypes.oneOf([
     'full',
     'scroll',
@@ -265,6 +278,7 @@ PSClickWrap.propTypes = {
     'embedded',
   ]),
   confirmationEmail: PropTypes.bool,
+  customData: PropTypes.object,
   disableSending: PropTypes.bool,
   displayAll: PropTypes.bool,
   displayImmediately: PropTypes.bool,
