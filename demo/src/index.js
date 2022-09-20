@@ -23,6 +23,13 @@ class Demo extends React.Component {
     console.log(`${name} prop callback called for PSClickwrap with parameters: `, [...args]);
   };
 
+  static onError = (...args) => {
+    if (args[0] === 'Command aborted on: validationTask, Error: missing_signer_id') {
+      alert('Please enter a signer ID (email address) before agreeing.');
+    }
+    Demo.onEventMethod('onError', ...args);
+  };
+
   handleChangeSignerId = (e) => {
     this.setState({ signerIdValue: e.target.value });
   };
@@ -59,13 +66,6 @@ class Demo extends React.Component {
   onInvalid = (...args) => {
     this.setState({ hasAgreed: false });
     Demo.onEventMethod('onInvalid', ...args);
-  };
-
-  onError = (...args) => {
-    if (args[0] === 'Command aborted on: validationTask, Error: missing_signer_id') {
-      alert('Please enter a signer ID (email address) before agreeing.');
-    }
-    Demo.onEventMethod('onError', ...args);
   };
 
   onClickSubmit = () => {
@@ -179,7 +179,7 @@ class Demo extends React.Component {
           onSent={(...args) => Demo.onEventMethod('onSent', ...args)}
           onInvalid={this.onInvalid}
           onDisplayed={(...args) => Demo.onEventMethod('onDisplayed', ...args)}
-          onError={this.onError}
+          onError={Demo.onError}
           onSetSignerId={this.onUpdateSignerId}
           onSet={(...args) => Demo.onEventMethod('onSet', ...args)}
           onRendered={(...args) => Demo.onEventMethod('onRendered', ...args)}
