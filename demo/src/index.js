@@ -48,24 +48,24 @@ class Demo extends React.Component {
         user_token_value: args[0],
       },
     }));
-    this.onEventMethod('onSetSignerId', ...args);
+    Demo.onEventMethod('onSetSignerId', ...args);
   };
 
   onValid = (...args) => {
     this.setState({ hasAgreed: true });
-    this.onEventMethod('onValid', ...args);
+    Demo.onEventMethod('onValid', ...args);
   };
 
   onInvalid = (...args) => {
     this.setState({ hasAgreed: false });
-    this.onEventMethod('onInvalid', ...args);
+    Demo.onEventMethod('onInvalid', ...args);
   };
 
   onError = (...args) => {
     if (args[0] === 'Command aborted on: validationTask, Error: missing_signer_id') {
       alert('Please enter a signer ID (email address) before agreeing.');
     }
-    this.onEventMethod('onError', ...args);
+    Demo.onEventMethod('onError', ...args);
   };
 
   onClickSubmit = () => {
@@ -167,7 +167,7 @@ class Demo extends React.Component {
         <br />
         <PSClickWrap
           accessId={process.env.PACTSAFE_ACCESS_ID}
-          groupKey="dynamic-clickwrap"
+          groupKey="example-web-group"
           confirmationEmail
           displayImmediately={false}
           testMode
@@ -176,14 +176,14 @@ class Demo extends React.Component {
           renderData={dynamicRenderData}
           clickWrapStyle={clickwrapStyle}
           onValid={this.onValid}
-          onSent={(...args) => this.onEventMethod('onSent', ...args)}
+          onSent={(...args) => Demo.onEventMethod('onSent', ...args)}
           onInvalid={this.onInvalid}
-          onDisplayed={(...args) => this.onEventMethod('onDisplayed', ...args)}
+          onDisplayed={(...args) => Demo.onEventMethod('onDisplayed', ...args)}
           onError={this.onError}
           onSetSignerId={this.onUpdateSignerId}
-          onSet={(...args) => this.onEventMethod('onSet', ...args)}
-          onRendered={(...args) => this.onEventMethod('onRendered', ...args)}
-          onRetrieved={(...args) => this.onEventMethod('onRetrieved', ...args)}
+          onSet={(...args) => Demo.onEventMethod('onSet', ...args)}
+          onRendered={(...args) => Demo.onEventMethod('onRendered', ...args)}
+          onRetrieved={(...args) => Demo.onEventMethod('onRetrieved', ...args)}
         />
         {needsAgreeWarning && (
         <div className="alert alert-warning" role="alert">
