@@ -24,7 +24,7 @@ class Demo extends React.Component {
   };
 
   updateRenderData = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       dynamicRenderData: {
         ...state.dynamicRenderData,
         another_token_value: 'This value was updated through user interaction!',
@@ -42,7 +42,7 @@ class Demo extends React.Component {
   };
 
   onUpdateSignerId = (...args) => {
-    this.setState(state => ({
+    this.setState((state) => ({
       dynamicRenderData: {
         ...state.dynamicRenderData,
         user_token_value: args[0],
@@ -95,7 +95,7 @@ class Demo extends React.Component {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossOrigin="anonymous"
         />
-        <h1>PactSafe React SDK - Example Clickwrap & Browsewrap</h1>
+        <h1>Ironclad Clickwrap React SDK - Example Clickwrap</h1>
         <h2>
           <a href="https://github.com/PactSafe/pactsafe-react-sdk">View project on GitHub</a>
         </h2>
@@ -187,7 +187,7 @@ class Demo extends React.Component {
         />
         {needsAgreeWarning && (
         <div className="alert alert-warning" role="alert">
-            Please agree to all contracts with an email address above before submitting!
+          Please agree to all contracts with an email address above before submitting!
 
         </div>
         )}
