@@ -214,7 +214,7 @@ describe('PSClickWrap _ps interface tests', () => {
   it('ensures customData is passed properly if passed as a prop', () => {
     const testCustomData = { key_1: 'key1val', key_2: 2 };
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" customData={testCustomData} />);
-    expect(_ps.mock.calls[FUNC.LOAD][2].custom_data).toMatchObject(testCustomData);
+    expect(_ps.mock.calls[3][2]).toMatchObject(testCustomData);
   });
 
   it('sets customData to undefined if it is not passed as a prop', () => {
