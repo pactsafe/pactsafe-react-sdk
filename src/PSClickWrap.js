@@ -220,7 +220,6 @@ class PSClickWrap extends React.Component {
       auto_run: displayImmediately,
       confirmation_email: confirmationEmail,
       container_selector: containerId,
-      custom_data: customData,
       display_all: displayAll,
       filter,
       force_scroll: forceScroll,
@@ -250,6 +249,10 @@ class PSClickWrap extends React.Component {
         this.registerEventListeners(key);
       }
     };
+
+    if (customData) {
+      _ps('set', 'custom_data', customData);
+    }
 
     if (groupKey) {
       _ps('load', groupKey, { ...options, event_callback: eventCallback });
