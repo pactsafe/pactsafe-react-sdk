@@ -21,25 +21,25 @@ Automatically loads the Ironclad Clickwrap JavaScript Library into your app so a
 
 ## Demo & Examples
 
-[Check out a live demo of both the PSClickwrap here](https://pactsafe.github.io/pactsafe-react-sdk/)
+[Check out a live demo of the PSClickwrap here](https://pactsafe.github.io/pactsafe-react-sdk/)
 
 ### PSClickWrap
 
 ![PSClickCrap](images/psclickwrap.gif "PSClickWrap")
 
-To build the examples locally (after cloning this repo from Github), you must first add your Ironclad Clickwrap Site Access ID by creating a `.env` file in the root directory and add the following contents:
+To build the example locally (after cloning this repo from Github), you must first add your Ironclad Clickwrap Site Access ID by creating a `.env` file in the root directory and add the following contents:
 
 ```
 PACTSAFE_ACCESS_ID=<YOUR_PACTSAFE_ACCESS_ID_HERE>
 ```
 
-After doing this, you need to create both a clickwrap group with the group key `example-clickwrap`. In your example clickwrap group, if you
-want the render data to work properly, create three tokens in a template within the `example-clickwrap` group with the API field names to be: `user_token_value`, `another_token_value`, and `last_token_value`.
+After doing this, you need to create a clickwrap group with the group key `example-web-group`. In your example clickwrap group, if you
+want the render data to work properly, create three tokens in a template within the `example-web-group` group with the API field names to be: `user_token_value`, `another_token_value`, and `last_token_value`.
 
 [Some helpful information on creating templates with render data can be found here.](https://clickwrap-developer.ironcladapp.com/docs/how-to-use-dynamic-contracts-with-the-javascript-library)
 (Note: You shouldn't have to write any javascript to get the demo to work! When implementing yourself, the React SDK uses the `dynamic` and `renderData` props to handle rendering of dynamic contracts instead of having to make `_ps` calls.)
 
-After completing these steps the demo should load as the online example does by running
+After completing these steps, the demo should load as the online example does by running:
 
 ```
 npm install
