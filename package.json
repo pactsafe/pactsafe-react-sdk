@@ -1,6 +1,6 @@
 {
   "name": "@pactsafe/pactsafe-react-sdk",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "Ironclad Clickwrap React SDK - SDK for easy Ironclad Clickwrap implementations leveraging the Ironclad JavaScript Library & API",
   "author": "Ironclad",
   "license": "MIT",
