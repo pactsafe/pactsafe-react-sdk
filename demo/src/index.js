@@ -19,12 +19,23 @@ class Demo extends React.Component {
     };
   }
 
+  static onEventMethod = (name, ...args) => {
+    console.log(`${name} prop callback called for PSClickwrap with parameters: `, [...args]);
+  };
+
+  static onError = (...args) => {
+    if (args[0] === 'Command aborted on: validationTask, Error: missing_signer_id') {
+      alert('Please enter a signer ID (email address) before agreeing.');
+    }
+    Demo.onEventMethod('onError', ...args);
+  };
+
   handleChangeSignerId = (e) => {
     this.setState({ signerIdValue: e.target.value });
   };
 
   updateRenderData = () => {
-    this.setState(state => ({
+    this.setState((state) => ({
       dynamicRenderData: {
         ...state.dynamicRenderData,
         another_token_value: 'This value was updated through user interaction!',
@@ -37,35 +48,24 @@ class Demo extends React.Component {
     this.setState({ clickwrapStyle: e.target.value });
   };
 
-  onEventMethod = (name, ...args) => {
-    console.log(`${name} prop callback called for PSClickwrap with parameters: `, [...args]);
-  };
-
   onUpdateSignerId = (...args) => {
-    this.setState(state => ({
+    this.setState((state) => ({
       dynamicRenderData: {
         ...state.dynamicRenderData,
         user_token_value: args[0],
       },
     }));
-    this.onEventMethod('onSetSignerId', ...args);
+    Demo.onEventMethod('onSetSignerId', ...args);
   };
 
   onValid = (...args) => {
     this.setState({ hasAgreed: true });
-    this.onEventMethod('onValid', ...args);
+    Demo.onEventMethod('onValid', ...args);
   };
 
   onInvalid = (...args) => {
     this.setState({ hasAgreed: false });
-    this.onEventMethod('onInvalid', ...args);
-  };
-
-  onError = (...args) => {
-    if (args[0] === 'Command aborted on: validationTask, Error: missing_signer_id') {
-      alert('Please enter a signer ID (email address) before agreeing.');
-    }
-    this.onEventMethod('onError', ...args);
+    Demo.onEventMethod('onInvalid', ...args);
   };
 
   onClickSubmit = () => {
@@ -95,7 +95,7 @@ class Demo extends React.Component {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossOrigin="anonymous"
         />
-        <h1>PactSafe React SDK - Example Clickwrap & Browsewrap</h1>
+        <h1>Ironclad Clickwrap React SDK - Example Clickwrap</h1>
         <h2>
           <a href="https://github.com/PactSafe/pactsafe-react-sdk">View project on GitHub</a>
         </h2>
@@ -167,7 +167,7 @@ class Demo extends React.Component {
         <br />
         <PSClickWrap
           accessId={process.env.PACTSAFE_ACCESS_ID}
-          groupKey="dynamic-clickwrap"
+          groupKey="example-web-group"
           confirmationEmail
           displayImmediately={false}
           testMode
@@ -176,18 +176,18 @@ class Demo extends React.Component {
           renderData={dynamicRenderData}
           clickWrapStyle={clickwrapStyle}
           onValid={this.onValid}
-          onSent={(...args) => this.onEventMethod('onSent', ...args)}
+          onSent={(...args) => Demo.onEventMethod('onSent', ...args)}
           onInvalid={this.onInvalid}
-          onDisplayed={(...args) => this.onEventMethod('onDisplayed', ...args)}
-          onError={this.onError}
+          onDisplayed={(...args) => Demo.onEventMethod('onDisplayed', ...args)}
+          onError={Demo.onError}
           onSetSignerId={this.onUpdateSignerId}
-          onSet={(...args) => this.onEventMethod('onSet', ...args)}
-          onRendered={(...args) => this.onEventMethod('onRendered', ...args)}
-          onRetrieved={(...args) => this.onEventMethod('onRetrieved', ...args)}
+          onSet={(...args) => Demo.onEventMethod('onSet', ...args)}
+          onRendered={(...args) => Demo.onEventMethod('onRendered', ...args)}
+          onRetrieved={(...args) => Demo.onEventMethod('onRetrieved', ...args)}
         />
         {needsAgreeWarning && (
         <div className="alert alert-warning" role="alert">
-            Please agree to all contracts with an email address above before submitting!
+          Please agree to all contracts with an email address above before submitting!
 
         </div>
         )}

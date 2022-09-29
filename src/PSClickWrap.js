@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredIf from 'react-proptype-conditional-require';
-import uuid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import isEqual from 'lodash.isequal';
 import PSSnippet from './PSSnippet';
 
@@ -73,7 +73,9 @@ class PSClickWrap extends React.Component {
 
   componentDidUpdate(prevProps) {
     const {
+      acceptanceLanguage,
       clickWrapStyle,
+      customData,
       filter,
       groupKey,
       injectSnippetOnly,
@@ -96,6 +98,12 @@ class PSClickWrap extends React.Component {
     ) {
       _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
+    }
+    if (!isEqual(customData, prevProps.customData)) {
+      _ps('set', 'custom_data', customData);
+    }
+    if (acceptanceLanguage !== prevProps.acceptanceLanguage) {
+      _ps('set', 'acceptance_language', acceptanceLanguage);
     }
     if (!isEqual(renderData, prevProps.renderData)) {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
@@ -155,7 +163,7 @@ class PSClickWrap extends React.Component {
     };
     // In order to handle unregistration of event listeners, we override the toString function to identify the
     // function by a UUID rather than the default toString of a function.
-    const newEventListenerID = uuid();
+    const newEventListenerID = uuidv4();
     eventCallbackFn.toString = () => newEventListenerID;
     _ps.on(this.propsEventMap[eventProp], eventCallbackFn);
     return eventCallbackFn.toString();
@@ -191,7 +199,9 @@ class PSClickWrap extends React.Component {
 
   createClickWrap() {
     const {
+      acceptanceLanguage,
       clickWrapStyle,
+      customData,
       confirmationEmail,
       containerId,
       displayAll,
@@ -205,16 +215,17 @@ class PSClickWrap extends React.Component {
       allowDisagreed,
     } = this.props;
     const options = {
-      filter,
-      container_selector: containerId,
+      allow_disagreed: allowDisagreed || false,
+      acceptance_language: acceptanceLanguage,
+      auto_run: displayImmediately,
       confirmation_email: confirmationEmail,
+      container_selector: containerId,
+      display_all: displayAll,
+      filter,
+      force_scroll: forceScroll,
+      render_data: renderData,
       signer_id_selector: signerIdSelector,
       style: clickWrapStyle,
-      display_all: displayAll,
-      render_data: renderData,
-      auto_run: displayImmediately,
-      force_scroll: forceScroll,
-      allow_disagreed: allowDisagreed || false,
     };
 
     if (injectSnippetOnly) return;
@@ -239,6 +250,10 @@ class PSClickWrap extends React.Component {
       }
     };
 
+    if (customData) {
+      _ps('set', 'custom_data', customData);
+    }
+
     if (groupKey) {
       _ps('load', groupKey, { ...options, event_callback: eventCallback });
     } else _ps('load', { ...options, event_callback: eventCallback });
@@ -256,7 +271,8 @@ PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: Y
 PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
 
 PSClickWrap.propTypes = {
-  accessId: isRequiredIf(PropTypes.string, props => !props.hasOwnProperty('injectSnippetOnly')),
+  acceptanceLanguage: PropTypes.string,
+  accessId: isRequiredIf(PropTypes.string, (props) => !props.hasOwnProperty('injectSnippetOnly')),
   clickWrapStyle: PropTypes.oneOf([
     'full',
     'scroll',
@@ -265,6 +281,7 @@ PSClickWrap.propTypes = {
     'embedded',
   ]),
   confirmationEmail: PropTypes.bool,
+  customData: PropTypes.object,
   disableSending: PropTypes.bool,
   displayAll: PropTypes.bool,
   displayImmediately: PropTypes.bool,
@@ -272,13 +289,13 @@ PSClickWrap.propTypes = {
   containerId: PropTypes.string,
   filter: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('groupKey') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   forceScroll: PropTypes.bool,
   groupKey: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('filter') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE,
   ),
   injectSnippetOnly: PropTypes.bool,
@@ -286,23 +303,23 @@ PSClickWrap.propTypes = {
   backupScriptURL: PropTypes.string,
   renderData: isRequiredIf(
     PropTypes.object,
-    props => props.hasOwnProperty('dynamic') && props.dynamic === true,
+    (props) => props.hasOwnProperty('dynamic') && props.dynamic === true,
     PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE,
   ),
   signerIdSelector: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('signerId') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   signerId: isRequiredIf(
     PropTypes.string,
-    props => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
+    (props) => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
   testMode: PropTypes.bool,
   allowDisagreed: isRequiredIf(
     PropTypes.bool,
-    props => props.hasOwnProperty('onInvalid'),
+    (props) => props.hasOwnProperty('onInvalid'),
     PSClickWrap.MUST_SET_ALLOW_DISAGREED,
   ),
   debug: PropTypes.bool,

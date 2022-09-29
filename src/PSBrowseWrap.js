@@ -15,7 +15,6 @@ class PSBrowseWrap extends React.Component {
     _ps('create', accessId);
   }
 
-
   componentDidMount() {
     const { groupKey, position, badgeText, alwaysVisible, openLegalCenter } = this.props;
     _ps('load', groupKey, {
@@ -27,19 +26,9 @@ class PSBrowseWrap extends React.Component {
     });
   }
 
-
   componentWillUnmount() {
     const { groupKey } = this.props;
     _ps.getByKey(groupKey).rendered = false;
-  }
-
-  isSnippetLoaded() {
-    const { psScriptUrl } = this.props;
-    const scripts = document.getElementsByTagName('script');
-    for (let i = 0; i < scripts.length; i += 1) {
-      if (scripts[i].src.indexOf(psScriptUrl) !== -1) return true;
-    }
-    return false;
   }
 
   render() {
@@ -61,7 +50,7 @@ PSBrowseWrap.propTypes = {
   groupKey: PropTypes.string.isRequired,
   link: isRequiredIf(
     PropTypes.string,
-    props => props.hasOwnProperty('openLegalCenter') && props.openLegalCenter === false,
+    (props) => props.hasOwnProperty('openLegalCenter') && props.openLegalCenter === false,
     PSBrowseWrap.MUST_PROVIDE_LINK_IF_OPEN_LEGAL_CENTER_FALSE,
   ),
   linkText: PropTypes.string.isRequired,
