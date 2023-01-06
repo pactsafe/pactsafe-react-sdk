@@ -28,7 +28,7 @@
 
 ## Deploying
 
-- Commit all changes you want to `master` before running the following...
+- Commit all changes you want to `main` before running the following...
 - [`np`](https://github.com/sindresorhus/np) will walk you through it
   - You may need to bug @mewelling to turn off branch protection rules
   - You can run this by running `npm run release`
