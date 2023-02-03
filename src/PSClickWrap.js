@@ -96,7 +96,7 @@ class PSClickWrap extends React.Component {
       && !dynamicGroup
       && _psLoadedValidGroup
     ) {
-      _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
+      _ps.getByKey(clickwrapGroupKey).set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
     if (!isEqual(customData, prevProps.customData)) {
@@ -106,11 +106,11 @@ class PSClickWrap extends React.Component {
       _ps('set', 'acceptance_language', acceptanceLanguage);
     }
     if (!isEqual(renderData, prevProps.renderData)) {
-      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
+      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
     if (signerId !== prevProps.signerId) {
-      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
+      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).set('style', clickWrapStyle); }
       _ps('set', 'signer_id', signerId);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
@@ -216,16 +216,16 @@ class PSClickWrap extends React.Component {
     } = this.props;
     const options = {
       allow_disagreed: allowDisagreed || false,
-      acceptance_language: acceptanceLanguage,
+      ...(acceptanceLanguage && { acceptance_language: acceptanceLanguage }),
       auto_run: displayImmediately,
-      confirmation_email: confirmationEmail,
+      ...(confirmationEmail && { confirmation_email: confirmationEmail }),
       container_selector: containerId,
       display_all: displayAll,
-      filter,
-      force_scroll: forceScroll,
-      render_data: renderData,
-      signer_id_selector: signerIdSelector,
-      style: clickWrapStyle,
+      ...(filter && { filter }),
+      ...(forceScroll && { force_scroll: forceScroll }),
+      ...(renderData && { render_data: renderData }),
+      ...(signerIdSelector && { signer_id_selector: signerIdSelector }),
+      ...(clickWrapStyle && { style: clickWrapStyle }),
     };
 
     if (injectSnippetOnly) return;
