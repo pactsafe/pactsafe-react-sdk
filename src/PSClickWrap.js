@@ -216,16 +216,16 @@ class PSClickWrap extends React.Component {
     } = this.props;
     const options = {
       allow_disagreed: allowDisagreed || false,
-      ...(acceptanceLanguage && { acceptance_language: acceptanceLanguage }),
+      ...(acceptanceLanguage !== undefined && { acceptance_language: acceptanceLanguage }),
       auto_run: displayImmediately,
-      ...(confirmationEmail && { confirmation_email: confirmationEmail }),
+      ...(confirmationEmail !== undefined && { confirmation_email: confirmationEmail }),
       container_selector: containerId,
       display_all: displayAll,
-      ...(filter && { filter }),
-      ...(forceScroll && { force_scroll: forceScroll }),
-      ...(renderData && { render_data: renderData }),
-      ...(signerIdSelector && { signer_id_selector: signerIdSelector }),
-      ...(clickWrapStyle && { style: clickWrapStyle }),
+      ...(filter !== undefined && { filter }),
+      ...(forceScroll !== undefined && { force_scroll: forceScroll }),
+      ...(renderData !== undefined && { render_data: renderData }),
+      ...(signerIdSelector !== undefined && { signer_id_selector: signerIdSelector }),
+      ...(clickWrapStyle !== undefined && { style: clickWrapStyle }),
     };
 
     if (injectSnippetOnly) return;
