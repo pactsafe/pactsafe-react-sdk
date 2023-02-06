@@ -96,7 +96,7 @@ class PSClickWrap extends React.Component {
       && !dynamicGroup
       && _psLoadedValidGroup
     ) {
-      _ps.getByKey(clickwrapGroupKey).set('style', clickWrapStyle);
+      _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle);
       _ps.getByKey(clickwrapGroupKey).retrieveHTML();
     }
     if (!isEqual(customData, prevProps.customData)) {
@@ -106,11 +106,11 @@ class PSClickWrap extends React.Component {
       _ps('set', 'acceptance_language', acceptanceLanguage);
     }
     if (!isEqual(renderData, prevProps.renderData)) {
-      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).set('style', clickWrapStyle); }
+      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps(`${clickwrapGroupKey}:retrieveHTML`, renderData);
     }
     if (signerId !== prevProps.signerId) {
-      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).set('style', clickWrapStyle); }
+      if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps('set', 'signer_id', signerId);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
