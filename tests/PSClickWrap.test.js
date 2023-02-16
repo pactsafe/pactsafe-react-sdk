@@ -100,6 +100,7 @@ describe('PSClickWrap _ps interface tests', () => {
     expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('auto_run');
 
     /* These properties don't have defaults on the React SDK, so they shouldn't be passed back to the snippet */
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('filter');
     expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('confirmation_email');
     expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('signer_id_selector');
     expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('style');
