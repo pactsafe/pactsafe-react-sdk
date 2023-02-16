@@ -79,12 +79,18 @@ describe('PSClickWrap _ps interface tests', () => {
     expect(typeof _ps.mock.calls[FUNC.LOAD][1]).toBe('object');
     expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('filter');
     expect(_ps.mock.calls[FUNC.LOAD][1].filter).toBe('id==12345 and tags==tag1,tag2');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('container_selector');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('display_all');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('auto_run');
   });
 
   it('calls _ps with options as third parameter if groupKey is specified', () => {
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
     expect(_ps.mock.calls[FUNC.LOAD][0]).toBe('load');
     expect(typeof _ps.mock.calls[FUNC.LOAD][2]).toBe('object');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('container_selector');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('display_all');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('auto_run');
   });
 
   it('sets clickwrapStyle properly on payload if passed as a prop', () => {
