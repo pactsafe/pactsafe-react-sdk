@@ -80,28 +80,32 @@ describe('PSClickWrap _ps interface tests', () => {
     expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('filter');
     expect(_ps.mock.calls[FUNC.LOAD][1].filter).toBe('id==12345 and tags==tag1,tag2');
     expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('container_selector');
-    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('confirmation_email');
-    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('signer_id_selector');
-    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('style');
     expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('display_all');
-    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('render_data');
     expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('auto_run');
-    expect(_ps.mock.calls[FUNC.LOAD][1]).toHaveProperty('force_scroll');
+
+    /* These properties don't have defaults on the React SDK, so they shouldn't be passed back to the snippet */
+    expect(_ps.mock.calls[FUNC.LOAD][1]).not.toHaveProperty('confirmation_email');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).not.toHaveProperty('signer_id_selector');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).not.toHaveProperty('style');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).not.toHaveProperty('render_data');
+    expect(_ps.mock.calls[FUNC.LOAD][1]).not.toHaveProperty('force_scroll');
   });
 
   it('calls _ps with options as third parameter if groupKey is specified', () => {
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
     expect(_ps.mock.calls[FUNC.LOAD][0]).toBe('load');
     expect(typeof _ps.mock.calls[FUNC.LOAD][2]).toBe('object');
-    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('filter');
     expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('container_selector');
-    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('confirmation_email');
-    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('signer_id_selector');
-    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('style');
     expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('display_all');
-    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('render_data');
     expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('auto_run');
-    expect(_ps.mock.calls[FUNC.LOAD][2]).toHaveProperty('force_scroll');
+
+    /* These properties don't have defaults on the React SDK, so they shouldn't be passed back to the snippet */
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('filter');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('confirmation_email');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('signer_id_selector');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('style');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('render_data');
+    expect(_ps.mock.calls[FUNC.LOAD][2]).not.toHaveProperty('force_scroll');
   });
 
   it('sets clickwrapStyle properly on payload if passed as a prop', () => {
