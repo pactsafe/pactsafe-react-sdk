@@ -81,7 +81,7 @@ class PSClickWrap extends React.Component {
       injectSnippetOnly,
       renderData,
       signerId,
-			snapshotLocation,
+      snapshotLocation,
     } = this.props;
     const { clickwrapGroupKey, dynamicGroup } = this.state;
     const _psLoadedValidGroup = _ps
@@ -114,7 +114,7 @@ class PSClickWrap extends React.Component {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps('set', 'signer_id', signerId);
     }
-		if (!isEqual(snapshotLocation, prevProps.snapshotLocation)) {
+    if (!isEqual(snapshotLocation, prevProps.snapshotLocation)) {
       _ps('set', 'snapshot_location', snapshotLocation);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
@@ -216,7 +216,7 @@ class PSClickWrap extends React.Component {
       injectSnippetOnly,
       renderData,
       signerIdSelector,
-			snapshotLocation,
+      snapshotLocation,
       allowDisagreed,
     } = this.props;
     const options = {
@@ -259,9 +259,9 @@ class PSClickWrap extends React.Component {
       _ps('set', 'custom_data', customData);
     }
 		
-		if (snapshotLocation) {
-			_ps('set', 'snapshot_location', snapshotLocation);
-		}
+    if (snapshotLocation) {
+      _ps('set', 'snapshot_location', snapshotLocation);
+    }
 
     if (groupKey) {
       _ps('load', groupKey, { ...options, event_callback: eventCallback });
@@ -325,7 +325,7 @@ PSClickWrap.propTypes = {
     (props) => !props.hasOwnProperty('signerIdSelector') && !props.hasOwnProperty('injectSnippetOnly'),
     PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR,
   ),
-	snapshotLocation: PropTypes.string,
+  snapshotLocation: PropTypes.string,
   testMode: PropTypes.bool,
   allowDisagreed: isRequiredIf(
     PropTypes.bool,
