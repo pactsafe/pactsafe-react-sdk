@@ -114,7 +114,7 @@ class PSClickWrap extends React.Component {
       if (clickWrapStyle && _psLoadedValidGroup) { _ps.getByKey(clickwrapGroupKey).site.set('style', clickWrapStyle); }
       _ps('set', 'signer_id', signerId);
     }
-    if (!isEqual(snapshotLocation, prevProps.snapshotLocation)) {
+    if (snapshotLocation !== prevProps.snapshotLocation) {
       _ps('set', 'snapshot_location', snapshotLocation);
     }
     if (clickWrapStyle !== prevProps.clickWrapStyle && dynamicGroup) {
