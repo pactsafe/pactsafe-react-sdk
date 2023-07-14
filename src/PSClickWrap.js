@@ -220,7 +220,7 @@ class PSClickWrap extends React.Component {
       allowDisagreed,
     } = this.props;
     const options = {
-      allow_disagreed: allowDisagreed || false,
+      ...(allowDisagreed !== undefined && { allow_disagreed: allowDisagreed }),
       ...(acceptanceLanguage !== undefined && { acceptance_language: acceptanceLanguage }),
       auto_run: displayImmediately,
       ...(confirmationEmail !== undefined && { confirmation_email: confirmationEmail }),
