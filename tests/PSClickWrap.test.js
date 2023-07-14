@@ -198,17 +198,6 @@ describe('PSClickWrap _ps interface tests', () => {
     expect(_ps.mock.calls[FUNC.LOAD][2].allow_disagreed).toBe(true);
   });
 
-  it('sets allowDisagreed to false if not passed as a prop', () => {
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" />);
-    expect(_ps.mock.calls[FUNC.LOAD][2].allow_disagreed).toBe(false);
-  });
-
-  it('a console error should be shown if onInvalid is passed without setting allowDisagreed', () => {
-    const logSpy = jest.spyOn(console, 'error');
-    mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onInvalid={() => {}} />);
-    expect(logSpy).toHaveBeenCalled();
-  });
-
   it('client properties should be set to react', () => {
     mount(<PSClickWrap accessId="0000000-000000-0000-0000000" groupKey="example-clickwrap" signerId="test@abc.com" onInvalid={() => {}} />);
     expect(_ps.mock.calls[FUNC.SET_LIB][2]).toBe('react-sdk');

@@ -220,7 +220,7 @@ class PSClickWrap extends React.Component {
       allowDisagreed,
     } = this.props;
     const options = {
-      allow_disagreed: allowDisagreed || false,
+      ...(allowDisagreed !== undefined && { allow_disagreed: allowDisagreed }),
       ...(acceptanceLanguage !== undefined && { acceptance_language: acceptanceLanguage }),
       auto_run: displayImmediately,
       ...(confirmationEmail !== undefined && { confirmation_email: confirmationEmail }),
@@ -277,7 +277,6 @@ class PSClickWrap extends React.Component {
 PSClickWrap.FILTER_OR_GROUPKEY_REQUIRED_ERROR_MESSAGE = 'PSClickWrap Error: You must provide either a groupKey or filter prop in order to use the PactSafe ClickWrap component!';
 PSClickWrap.MUST_PROVIDE_RENDER_DATA_ERROR_MESSAGE = 'PSClickWrap Error: You must provide a renderData prop when passing down the dynamic prop';
 PSClickWrap.MUST_PROVIDE_SIGNER_ID_OR_SIGNER_ID_SELECTOR = 'PSClickWrap Error: You must provide either a signer ID or a signer ID selector';
-PSClickWrap.MUST_SET_ALLOW_DISAGREED = 'PSClickWrap Error: You must set allowDisagreed as true to make onInvalid work';
 
 PSClickWrap.propTypes = {
   acceptanceLanguage: PropTypes.string,
@@ -327,11 +326,7 @@ PSClickWrap.propTypes = {
   ),
   snapshotLocation: PropTypes.string,
   testMode: PropTypes.bool,
-  allowDisagreed: isRequiredIf(
-    PropTypes.bool,
-    (props) => props.hasOwnProperty('onInvalid'),
-    PSClickWrap.MUST_SET_ALLOW_DISAGREED,
-  ),
+  allowDisagreed: PropTypes.bool,
   debug: PropTypes.bool,
   onAll: PropTypes.func,
   onSent: PropTypes.func,
