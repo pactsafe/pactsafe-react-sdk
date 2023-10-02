@@ -135,6 +135,8 @@ For accounts at `app.demo.pactsafe.com`, set the `psScriptUrl` prop as `//vault.
 |     `onDisplayed`    | See [onDisplayed](#onDisplayed) below                                                                                                                                                                                                                                                                                                                                              |                                   function                                   |                      No                     |                   undefined                  |
 |     `onScrolled`     | See [onScrolled](#onScrolled) below                                                                                                                                                                                                                                                                                                                                                |                                   function                                   |                      No                     |                   undefined                  |
 | `onScrolledContract` | See [onScrolledContract](#onScrolledContract) below                                                                                                                                                                                                                                                                                                                                |                                   function                                   |                      No                     |                   undefined                  |
+| `onChecked` | See [onChecked](#onChecked) below                                                                                                                                                                                                                                                                                                                                |                                   function                                   |                      No                     |                   undefined                  |
+| `onUnchecked` | See [onUnchecked](#onUnchecked) below                                                                                                                                                                                                                                                                                                                                |                                   function                                   |                      No                     |                   undefined                  |
 |       `onError`      | See [onError](#onError) below                                                                                                                                                                                                                                                                                                                                                      |                                   function                                   |                      No                     |                   undefined                  |                                                                          |
 
 ## <a name="callback-props"></a>PSClickwrap Triggered Event Callback Props
@@ -324,8 +326,34 @@ Triggered when "Force Scroll" has been enabled in your Group Settings (or passed
 
 |       Name       |                                 Type                           |                   Description                                                                                                                       |
 |:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
-| contractHTML     | Object                                                         | An object containing the HTML of the contract that has been scrolled to the bottom.                                                                 |
-| group            | ClickwrapGroup                                                 | The Group object that was scrolled to the bottom                                                                                                    |
+| element     | Object                                                         | An object containing the HTML of the contract that has been scrolled to the bottom.                                                                 |
+| context            | ClickwrapGroup                                                 | The Group object that was scrolled to the bottom.                                                                                                    |
+
+## <a name="onChecked"></a> onChecked
+
+_ps event: `checked`
+
+Triggered when any of the ClickwrapGroup checkboxes is checked.
+
+### Callback Arguments
+
+|       Name       |                                 Type                           |                   Description                                                                                                                       |
+|:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
+| element       | Object                                                         | An object containing the HTML of the checkbox that was checked.            |
+| context          | ClickwrapGroup                              | The Group object that was checked.                                                                                                                 |
+
+## <a name="onUnchecked"></a> onUnchecked
+
+_ps event: `unchecked`
+
+Triggered when any of the ClickwrapGroup checkboxes is unchecked.
+
+### Callback Arguments
+
+|       Name       |                                 Type                           |                   Description                                                                                                                       |
+|:----------------:|:--------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
+| element       | Object                                                         | An object containing the HTML of the checkbox that was unchecked.            |
+| context          | ClickwrapGroup                              | The Group object that was unchecked                                                                                                                 |
 
 ## <a name="onError"></a> onError
 
