@@ -46,12 +46,11 @@
     "@babel/plugin-proposal-export-default-from": "^7.18.10",
     "@babel/preset-env": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^11.2.7",
     "babel-jest": "^29.0.3",
     "babel-plugin-search-and-replace": "^1.1.1",
     "dotenv-webpack": "^8.0.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "enzyme-to-json": "^3.6.2",
     "eslint": "^8.23.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
@@ -76,12 +75,6 @@
     "url": "https://github.com/PactSafe/pactsafe-react-sdk/issues"
   },
   "jest": {
-    "setupFiles": [
-      "./tests/jest-setup.js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/jest.transform.js"
     },
