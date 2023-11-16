@@ -1,0 +1,17 @@
+name: 'Tests'
+on:
+  pull_request:
+    types: [opened, synchronize] # `reopened` could work here too, but it sometimes fires at the same time as synchronize
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: 'Run Tests'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm ci 
+      - name: Run tests
+        run: npm test
