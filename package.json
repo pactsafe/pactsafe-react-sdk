@@ -8,10 +8,10 @@
   "module": "es/index.js",
   "homepage": "https://github.com/PactSafe/pactsafe-react-sdk",
   "scripts": {
-    "build": "nwb build-react-component",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider nwb build-react-component",
     "clean": "nwb clean-module && nwb clean-demo",
     "prepublishOnly": "npm run build",
-    "start": "nwb serve-react-demo",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider nwb serve-react-demo",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
