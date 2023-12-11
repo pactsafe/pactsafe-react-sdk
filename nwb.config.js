@@ -1,3 +1,4 @@
+const { LoaderOptionsPlugin } = require('webpack');
 const Dotenv = require('dotenv-webpack');
 const { version } = require('./package.json');
 
@@ -19,6 +20,13 @@ module.exports = {
     extra: {
       plugins: [
         new Dotenv(),
+        new LoaderOptionsPlugin({
+          options: {
+            experiments: {
+              futureDefaults: true,
+            },
+          },
+        }),
       ],
     },
   },
