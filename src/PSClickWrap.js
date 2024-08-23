@@ -39,6 +39,7 @@ class PSClickWrap extends React.Component {
       disableSending,
       dynamic,
       injectSnippetOnly,
+      oversized,
       psScriptUrl,
       signerId,
       testMode,
@@ -57,6 +58,7 @@ class PSClickWrap extends React.Component {
       disable_sending: disableSending,
       dynamic,
       signer_id: signerId,
+      oversized,
     });
 
     _ps('set', 'client_library', 'react-sdk');
@@ -216,7 +218,6 @@ class PSClickWrap extends React.Component {
       forceScroll,
       groupKey,
       injectSnippetOnly,
-      oversized,
       renderData,
       signerIdSelector,
       snapshotLocation,
@@ -231,7 +232,6 @@ class PSClickWrap extends React.Component {
       display_all: displayAll,
       ...(filter !== undefined && { filter }),
       ...(forceScroll !== undefined && { force_scroll: forceScroll }),
-      ...(oversized !== undefined && { oversized: oversized }),
       ...(renderData !== undefined && { render_data: renderData }),
       ...(signerIdSelector !== undefined && { signer_id_selector: signerIdSelector }),
       ...(clickWrapStyle !== undefined && { style: clickWrapStyle }),
@@ -363,6 +363,7 @@ PSClickWrap.defaultProps = {
   displayAll: true,
   dynamic: false,
   testMode: false,
+  oversized: false,
 };
 
 export default PSClickWrap;
