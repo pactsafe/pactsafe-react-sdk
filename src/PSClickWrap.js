@@ -216,6 +216,7 @@ class PSClickWrap extends React.Component {
       forceScroll,
       groupKey,
       injectSnippetOnly,
+      oversized,
       renderData,
       signerIdSelector,
       snapshotLocation,
@@ -230,6 +231,7 @@ class PSClickWrap extends React.Component {
       display_all: displayAll,
       ...(filter !== undefined && { filter }),
       ...(forceScroll !== undefined && { force_scroll: forceScroll }),
+      ...(oversized !== undefined && { oversized: oversized }),
       ...(renderData !== undefined && { render_data: renderData }),
       ...(signerIdSelector !== undefined && { signer_id_selector: signerIdSelector }),
       ...(clickWrapStyle !== undefined && { style: clickWrapStyle }),
@@ -312,6 +314,7 @@ PSClickWrap.propTypes = {
   injectSnippetOnly: PropTypes.bool,
   psScriptUrl: PropTypes.string,
   backupScriptURL: PropTypes.string,
+  oversized: PropTypes.bool,
   renderData: isRequiredIf(
     PropTypes.object,
     (props) => props.hasOwnProperty('dynamic') && props.dynamic === true,
