@@ -39,6 +39,7 @@ class PSClickWrap extends React.Component {
       disableSending,
       dynamic,
       injectSnippetOnly,
+      oversized,
       psScriptUrl,
       signerId,
       testMode,
@@ -57,6 +58,7 @@ class PSClickWrap extends React.Component {
       disable_sending: disableSending,
       dynamic,
       signer_id: signerId,
+      oversized,
     });
 
     _ps('set', 'client_library', 'react-sdk');
@@ -312,6 +314,7 @@ PSClickWrap.propTypes = {
   injectSnippetOnly: PropTypes.bool,
   psScriptUrl: PropTypes.string,
   backupScriptURL: PropTypes.string,
+  oversized: PropTypes.bool,
   renderData: isRequiredIf(
     PropTypes.object,
     (props) => props.hasOwnProperty('dynamic') && props.dynamic === true,
@@ -360,6 +363,7 @@ PSClickWrap.defaultProps = {
   displayAll: true,
   dynamic: false,
   testMode: false,
+  oversized: false,
 };
 
 export default PSClickWrap;
