@@ -222,6 +222,7 @@ class PSClickWrap extends React.Component {
       signerIdSelector,
       snapshotLocation,
       allowDisagreed,
+      onLoadCallback,
     } = this.props;
     const options = {
       ...(allowDisagreed !== undefined && { allow_disagreed: allowDisagreed }),
@@ -257,6 +258,7 @@ class PSClickWrap extends React.Component {
         if (!isDynamic) group.render();
         this.registerEventListeners(key);
       }
+      onLoadCallback && onLoadCallback(err, group);
     };
 
     if (customData) {
@@ -337,6 +339,7 @@ PSClickWrap.propTypes = {
     (props) => props.hasOwnProperty('onInvalid'),
     PSClickWrap.MUST_SET_ALLOW_DISAGREED,
   ),
+  onLoadCallback: PropTypes.func,
   debug: PropTypes.bool,
   onAll: PropTypes.func,
   onSent: PropTypes.func,
