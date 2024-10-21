@@ -126,6 +126,7 @@ For accounts at `app.demo.pactsafe.com`, set the `psScriptUrl` prop as `//vault.
 |     `oversized`     | Prop to support sizable payloads (e.g., when generating complex templates or including extensive data)                                                                                                                                                                                                                                                                           |                                    bool                                    |                      No                     |                   false                  |
 |      `testMode`      | Enable this to register any contract acceptances as test data that can be cleared within the Ironclad Clickwrap UI                                                                                                                                                                                                                                                                           |                                     bool                                     |                      No                     |                     false                    |
 |      `allowDisagreed`      | Enable this to allow invalid events to be triggered when a signer unchecks a checkbox.                                                                         |                                     bool                                     |                   Required to be true if `onInvalid` is passed                      |                     Value specified in Ironclad Clickwrap Group's UI                    |
+|        `onLoadCallback`       | See [onLoadCallback](#onLoadCallback) below                                                                                                                                                                                                                                                                                                                                                          |                                   function                                   |                      No                     |                   undefined                  |
 |        `onAll`       | See [onAll](#onAll) below                                                                                                                                                                                                                                                                                                                                                          |                                   function                                   |                      No                     |                   undefined                  |
 |       `onSent`       | See [onSent](#onSent) below                                                                                                                                                                                                                                                                                                                                                        |                                   function                                   |                      No                     |                   undefined                  |
 |     `onRetrieved`    | See [onRetrieved](#onRetrieved) below                                                                                                                                                                                                                                                                                                                                              |                                   function                                   |                      No                     |                   undefined                  |
@@ -184,11 +185,24 @@ If you do not want to use event callback props, the `_ps` is loaded into the win
 
 The list below describes the props names and corresponding Ironclad Clickwrap events:
 
+## <a name="onLoadCallback"></a> onLoadCallback
+
+_ps event: n/a
+
+A callback that can be added specifically for the load event which is not included in the default set of events below. The first argument is an object containing an error if detected and null otherwise. The remaining arguments will match the arguments were passed to the original event's callback function.
+
+### Callback Arguments
+
+|       Name       |        Type        |                   Description                                                                                                                       |
+|:----------------:|:------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------:|
+| err            | Object             | An object containing the error if detected; null otherwise.                                                                                                           |
+|[arguments]       | Array<Any>         | The arguments passed to the original load event.                                                                                        |
+
 ## <a name="onAll"></a> onAll
 
 _ps event: `all`
 
-A special event that is triggered when any other event is triggered. The name of the original event is always the first argument passed to the callback function. The rest of the arguments will match whatever arguments were passed to the original event's callback function.
+A special event that is triggered when any event below is triggered (note that this does not include the onLoadCallback event). The name of the original event is always the first argument passed to the callback function. The rest of the arguments will match whatever arguments were passed to the original event's callback function.
 
 ### Callback Arguments
 
